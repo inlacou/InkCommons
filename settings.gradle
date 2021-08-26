@@ -1,0 +1,6 @@
+rootProject.name = "InkCommonsLibraryProject"
+include ':app'
+include ':InkKotlinExtensions'
+include ':InkAndroidExtensions'
+include ':InkBetterAndroidViews'
+include ':InkKotlinCommons'

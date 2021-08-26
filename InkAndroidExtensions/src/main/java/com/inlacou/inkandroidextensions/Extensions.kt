@@ -1,0 +1,112 @@
+package com.inlacou.inkandroidextensions
+
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.net.Uri
+import android.os.Build
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.annotation.RequiresPermission
+import java.util.*
+
+fun Int.dpToPx() = (this * Resources.getSystem().displayMetrics.density).toInt()
+fun Float.dpToPx() = (this * Resources.getSystem().displayMetrics.density)
+fun Int.pxToDp() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+fun Context.getColorCompat(resId: Int): Int {
+	return resources.getColorCompat(resId)
+}
+
+fun MediaPlayer.setRawAudioDataSource(context: Context, resId: Int) {
+	setDataSource(context, getRawResourceUri(context, resId))
+}
+
+fun getRawResourceUri(context: Context, resId: Int): Uri {
+	return Uri.parse("android.resource://${context}/raw/${resId}")
+}
+
+fun Context.getDrawableCompat(resId: Int): Drawable {
+	return resources.getDrawableCompat(resId)
+}
+
+@RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
+fun Context.networkInfo(): NetworkInfo? = (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
+
+fun Resources.getDrawableCompat(resId: Int): Drawable {
+	return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+		getDrawable(resId, null)
+	}else{
+		getDrawable(resId)
+	}
+}
+
+fun Resources.getColorCompat(resId: Int): Int {
+	return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+		getColor(resId, null)
+	}else{
+		getColor(resId)
+	}
+}
+
+fun Context.hideKeyboard(view: View) {
+	val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+	imm.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Context.getCurrentLocale(): Locale {
+	return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+		resources.configuration.locales.get(0)
+	} else {
+		resources.configuration.locale
+	}
+}
+
+fun String.hexToColor(): Int {
+	return Color.parseColor(if(this.length==4) { //For instances like #0F0, equal to #00FF00
+		var aux = "#"
+		aux += this[1]
+		aux += this[1]
+		aux += this[2]
+		aux += this[2]
+		aux += this[3]
+		aux += this[3]
+		aux
+	}else{
+		this
+	})
+}
+
+
+@RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
+fun Context?.isOnline(online : () -> Unit, offline : (() -> Unit)? = null) {
+	this?.apply {
+		val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+		val netInfo = cm.activeNetworkInfo
+		if (netInfo != null && netInfo.isConnected) {
+			online()
+		}else{
+			offline?.invoke()
+		}
+	} ?: offline?.invoke()
+}
+
+fun View.hideKeyboard(): Boolean {
+	try {
+		val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+		return inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+	} catch (ignored: RuntimeException) { }
+	return false
+}
+
+fun View.showKeyboard() {
+	val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+	this.requestFocus()
+	imm.showSoftInput(this, 0)
+}
