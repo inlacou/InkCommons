@@ -25,7 +25,6 @@ afterEvaluate {
             release(MavenPublication) {
                 group = 'com.github.inlacou.inkcommons'
                 artifactId = 'InkKotlinExtensions'
-                version = 'RC2'
                 artifact(sourceJar)
                 artifact(javadocJar)
                 from components.java

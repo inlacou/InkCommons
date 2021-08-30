@@ -4,6 +4,17 @@ plugins {
     id 'kotlin-android'
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                group = 'com.github.inlacou.inkcommons'
+                artifactId = 'InkAndroidExtensions'
+            }
+        }
+    }
+}
+
 android {
     compileSdkVersion 30
 
