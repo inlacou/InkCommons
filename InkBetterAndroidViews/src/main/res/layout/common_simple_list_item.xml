@@ -7,7 +7,7 @@
 	android:singleLine="true"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:padding="@dimen/general_all"
+	android:padding="@dimen/inkbetterandroidviews_general_all"
 	android:background="@color/basic_grey_light"
 	android:ellipsize="marquee"
 	tools:text="Example text"/>

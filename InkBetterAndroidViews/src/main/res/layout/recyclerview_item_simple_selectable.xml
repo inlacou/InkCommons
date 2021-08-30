@@ -6,7 +6,7 @@
 	android:id="@+id/view"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:padding="@dimen/general_all">
+	android:padding="@dimen/inkbetterandroidviews_general_all">
 	<TextView
 		android:id="@+id/tv"
 		android:layout_width="match_parent"
@@ -18,8 +18,8 @@
 		tools:text="text"/>
 	<ImageView
 		android:id="@+id/iv_cb"
-		android:layout_width="@dimen/checkbox_normal"
-		android:layout_height="@dimen/checkbox_normal"
+		android:layout_width="@dimen/inkbetterandroidviews_checkbox_normal"
+		android:layout_height="@dimen/inkbetterandroidviews_checkbox_normal"
 		app:layout_constraintTop_toTopOf="parent"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
