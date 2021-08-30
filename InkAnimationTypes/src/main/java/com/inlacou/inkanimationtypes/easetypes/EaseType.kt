@@ -16,45 +16,45 @@ enum class EaseType
 constructor(private val easingType: Class<out Interpolable>) {
 	None(NoEase::class.java),
 
-	EaseInSine(EaseInSine::class.java),
-	EaseOutSine(EaseOutSine::class.java),
-	EaseInOutSine(EaseInOutSine::class.java),
+	EaseInSine(com.inlacou.inkanimationtypes.easetypes.EaseInSine::class.java),
+	EaseOutSine(com.inlacou.inkanimationtypes.easetypes.EaseOutSine::class.java),
+	EaseInOutSine(com.inlacou.inkanimationtypes.easetypes.EaseInOutSine::class.java),
 
-	EaseInQuad(EaseInQuad::class.java),
-	EaseOutQuad(EaseOutQuad::class.java),
-	EaseInOutQuad(EaseInOutQuad::class.java),
+	EaseInQuad(com.inlacou.inkanimationtypes.easetypes.EaseInQuad::class.java),
+	EaseOutQuad(com.inlacou.inkanimationtypes.easetypes.EaseOutQuad::class.java),
+	EaseInOutQuad(com.inlacou.inkanimationtypes.easetypes.EaseInOutQuad::class.java),
 
-	EaseInCubic(EaseInCubic::class.java),
-	EaseOutCubic(EaseOutCubic::class.java),
-	EaseInOutCubic(EaseInOutCubic::class.java),
+	EaseInCubic(com.inlacou.inkanimationtypes.easetypes.EaseInCubic::class.java),
+	EaseOutCubic(com.inlacou.inkanimationtypes.easetypes.EaseOutCubic::class.java),
+	EaseInOutCubic(com.inlacou.inkanimationtypes.easetypes.EaseInOutCubic::class.java),
 
-	EaseInQuart(EaseInQuart::class.java),
-	EaseOutQuart(EaseOutQuart::class.java),
-	EaseInOutQuart(EaseInOutQuart::class.java),
+	EaseInQuart(com.inlacou.inkanimationtypes.easetypes.EaseInQuart::class.java),
+	EaseOutQuart(com.inlacou.inkanimationtypes.easetypes.EaseOutQuart::class.java),
+	EaseInOutQuart(com.inlacou.inkanimationtypes.easetypes.EaseInOutQuart::class.java),
 
-	EaseInQuint(EaseInQuint::class.java),
-	EaseOutQuint(EaseOutQuint::class.java),
-	EaseInOutQuint(EaseInOutQuint::class.java),
+	EaseInQuint(com.inlacou.inkanimationtypes.easetypes.EaseInQuint::class.java),
+	EaseOutQuint(com.inlacou.inkanimationtypes.easetypes.EaseOutQuint::class.java),
+	EaseInOutQuint(com.inlacou.inkanimationtypes.easetypes.EaseInOutQuint::class.java),
 
-	EaseInExpo(EaseInExpo::class.java),
-	EaseOutExpo(EaseOutExpo::class.java),
-	EaseInOutExpo(EaseInOutExpo::class.java),
+	EaseInExpo(com.inlacou.inkanimationtypes.easetypes.EaseInExpo::class.java),
+	EaseOutExpo(com.inlacou.inkanimationtypes.easetypes.EaseOutExpo::class.java),
+	EaseInOutExpo(com.inlacou.inkanimationtypes.easetypes.EaseInOutExpo::class.java),
 
-	EaseInCirc(EaseInCirc::class.java),
-	EaseOutCirc(EaseOutCirc::class.java),
-	EaseInOutCirc(EaseInOutCirc::class.java),
+	EaseInCirc(com.inlacou.inkanimationtypes.easetypes.EaseInCirc::class.java),
+	EaseOutCirc(com.inlacou.inkanimationtypes.easetypes.EaseOutCirc::class.java),
+	EaseInOutCirc(com.inlacou.inkanimationtypes.easetypes.EaseInOutCirc::class.java),
 
 	EaseInBack(com.inlacou.inkanimationtypes.easetypes.EaseInBack::class.java),
-	EaseOutBack(EaseOutBack::class.java),
-	EaseInOutBack(EaseInOutBack::class.java),
+	EaseOutBack(com.inlacou.inkanimationtypes.easetypes.EaseOutBack::class.java),
+	EaseInOutBack(com.inlacou.inkanimationtypes.easetypes.EaseInOutBack::class.java),
 
-	EaseInElastic(EaseInElastic::class.java),
-	EaseOutElastic(EaseOutElastic::class.java),
-	EaseInOutElastic(EaseInOutElastic::class.java),
+	EaseInElastic(com.inlacou.inkanimationtypes.easetypes.EaseInElastic::class.java),
+	EaseOutElastic(com.inlacou.inkanimationtypes.easetypes.EaseOutElastic::class.java),
+	EaseInOutElastic(com.inlacou.inkanimationtypes.easetypes.EaseInOutElastic::class.java),
 
-	EaseInBounce(EaseInBounce::class.java),
-	EaseOutBounce(EaseOutBounce::class.java),
-	EaseInOutBounce(EaseInOutBounce::class.java),
+	EaseInBounce(com.inlacou.inkanimationtypes.easetypes.EaseInBounce::class.java),
+	EaseOutBounce(com.inlacou.inkanimationtypes.easetypes.EaseOutBounce::class.java),
+	EaseInOutBounce(com.inlacou.inkanimationtypes.easetypes.EaseInOutBounce::class.java),
 
 	Linear(com.inlacou.inkanimationtypes.easetypes.Linear::class.java);
 	
