@@ -10,6 +10,7 @@ afterEvaluate {
             release(MavenPublication) {
                 group = 'com.github.inlacou.inkcommons'
                 artifactId = 'InkBetterAndroidViews'
+                from components.release
             }
         }
     }
