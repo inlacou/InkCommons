@@ -1,6 +1,5 @@
 package com.inlacou.inkkotlinextensions.rx
 
-import com.inlacou.inkkotlincommons.rx.observables.RetryWithDelay
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

@@ -1,4 +1,4 @@
-package com.inlacou.inkkotlincommons.rx.observables
+package com.inlacou.inkkotlinextensions.rx
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.functions.Function
