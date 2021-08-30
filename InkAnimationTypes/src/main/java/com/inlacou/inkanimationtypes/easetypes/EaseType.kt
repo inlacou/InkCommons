@@ -14,47 +14,47 @@ enum class EaseType
  * @param easingType
  */
 constructor(private val easingType: Class<out Interpolable>) {
-	None(com.inlacou.inkswitch.animations.easetypes.NoEase::class.java),
+	None(NoEase::class.java),
 
-	EaseInSine(com.inlacou.inkswitch.animations.easetypes.EaseInSine::class.java),
-	EaseOutSine(com.inlacou.inkswitch.animations.easetypes.EaseOutSine::class.java),
-	EaseInOutSine(com.inlacou.inkswitch.animations.easetypes.EaseInOutSine::class.java),
+	EaseInSine(EaseInSine::class.java),
+	EaseOutSine(EaseOutSine::class.java),
+	EaseInOutSine(EaseInOutSine::class.java),
 
-	EaseInQuad(com.inlacou.inkswitch.animations.easetypes.EaseInQuad::class.java),
-	EaseOutQuad(com.inlacou.inkswitch.animations.easetypes.EaseOutQuad::class.java),
-	EaseInOutQuad(com.inlacou.inkswitch.animations.easetypes.EaseInOutQuad::class.java),
+	EaseInQuad(EaseInQuad::class.java),
+	EaseOutQuad(EaseOutQuad::class.java),
+	EaseInOutQuad(EaseInOutQuad::class.java),
 
-	EaseInCubic(com.inlacou.inkswitch.animations.easetypes.EaseInCubic::class.java),
-	EaseOutCubic(com.inlacou.inkswitch.animations.easetypes.EaseOutCubic::class.java),
-	EaseInOutCubic(com.inlacou.inkswitch.animations.easetypes.EaseInOutCubic::class.java),
+	EaseInCubic(EaseInCubic::class.java),
+	EaseOutCubic(EaseOutCubic::class.java),
+	EaseInOutCubic(EaseInOutCubic::class.java),
 
-	EaseInQuart(com.inlacou.inkswitch.animations.easetypes.EaseInQuart::class.java),
-	EaseOutQuart(com.inlacou.inkswitch.animations.easetypes.EaseOutQuart::class.java),
-	EaseInOutQuart(com.inlacou.inkswitch.animations.easetypes.EaseInOutQuart::class.java),
+	EaseInQuart(EaseInQuart::class.java),
+	EaseOutQuart(EaseOutQuart::class.java),
+	EaseInOutQuart(EaseInOutQuart::class.java),
 
-	EaseInQuint(com.inlacou.inkswitch.animations.easetypes.EaseInQuint::class.java),
-	EaseOutQuint(com.inlacou.inkswitch.animations.easetypes.EaseOutQuint::class.java),
-	EaseInOutQuint(com.inlacou.inkswitch.animations.easetypes.EaseInOutQuint::class.java),
+	EaseInQuint(EaseInQuint::class.java),
+	EaseOutQuint(EaseOutQuint::class.java),
+	EaseInOutQuint(EaseInOutQuint::class.java),
 
-	EaseInExpo(com.inlacou.inkswitch.animations.easetypes.EaseInExpo::class.java),
-	EaseOutExpo(com.inlacou.inkswitch.animations.easetypes.EaseOutExpo::class.java),
-	EaseInOutExpo(com.inlacou.inkswitch.animations.easetypes.EaseInOutExpo::class.java),
+	EaseInExpo(EaseInExpo::class.java),
+	EaseOutExpo(EaseOutExpo::class.java),
+	EaseInOutExpo(EaseInOutExpo::class.java),
 
-	EaseInCirc(com.inlacou.inkswitch.animations.easetypes.EaseInCirc::class.java),
-	EaseOutCirc(com.inlacou.inkswitch.animations.easetypes.EaseOutCirc::class.java),
-	EaseInOutCirc(com.inlacou.inkswitch.animations.easetypes.EaseInOutCirc::class.java),
+	EaseInCirc(EaseInCirc::class.java),
+	EaseOutCirc(EaseOutCirc::class.java),
+	EaseInOutCirc(EaseInOutCirc::class.java),
 
 	EaseInBack(com.inlacou.inkanimationtypes.easetypes.EaseInBack::class.java),
-	EaseOutBack(com.inlacou.inkswitch.animations.easetypes.EaseOutBack::class.java),
-	EaseInOutBack(com.inlacou.inkswitch.animations.easetypes.EaseInOutBack::class.java),
+	EaseOutBack(EaseOutBack::class.java),
+	EaseInOutBack(EaseInOutBack::class.java),
 
-	EaseInElastic(com.inlacou.inkswitch.animations.easetypes.EaseInElastic::class.java),
-	EaseOutElastic(com.inlacou.inkswitch.animations.easetypes.EaseOutElastic::class.java),
-	EaseInOutElastic(com.inlacou.inkswitch.animations.easetypes.EaseInOutElastic::class.java),
+	EaseInElastic(EaseInElastic::class.java),
+	EaseOutElastic(EaseOutElastic::class.java),
+	EaseInOutElastic(EaseInOutElastic::class.java),
 
-	EaseInBounce(com.inlacou.inkswitch.animations.easetypes.EaseInBounce::class.java),
-	EaseOutBounce(com.inlacou.inkswitch.animations.easetypes.EaseOutBounce::class.java),
-	EaseInOutBounce(com.inlacou.inkswitch.animations.easetypes.EaseInOutBounce::class.java),
+	EaseInBounce(EaseInBounce::class.java),
+	EaseOutBounce(EaseOutBounce::class.java),
+	EaseInOutBounce(EaseInOutBounce::class.java),
 
 	Linear(com.inlacou.inkanimationtypes.easetypes.Linear::class.java);
 	
