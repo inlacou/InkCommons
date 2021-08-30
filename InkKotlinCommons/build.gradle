@@ -1,14 +1,37 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
     id 'kotlin'
 }
-
-group='com.github.inlacou.inkcommons'
-version 'RC1'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier 'javadoc'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                group = 'com.github.inlacou.inkcommons'
+                artifactId = 'InkKotlinCommons'
+                version = 'RC2'
+                artifact(sourceJar)
+                artifact(javadocJar)
+                from components.java
+            }
+        }
+    }
 }
 
 dependencies {
