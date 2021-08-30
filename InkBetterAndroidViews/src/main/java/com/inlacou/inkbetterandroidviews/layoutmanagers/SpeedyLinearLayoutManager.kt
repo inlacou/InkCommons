@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * LinearLayoutManager class that allows you to set the scroll speed. Bigger is slower. Default 100f, pretty smooth.
+ * LinearLayoutManager class that allows you to set the scroll speed. Bigger is slower. Default is 100f, pretty smooth.
  */
 class SpeedyLinearLayoutManager : LinearLayoutManager {
 	

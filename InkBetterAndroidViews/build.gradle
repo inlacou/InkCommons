@@ -46,6 +46,7 @@ android {
 
 dependencies {
     compileOnly project(':InkAndroidExtensions')
+    compileOnly project(':InkAnimationTypes')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -60,6 +61,6 @@ dependencies {
     compileOnly "io.reactivex.rxjava3:rxandroid:3.0.0"									//RX
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava"s latest version for bug fixes and new features.
-    compileOnly "io.reactivex.rxjava3:rxjava:3.0.8"                                     //RX
+    compileOnly "io.reactivex.rxjava3:rxjava:3.1.1"                                     //RX
     compileOnly "io.reactivex.rxjava3:rxkotlin:3.0.1"                                  	//RX
 }
