@@ -2,6 +2,7 @@ package com.inlacou.inkkotlinextensions.extensions
 
 import com.inlacou.inkkotlinextensions.*
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.jupiter.api.Test
 
 /**
@@ -37,5 +38,23 @@ class IntExtensionsTests {
 	//Non-intuitive cases
 	@Test fun `11 change range from 0-22 to 0-15 is 7`() = assertEquals(7, 11.changeValueFromOneRangeToAnother(0, 22, 0, 15))
 	@Test fun `12 change range from 0-22 to 0-15 is 8`() = assertEquals(8, 12.changeValueFromOneRangeToAnother(0, 22, 0, 15))
+	
+	@Test fun `12 is between 10 and 20`() = assertTrue(12.between(10, 20))
+	@Test fun `12 is between 0 and 15`() = assertTrue(12.between(0, 15))
+	@Test fun `12 is between 11 and 13`() = assertTrue(12.between(11, 13))
+	@Test fun `12 is between 12 and 12`() = assertTrue(12.between(12, 12))
+
+	@Test fun `12 is between 10 with range 10`() = assertTrue(12.betweenRange(10, 10))
+	@Test fun `12 is between 15 with range 5`() = assertTrue(12.betweenRange(15, 5))
+	@Test fun `12 is between 11 with range 1`() = assertTrue(12.betweenRange(11, 1))
+	@Test fun `12 is between 12 with range 0`() = assertTrue(12.betweenRange(12, 0))
+
+	@Test fun `12 is between 10 with range 10 (floats)`() = assertTrue(12f.betweenRange(10f, 10f))
+	@Test fun `12 is between 15 with range 5 (floats)`() = assertTrue(12f.betweenRange(15f, 5f))
+	@Test fun `12 is between 11 with range 1 (floats)`() = assertTrue(12f.betweenRange(11f, 1f))
+	@Test fun `12 is between 12 with range 0 (floats)`() = assertTrue(12f.betweenRange(12f, 0f))
+	
+	@Test fun `5 of 10 is percentage 50%`() = assertEquals(0.5f, 5.toPercentage(10))
+	@Test fun `5 of 15 is percentage 33%`() = assertEquals("0.33", 5.toPercentage(15).toString().take(4))
 
 }
