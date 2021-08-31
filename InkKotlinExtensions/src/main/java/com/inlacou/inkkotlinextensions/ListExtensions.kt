@@ -323,5 +323,17 @@ fun <T> HashMap<T, Boolean>.merge(list: List<T>, default: Boolean): HashMap<T, B
 	return this
 }
 
+/**
+ * Takes current list and @return a new one with the same elements but different order.
+ * Take elements from given @param index to end, and then adds too the elements from the start to @param index.
+ * List A,B,C,D,E,F changed start to 1 would be B,C,D,E,F,A
+ */
+fun <T> List<T>.changeStartToIndex(index: Int): List<T> {
+	val result = mutableListOf<T>()
+	result.addAll(this.subList(index, this.size))
+	result.addAll(this.subList(0, index))
+	return result
+}
+
 inline fun <T> Iterable<T>.tapIndexed(function: (index: Int, T) -> Unit): Iterable<T> = this.also { forEachIndexed(function) }
 inline fun <T> Iterable<T>.tap(function: (T) -> Unit): Iterable<T> = this.also { forEach(function) }
