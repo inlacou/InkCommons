@@ -7,8 +7,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
-//RecyclerView
-
 fun RecyclerView.scrollToWithDelay(position: Int = 0, delayMillis: Long = 300, doOnNext: (() -> Unit)? = null): Disposable {
 	return Observable.timer(delayMillis, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
 		this.scrollToPosition(position)
@@ -27,4 +25,3 @@ fun RecyclerView.safeSmoothScrollToPosition(pos: Int, max: Int){
 		else -> pos
 	})
 }
-///RecyclerView

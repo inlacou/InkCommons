@@ -7,13 +7,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
-//ScrollView
-
 fun ScrollView.scrollToBottom(delayMillis: Long = 300, doOnNext: (() -> Unit)? = null): Disposable {
 	return Observable.timer(delayMillis, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
 		this.fullScroll(View.FOCUS_DOWN)
 		doOnNext?.invoke()
 	}
 }
-
-///ScrollView

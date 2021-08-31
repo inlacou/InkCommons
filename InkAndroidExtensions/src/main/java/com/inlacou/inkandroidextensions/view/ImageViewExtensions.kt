@@ -13,8 +13,6 @@ import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkandroidextensions.getDrawableCompat
 import timber.log.Timber
 
-//ImageView
-
 fun ImageView.tint(colorResId: Int) {
 	ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(this.context.getColorCompat(colorResId)))
 }
@@ -86,5 +84,3 @@ fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeig
 
 	return inSampleSize
 }
-
-///ImageView
