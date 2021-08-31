@@ -18,4 +18,11 @@ fun View.touchs(): Observable<Triple<MotionEvent, Float, Float>> = Observable.cr
 fun TextView.textChanges(): Observable<String> = Observable.create(TextChangeObs(this))
 fun CheckBox.checkedChanges(): Observable<Boolean> = Observable.create(CheckBoxObs(this))
 fun View.layoutChanges(): Observable<Triple<View, LayoutChangeObs.Dimensions, LayoutChangeObs.Dimensions>> = Observable.create(LayoutChangeObs(this))
+
+val slowFiringInterval = listOf(Pair(1500, 500))
+fun View.longClickSpeedingFiringIntervals(breakpointsAndSpeeds: List<Pair<Int, Int>>? = null): Observable<Long> = Observable.create(OnLongTouchIncrementFiringSpeedObs(this, breakpointsAndSpeeds))
+
+/*fun InkSwitch.changes(): Observable<Pair<Int, Boolean>> {
+	return Observable.create(InkSwitchObs(this))
+}*/
 /* /UI */

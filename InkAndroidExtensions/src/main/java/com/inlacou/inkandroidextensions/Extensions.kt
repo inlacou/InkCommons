@@ -11,6 +11,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresPermission
@@ -30,6 +32,14 @@ fun MediaPlayer.setRawAudioDataSource(context: Context, resId: Int) {
 
 fun getRawResourceUri(context: Context, resId: Int): Uri {
 	return Uri.parse("android.resource://${context}/raw/${resId}")
+}
+
+fun String.asStringId(context: Context): String? {
+	return try{
+		context.resources.getString(context.resources.getIdentifier(this, "string", context.packageName))
+	}catch (rnfe: Resources.NotFoundException){
+		this.replace("_", " ")
+	}
 }
 
 fun Context.getDrawableCompat(resId: Int): Drawable {
@@ -109,4 +119,21 @@ fun View.showKeyboard() {
 	val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 	this.requestFocus()
 	imm.showSoftInput(this, 0)
+}
+
+fun Bundle.toMap(): Map<String, Any?> {
+	val result = HashMap<String, Any?>()
+	keySet().forEach { result[it] = get(it) }
+	return result
+}
+
+fun Context.getExternalStorageDirectoryCompat(): String? {
+	var res: String? = null
+	try{
+		res = Environment.getExternalStorageDirectory().absolutePath
+	}catch (e: Exception) {}
+	if(res==null || res.isEmpty()){
+		res = System.getenv("EXTERNAL_STORAGE")
+	}
+	return res
 }

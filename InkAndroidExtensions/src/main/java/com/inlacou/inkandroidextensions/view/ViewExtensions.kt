@@ -4,15 +4,20 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.*
+import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -323,10 +328,10 @@ fun View.showAlphaObs(durationMillis: Long): Observable<Float> {
 	}
 }
 
-fun View.hideAlphaObs(durationMillis: Long): Observable<Float> {
+fun View.hideAlphaObs(durationMillis: Long, holdSpaceOnDisappear: Boolean = true): Observable<Float> {
 	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS).map { 1f-(it.toFloat()/100) }.toUi().doOnNext{ factor ->
 		alpha = factor
-		if(factor==0f) setVisible(false, holdSpaceOnDisappear = true)
+		if(factor==0f) setVisible(false, holdSpaceOnDisappear = holdSpaceOnDisappear)
 	}
 }
 
@@ -347,4 +352,67 @@ fun View.showResizeObs(durationMillis: Long): Observable<Float> {
 
 fun View.hideResizeObs(durationMillis: Long): Observable<Float> {
 	return resizeObs(1f, 0f, durationMillis)
+}
+
+/**
+ * Works on changes from
+ * GONE to VISIBLE
+ * GONE to INVISIBLE
+ * VISIBLE to GONE
+ * INVISIBLE to GONE
+ * @return (lambda) int representing VISIBLE, INVISIBLE, or GONE
+ */
+fun View.addOnVisibilityChangeListener(callback: (Int) -> Unit): ViewTreeObserver.OnGlobalLayoutListener {
+	Timber.d("addOnVisibilityChange")
+	val listener = object : ViewTreeObserver.OnGlobalLayoutListener {
+		var lastVisibility: Int? = null
+		override fun onGlobalLayout() {
+			val newVisibility = visibility
+			if(lastVisibility!=newVisibility) callback.invoke(newVisibility)
+			lastVisibility = newVisibility
+		}
+	}
+	viewTreeObserver?.addOnGlobalLayoutListener(listener)
+	return listener
+}
+
+fun View.removeOnVisibilityChangeListener(listener: ViewTreeObserver.OnGlobalLayoutListener?) {
+	if(listener!=null) viewTreeObserver?.removeOnGlobalLayoutListener(listener)
+}
+
+fun View.resizeHeightObs(from: Float, to: Float, durationMillis: Long): Observable<Float> {
+	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS)
+		.map { it.toFloat()/100 } //internal progress
+		.map { from+((abs(to-from) *it)*(if(from<to) 1 else -1)) }
+		.toUi().doOnNext{ factor ->
+			View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED).let { measure(it, it) }
+			resizeView(width, (measuredHeight*factor).toInt())
+			setVisible(true, holdSpaceOnDisappear = false)
+		}
+}
+
+fun View.resizeHeightObs(from: Int, to: Int, durationMillis: Long): Observable<Float> {
+	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS)
+		.map { it.toFloat()/100 } //internal progress
+		.map { from+((abs(to-from)*it)*(if(from<to) 1 else -1)) }
+		.toUi().doOnNext{ factor ->
+			Timber.d("resize | factor: $factor")
+			View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED).let { measure(it, it) }
+			resizeView(width, factor.toInt())
+			setVisible(true, holdSpaceOnDisappear = false)
+		}
+}
+
+// Convert a view to bitmap
+fun View.toBitmap(): Bitmap {
+	val displayMetrics = DisplayMetrics()
+	(context as AppCompatActivity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+	this.layoutParams = LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT)
+	this.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
+	this.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+	this.buildDrawingCache()
+	val bitmap = Bitmap.createBitmap(this.measuredWidth, this.measuredHeight, Bitmap.Config.ARGB_8888)
+	val canvas = Canvas(bitmap)
+	this.draw(canvas)
+	return bitmap
 }

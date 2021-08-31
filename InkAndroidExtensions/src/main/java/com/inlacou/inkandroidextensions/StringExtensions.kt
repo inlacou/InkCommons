@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
+import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
@@ -19,6 +20,15 @@ fun String?.isValidWebUrl(): Boolean {
 
 fun String?.isValidEmail(): Boolean {
 	return this!=null && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+}
+
+fun Resources.getStringOrNull(id: Int?): String? {
+	if(id==null) return null
+	return try {
+		getString(id)
+	} catch(e: Exception) {
+		null
+	}
 }
 
 /**

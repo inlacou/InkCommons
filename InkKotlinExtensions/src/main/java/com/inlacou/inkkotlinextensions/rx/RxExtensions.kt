@@ -31,6 +31,7 @@ inline fun <T : Any, S : Any> Observable<T>.mapNotNull(
  */
 fun <T> Observable<T>.filterRapidClicks(windowDuration: Long = 1000, timeUnit: TimeUnit = TimeUnit.MILLISECONDS): Observable<T> = throttleFirst(windowDuration, timeUnit)
 fun <T> Observable<T>.debounce(time: Long): Observable<T> = debounce(time, TimeUnit.MILLISECONDS)
+fun <T> Observable<T>.withPrevious(): Observable<Pair<T, T>> = buffer(2, 1).map { Pair(it[0], it[1]) }
 
 /**
  * Sugar

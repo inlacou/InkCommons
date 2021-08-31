@@ -4,12 +4,14 @@ import android.content.res.ColorStateList
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.core.widget.ImageViewCompat
 import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkandroidextensions.getDrawableCompat
+import timber.log.Timber
 
 //ImageView
 
@@ -19,6 +21,17 @@ fun ImageView.tint(colorResId: Int) {
 
 fun ImageView.tint(colorHex: String) {
 	ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(Color.parseColor(colorHex)))
+}
+
+fun ImageView.clearTint() {
+	ImageViewCompat.setImageTintList(this, null)
+}
+
+fun ImageView.recycleBitmap() {
+	(drawable as BitmapDrawable?)?.bitmap?.let {
+		it.recycle()
+		Timber.d("SongView | bitmap $it from $this recycled")
+	}
 }
 
 fun Drawable.tint(colorHex: String): Drawable {

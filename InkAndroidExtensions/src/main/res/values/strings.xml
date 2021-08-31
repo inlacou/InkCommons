@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="date">%1$td %1$tb %1$tY</string>
+    <string name="date_no_year">%1$tB %1$td</string>
+    <string name="date_month_as_number">%1$td/%1$tm/%1$tY</string>
+    <string name="datetime">%1$td %1$tb %1$tY%2$s%1$tk:%1$tM</string>
+    <string name="datetime_month_as_number">%1$td/%1$tm/%1$tY%2$s%1$tk:%1$tM</string>
+    <string name="datetime_day_of_week">%1$ta %1$td %1$tb %1$tY%2$s%1$tk:%1$tM</string>
+    <string name="datetime_day_of_week_month_as_number">%1$ta %1$td/%1$tm/%1$tY%2$s%1$tk:%1$tM</string>
+    <string name="time">%1$tk:%1$tM</string>
+    <string name="day_of_week">%1$tA</string>
+    <plurals name="Variable_years">
+        <item quantity="one">%1$d año</item>
+        <item quantity="other">%1$d años</item>
+    </plurals>
+    <plurals name="Variable_months">
+        <item quantity="one">%1$d mes</item>
+        <item quantity="other">%1$d meses</item>
+    </plurals>
+    <plurals name="Variable_weeks">
+        <item quantity="one">%1$d semana</item>
+        <item quantity="other">%1$d semanas</item>
+    </plurals>
+    <plurals name="Variable_days">
+        <item quantity="one">%1$d día</item>
+        <item quantity="other">%1$d días</item>
+    </plurals>
+    <plurals name="Variable_hours">
+        <item quantity="one">%1$d hora</item>
+        <item quantity="other">%1$d horas</item>
+    </plurals>
+    <plurals name="Variable_minutes">
+        <item quantity="one">%1$d minuto</item>
+        <item quantity="other">%1$d minutos</item>
+    </plurals>
+    <plurals name="Variable_seconds">
+        <item quantity="one">%1$d segundo</item>
+        <item quantity="other">%1$d segundos</item>
+    </plurals>
+    <plurals name="Variable_milliseconds">
+        <item quantity="one">%1$d milisegundo</item>
+        <item quantity="other">%1$d milisegundos</item>
+    </plurals>
+    <string name="January">January</string>
+    <string name="February">February</string>
+    <string name="March">March</string>
+    <string name="April">April</string>
+    <string name="May">May</string>
+    <string name="June">June</string>
+    <string name="July">July</string>
+    <string name="August">August</string>
+    <string name="September">September</string>
+    <string name="October">October</string>
+    <string name="November">November</string>
+    <string name="December">December</string>
+</resources>

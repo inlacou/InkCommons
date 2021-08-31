@@ -5,6 +5,22 @@ import kotlin.math.roundToInt
 
 val Int.digitsNum: Int get() = toString().length
 
+fun Int.between(low: Int, high: Int): Boolean {
+	return this in low..high
+}
+
+fun Int.toPercentage(max: Int): Float {
+	return (this.toFloat()/max.toFloat())
+}
+
+fun Int.betweenRange(other: Int, range: Int): Boolean {
+	return this in (other-range)..(other+range)
+}
+
+fun Float.betweenRange(other: Float, range: Float): Boolean {
+	return this in (other-range)..(other+range)
+}
+
 fun Long.toStringMinDigits(minDigits: Int): String {
 	var result = this.toString()
 	while (result.length<minDigits){

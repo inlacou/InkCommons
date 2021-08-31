@@ -2,15 +2,20 @@ package com.inlacou.inkandroidextensions
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Point
 import android.net.Uri
+import android.os.Build
+import android.util.DisplayMetrics
+import android.view.Display
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.FileProvider
 import androidx.drawerlayout.widget.DrawerLayout
@@ -30,6 +35,14 @@ fun Activity.windowSize(): Point {
 	val size = Point()
 	display.getSize(size)
 	return size
+}
+
+@RequiresApi(api = Build.VERSION_CODES.R)
+fun Context.windowSize(): Point {
+	val displayMetrics = DisplayMetrics()
+	val display: Display = display!!
+	display.getRealMetrics(displayMetrics)
+	return Point(displayMetrics.widthPixels, displayMetrics.heightPixels)
 }
 
 fun Activity.startActivity(intent: Intent, requestCode: Int? = null){

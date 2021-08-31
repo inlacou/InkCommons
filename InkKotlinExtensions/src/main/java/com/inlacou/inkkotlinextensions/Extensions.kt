@@ -105,3 +105,4 @@ fun randomText(characters: Int): String {
 fun Int.colorToHex(): String {
 	return String.format("#%06X", 0xFFFFFF and this)
 }
+
