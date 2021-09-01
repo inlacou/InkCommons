@@ -12,6 +12,9 @@ abstract class BaseCustomList<T>(
 	fun isEmpty(): Boolean = this.items.isEmpty()
 	fun isNotEmpty(): Boolean = this.items.isNotEmpty()
 	fun get(index: Int) = items[index]
+	fun removeAt(pos: Int) = items.removeAt(pos)
+	fun remove(element: T?) = items.remove(element)
+	fun removeAll(elements: List<T>) = items.removeAll(elements)
 	
 	/**
 	 * @return boolean indicating true if element was added, and false if not
