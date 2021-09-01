@@ -1,4 +1,4 @@
-package com.inlacou.inkbetterandroidviews
+package com.inlacou.inkbetterandroidviews.helpers
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +23,7 @@ class StartSnapHelper : LinearSnapHelper() {
 	}
 
 	override fun calculateDistanceToFinalSnap(@NonNull layoutManager: RecyclerView.LayoutManager,
-	                                          @NonNull targetView: View): IntArray? {
+	                                          @NonNull targetView: View): IntArray {
 		val out = IntArray(2)
 
 		if (layoutManager.canScrollHorizontally()) {
