@@ -1,8 +1,6 @@
 
-# InkCommons
+# InkCommons [![](https://jitpack.io/v/inlacou/InkCommons.svg)](https://jitpack.io/#inlacou/InkCommons)
 Library project with various common libraries for my projects.
-
-General badge: [![](https://jitpack.io/v/inlacou/InkCommons.svg)](https://jitpack.io/#inlacou/InkCommons)
 
 ## InkKotlinCommons
 Includes some new common classes.
