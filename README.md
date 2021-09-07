@@ -142,11 +142,11 @@ Import with `implementation 'com.github.inlacou.InkCommons:InkBetterAndroidViews
 * BetterSpinner
 
 Also includes some extensions, allowing better view listener interaction through Rx:
-* `View.clicks(): Observable\<View>`
-* `View.longClicks(cosumeEvent: Boolean = true): Observable\<View>`
-* `AutoCompleteTextView.itemClicks(): Observable\<Int>`
-* `View.touchs(): Observable\<Triple<MotionEvent, Float, Float>>`
-* `TextView.textChanges(): Observable\<String>`
-* `CheckBox.checkedChanges(): Observable\<Boolean>`
-* `View.layoutChanges(): Observable\<Triple<View, LayoutChangeObs.Dimensions, LayoutChangeObs.Dimensions>>`
-* `View.longClickSpeedingFiringIntervals(breakpointsAndSpeeds: List<Pair<Int, Int>>? = null): Observable\<Long>`
+* `View.clicks(): Observable<View>`
+* `View.longClicks(cosumeEvent: Boolean = true): Observable<View>`
+* `AutoCompleteTextView.itemClicks(): Observable<Int>`
+* `View.touchs(): Observable<Triple<MotionEvent, Float, Float>>`
+* `TextView.textChanges(): Observable<String>`
+* `CheckBox.checkedChanges(): Observable<Boolean>`
+* `View.layoutChanges(): Observable<Triple<View, LayoutChangeObs.Dimensions, LayoutChangeObs.Dimensions>>`
+* `View.longClickSpeedingFiringIntervals(breakpointsAndSpeeds: List<Pair<Int, Int>>? = null): Observable<Long>`
