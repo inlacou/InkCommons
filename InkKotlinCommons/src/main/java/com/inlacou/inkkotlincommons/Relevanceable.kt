@@ -6,8 +6,8 @@ interface Relevanceable {
 	val relevance: Float
 		get() {
 			val now = System.currentTimeMillis()
-			
-			return usages.map { usage ->
+
+			return if(usages.isEmpty()) 0f else usages.map { usage ->
 				//Apply algorithm to each usage
 				algorithm(now, usage)
 			}.reduce { acc, usageRelevance -> acc+usageRelevance }
