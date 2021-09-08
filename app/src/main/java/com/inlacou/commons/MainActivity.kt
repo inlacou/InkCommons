@@ -9,8 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import com.inlacou.inkcommonslibraryproject.R
-import com.inlacou.inkcommonslibraryproject.databinding.ActivityMainBinding
+import com.inlacou.commons.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 	
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		
+
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 		

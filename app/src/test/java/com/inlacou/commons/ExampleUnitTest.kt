@@ -1,4 +1,4 @@
-package com.inlacou.inkcommonslibraryproject
+package com.inlacou.commons
 
 import org.junit.Test
 

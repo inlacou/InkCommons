@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.inlacou.inkcommonslibraryproject.R
-import com.inlacou.inkcommonslibraryproject.databinding.FragmentSecondBinding
+import com.inlacou.commons.databinding.FragmentSecondBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

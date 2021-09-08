@@ -66,8 +66,7 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 			when (event.action) {
 				0 -> startClickTime = Calendar.getInstance().timeInMillis
 				1 -> {
-					val clickDuration =
-						Calendar.getInstance().timeInMillis - startClickTime
+					val clickDuration = Calendar.getInstance().timeInMillis - startClickTime
 					if (clickDuration < MAX_CLICK_DURATION) {
 						isPopup = if (isPopup) {
 							Timber.d("dismiss")
@@ -97,7 +96,7 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 		left: Drawable?,
 		top: Drawable?,
 		right: Drawable?,
-		bottom: Drawable?
+		bottom: Drawable?,
 	) {
 		var newRight = right
 		val dropdownIcon = ContextCompat.getDrawable(this.context, R.mipmap.ic_arrow_drop_down)
