@@ -15,19 +15,20 @@ class EitherUnitTests {
 	
 	@Test
 	fun `checking and casting`() {
-		val v1 = getRequestSuccess()
-		val v2 = getRequestError()
+		val mSuccess = getRequestSuccess()
+		val mError = getRequestError()
 		
-		if(v1 is Either.Left) {
-			v1.left.message
-		}else if(v1 is Either.Right) {
-			v1.right.name
+		if(mSuccess is Either.Left) {
+			mSuccess.left.message
+		}else if(mSuccess is Either.Right) {
+			Assertions.assertEquals((success as Either.Right).right.name, mSuccess.right.name)
 		}
 		
-		if(v2 is Either.Left) {
-			v2.left.message
-		}else if(v2 is Either.Right) {
-			v2.right.birthYear
+		if(mError is Either.Left) {
+			mError.left.message
+			Assertions.assertEquals((error as Either.Left).left.message, mError.left.message)
+		}else if(mError is Either.Right) {
+			mError.right.birthYear
 		}
 	}
 	

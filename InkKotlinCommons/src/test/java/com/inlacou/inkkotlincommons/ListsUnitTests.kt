@@ -1,9 +1,6 @@
 package com.inlacou.inkkotlincommons
 
-import com.inlacou.inkkotlincommons.lists.Fifo
-import com.inlacou.inkkotlincommons.lists.Filo
-import com.inlacou.inkkotlincommons.lists.Lifo
-import com.inlacou.inkkotlincommons.lists.Lilo
+import com.inlacou.inkkotlincommons.lists.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.jupiter.api.Test
@@ -70,9 +67,8 @@ class ListsUnitTests {
 
 	@Test
 	fun fifo_max_size() {
-		val list = Fifo<String>()
+		val list = fifoOf("uno") //uno
 		list.max = 3
-		list.push("uno") //uno
 		list.push("dos") //dos, uno
 		list.push("tres") //tres, dos, uno
 		list.push("cuatro") //cuatro, tres, dos
@@ -96,7 +92,7 @@ class ListsUnitTests {
 
 	@Test
 	fun lilo_max_size() {
-		val list = Lilo<String>()
+		val list = liloOf<String>()
 		list.max = 3
 		list.push("uno") //uno
 		list.push("dos") //uno, dos
@@ -122,7 +118,7 @@ class ListsUnitTests {
 	
 	@Test
 	fun lifo_max_size() {
-		val list = Lifo<String>()
+		val list = lifoOf<String>()
 		list.max = 3
 		list.push("uno") //uno
 		list.push("dos") //uno, dos
@@ -148,7 +144,7 @@ class ListsUnitTests {
 	
 	@Test
 	fun filo_max_size() {
-		val list = Filo<String>()
+		val list = filoOf<String>()
 		list.max = 3
 		list.push("uno") //uno
 		list.push("dos") //dos, uno
@@ -157,6 +153,33 @@ class ListsUnitTests {
 		assertEquals("dos", list.pop()) //cuatro, tres
 		assertEquals("tres", list.pop()) //cuatro
 		assertEquals("cuatro", list.pop()) //-
+	}
+
+	@Test
+	fun no_dupe_mutable_list() {
+		val noDupe = noDupeMutableListOf<Int>()
+		noDupe.push(1)
+		noDupe.push(2)
+		noDupe.push(2)
+		assertEquals(2, noDupe.size)
+		noDupe.push(3)
+		assertEquals(3, noDupe.size)
+		noDupe.push(3)
+		assertEquals(3, noDupe.size)
+		noDupe.push(3)
+		assertEquals(3, noDupe.size)
+		noDupe.remove(2)
+		assertEquals(2, noDupe.size)
+		noDupe.remove(2)
+		assertEquals(2, noDupe.size)
+
+		assertEquals(1, noDupe.items.first())
+		noDupe.removeAt(0)
+		assertEquals(2, noDupe.items.first())
+		assertEquals(1, noDupe.size)
+		noDupe.push(3)
+		noDupe.removeAll(listOf(2, 3))
+		assertEquals(0, noDupe.size)
 	}
 	
 }
