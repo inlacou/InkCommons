@@ -194,4 +194,40 @@ class RxExtensionsUnitTests {
 			assertValueCount(1)
 		}
 	}
+
+	@Test fun `takeUntil given time`() {
+		Observable.interval(500, TimeUnit.MILLISECONDS)
+			.takeUntil(1100, TimeUnit.MILLISECONDS)
+			.test()
+			.apply {
+				await(1500, TimeUnit.MILLISECONDS)
+				assertValues(mutableListOf(0, 1))
+				assertValueCount(1)
+			}
+	}
+
+	@Test fun `withPrevious once`() {
+		Observable.interval(500, TimeUnit.MILLISECONDS)
+			.withPrevious()
+			.takeUntil { true }
+			.test()
+			.apply {
+				await(1500, TimeUnit.MILLISECONDS)
+				assertValues(Pair(0, 1))
+				assertValueCount(1)
+			}
+	}
+
+	@Test fun `withPrevious four times`() {
+		Observable.interval(500, TimeUnit.MILLISECONDS)
+			.withPrevious()
+			.takeUntil { it.second==4L }
+			.test()
+			.apply {
+				await(4500, TimeUnit.MILLISECONDS)
+				assertValues(Pair(0, 1), Pair(1, 2), Pair(2, 3), Pair(3, 4))
+				assertValueCount(4)
+			}
+	}
+
 }
