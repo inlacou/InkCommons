@@ -302,6 +302,13 @@ fun <T, V> List<T>.toPairs(second: V): List<Pair<T, V>> {
 	return map { Pair(it, second) }
 }
 
+/**
+ * Intended use of merging two lists with the same number of items
+ */
+fun <T, V> List<T>.toPairs(second: List<V>): List<Pair<T, V>> {
+	return mapIndexed { index, it -> Pair(it, second[index]) }
+}
+
 fun <T> Iterable<T>.groupConsecutiveBy(groupIdentifier: (T, T) -> Boolean) =
 	if (!this.any())
 		emptyList()
