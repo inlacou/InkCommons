@@ -63,4 +63,7 @@ dependencies {
     // explicitly depend on RxJava"s latest version for bug fixes and new features.
     compileOnly "io.reactivex.rxjava3:rxjava:3.1.1"                                     //RX
     compileOnly "io.reactivex.rxjava3:rxkotlin:3.0.1"                                  	//RX
+
+    compileOnly 'com.github.inlacou:InkSwitch:1.0.10'
+    compileOnly 'com.github.inlacou:ExInput:2.1.1'
 }

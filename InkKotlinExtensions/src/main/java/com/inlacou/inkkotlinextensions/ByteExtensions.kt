@@ -1,7 +1,5 @@
 package com.inlacou.inkkotlinextensions
 
-import java.util.*
-
 fun Byte.toPositiveInt() = toInt() and 0xFF
 
 private val HEX_CHARS = "0123456789ABCDEF".toCharArray()
@@ -16,15 +14,13 @@ fun String.hexToByte(): Byte {
 
 fun Byte.toHex(): String {
 	val octet = toInt()
-	val firstIndex = (octet and 0xF0).ushr(4)
-	val secondIndex = octet and 0x0F
-	return "${HEX_CHARS[firstIndex]}${HEX_CHARS[secondIndex]}"
+	return "${HEX_CHARS[(octet and 0xF0).ushr(4)]}${HEX_CHARS[octet and 0x0F]}"
 }
 
 fun Int.decimalToHex(): String {
 	var result = toString(16)
-	if(result.length%2!=0) result = "0$result"
-	return result.toUpperCase(Locale.ROOT)
+	if(result.length%2!=0 && result[0] !='-') result = "0$result" //Keep it in pairs, 00 0F FF and so on
+	return result.uppercase()
 }
 
 fun String.binaryToHex(): String {
@@ -46,4 +42,34 @@ fun Int.decimalToByte(): Byte {
 
 fun String.binaryToByte(): Byte {
 	return binaryToHex().hexToByte()
+}
+
+/**
+ * For when the int value goes from -128 to 127 with the following progression: Goes from 0 to 127 and then continues from -128 to -1. Examples:
+ *    00 ->	 0
+ *    01 ->	 1
+ *    02 ->	 2
+ *    79 ->	 127
+ *    80 ->	-128
+ *    FE ->	-2
+ *    FF ->	-1
+ */
+fun Int.decimalNegativableToByte(): Byte {
+	return when {
+		this>127    -> throw IllegalArgumentException()
+		this<-128   -> throw IllegalArgumentException()
+		this<0      -> (this+256).decimalToByte()
+		else        -> this.decimalToByte()
+	}
+}
+
+/**
+ * Inverse of @see Int.decimalNegativableToByte()
+ */
+fun Byte.byteToDecimalNegativable(): Int {
+	val aux = this.toHex().hexToDecimal()
+	return when {
+		aux<128 -> aux
+		else    -> aux-256
+	}
 }

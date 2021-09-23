@@ -34,7 +34,22 @@ class ByteExtensionsTests {
 	@Test fun `byte FD to hex FD`() = Assert.assertEquals("FD", 0xFD.toByte().toHex())
 	@Test fun `byte FE to hex FE`() = Assert.assertEquals("FE", 0xFE.toByte().toHex())
 	@Test fun `byte FF to hex FF`() = Assert.assertEquals("FF", 0xFF.toByte().toHex())
-	
+
+	@Test fun `byte 00 to hex 00 negativable`() = Assert.assertEquals("00", 0x00.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte 0A to hex 0A negativable`() = Assert.assertEquals("0A", 0x0A.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte 0B to hex 0B negativable`() = Assert.assertEquals("0B", 0x0B.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte 0C to hex 0C negativable`() = Assert.assertEquals("0C", 0x0C.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte 0D to hex 0D negativable`() = Assert.assertEquals("0D", 0x0D.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte 0E to hex 0E negativable`() = Assert.assertEquals("0E", 0x0E.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte 0F to hex 0F negativable`() = Assert.assertEquals("0F", 0x0F.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte F0 to hex F0 negativable`() = Assert.assertEquals("F0", 0xF0.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte FA to hex FA negativable`() = Assert.assertEquals("FA", 0xFA.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte FB to hex FB negativable`() = Assert.assertEquals("FB", 0xFB.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte FC to hex FC negativable`() = Assert.assertEquals("FC", 0xFC.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte FD to hex FD negativable`() = Assert.assertEquals("FD", 0xFD.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte FE to hex FE negativable`() = Assert.assertEquals("FE", 0xFE.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+	@Test fun `byte FF to hex FF negativable`() = Assert.assertEquals("FF", 0xFF.toByte().byteToDecimalNegativable().decimalNegativableToByte().toHex())
+
 	@Test fun `binary 0000 0000 to byte 00`() = Assert.assertEquals(0x00.toByte(), "00000000".binaryToByte())
 	@Test fun `binary 0000 1111 to byte 0F`() = Assert.assertEquals(0x0F.toByte(), "00001111".binaryToByte())
 	@Test fun `binary 1111 1111 to byte FF`() = Assert.assertEquals(0xFF.toByte(), "11111111".binaryToByte())
@@ -57,7 +72,9 @@ class ByteExtensionsTests {
 	@Test fun `decimal 224 to hex E0`() = Assert.assertEquals("E0", 224.decimalToHex())
 	@Test fun `decimal 240 to hex F0`() = Assert.assertEquals("F0", 240.decimalToHex())
 	@Test fun `decimal 255 to hex FF`() = Assert.assertEquals("FF", 255.decimalToHex())
-	
+
+	@Test fun `decimal -255 to hex -FF`() = Assert.assertEquals("-FF", (-255).decimalToHex())
+
 	@Test fun `decimal 0 to byte 00`() = Assert.assertEquals(0x00.toByte(), 0.decimalToByte())
 	@Test fun `decimal 10 to byte 0A`() = Assert.assertEquals(0x0A.toByte(), 10.decimalToByte())
 	@Test fun `decimal 15 to byte 0F`() = Assert.assertEquals(0x0F.toByte(), 15.decimalToByte())

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class SortStringsTest {
-    
+
     @Test
     fun basic(){
         val list = mutableListOf<String>()
@@ -54,7 +54,7 @@ class SortStringsTest {
         assertEquals(false, list.contains("X"))
         assertEquals(false, list.contains("B"))
     }
-    
+
     @Test
     fun medium(){
         val list = mutableListOf<String>()
