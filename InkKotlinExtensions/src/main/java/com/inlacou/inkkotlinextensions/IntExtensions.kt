@@ -1,6 +1,7 @@
 package com.inlacou.inkkotlinextensions
 
 import kotlin.math.floor
+import kotlin.math.pow
 import kotlin.math.roundToInt
 
 val Int.digitsNum: Int get() = toString().length
@@ -48,4 +49,12 @@ fun Int.changeValueFromOneRangeToAnother(oldMin: Int, oldMax: Int, newMin: Int, 
 			if (oldRange == 0) newMin.toDouble()
 			else (((oldValue - oldMin) * newRange) / oldRange) + newMin
 	return floor(newValue).roundToInt()
+}
+
+fun Int.changeValueFromOneRangeToAnother(oldMin: Int, oldMax: Int, newMin: Float, newMax: Float): Float {
+	val oldValue = this.toFloat()
+	val newRange = (newMax - newMin)
+	val oldRange = (oldMax - oldMin)
+	return  if  (oldRange == 0) newMin
+			else (((oldValue - oldMin) * newRange) / oldRange) + newMin
 }

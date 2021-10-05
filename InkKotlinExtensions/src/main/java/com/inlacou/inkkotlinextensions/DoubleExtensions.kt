@@ -3,6 +3,7 @@ package com.inlacou.inkkotlinextensions
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlin.math.floor
+import kotlin.math.pow
 
 /**
  * How many decimals the number has.
@@ -131,4 +132,22 @@ fun Float.percentageOf(max: Float): Float {
 		aux<-1f -> -1f
 		else -> aux
 	}
+}
+
+fun Float.changeValueFromOneRangeToAnother(oldMin: Float, oldMax: Float, newMin: Float, newMax: Float): Float {
+	val oldValue = this.toFloat()
+	val newRange = (newMax - newMin)
+	val oldRange = (oldMax - oldMin)
+	return  if (oldRange == 0f) newMin
+	else (((oldValue - oldMin) * newRange) / oldRange) + newMin
+}
+
+fun Float.roundDecimals(decimals: Int): Float {
+	val realDecimal = if(decimals<0) 0 else decimals
+	return (this*10f.pow(realDecimal)).toInt().toFloat()/10f.pow(realDecimal)
+}
+
+fun Double.roundDecimals(decimals: Int): Double {
+	val realDecimal = if(decimals<0) 0 else decimals
+	return (this*10f.pow(realDecimal)).toInt().toDouble()/10f.pow(realDecimal)
 }

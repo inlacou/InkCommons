@@ -30,11 +30,11 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
-fun View?.snackbar(messageResId: Int, length: Int = Snackbar.LENGTH_LONG){
+fun View?.snackbar(messageResId: Int, length: Int = Snackbar.LENGTH_LONG) {
 	this?.let { this.snackbar(this.context.getString(messageResId), length) }
 }
 
-fun View.onDrawn(callback: () -> Unit){
+fun View.onDrawn(callback: () -> Unit) {
 	val listener = object : ViewTreeObserver.OnGlobalLayoutListener {
 		override fun onGlobalLayout() {
 			viewTreeObserver?.removeOnGlobalLayoutListener(this)
@@ -47,7 +47,7 @@ fun View.onDrawn(callback: () -> Unit){
 val ViewGroup.childViews get() = (0..childCount).map { getChildAt(it) }
 
 /**
- * Works on changes from
+ * Works on changes from:
  * GONE to VISIBLE
  * GONE to INVISIBLE
  * VISIBLE to GONE
@@ -106,7 +106,7 @@ fun View.getCoordinates(): Rect {
 	return offsetViewBounds
 }
 
-fun View?.snackbar(message: String, length: Int = Snackbar.LENGTH_LONG){
+fun View?.snackbar(message: String, length: Int = Snackbar.LENGTH_LONG) {
 	this?.let { Snackbar.make(it, message, length).show() }
 }
 
@@ -136,13 +136,13 @@ fun View.setPaddings(left: Int? = null, top: Int? = null, right: Int? = null, bo
 	requestLayout()
 }
 
-fun View.setScrollingBehaviour(){
+fun View.setScrollingBehaviour() {
 	val params = layoutParams as CoordinatorLayout.LayoutParams
 	params.behavior = AppBarLayout.ScrollingViewBehavior()
 	requestLayout()
 }
 
-fun View.eraseBehaviours(){
+fun View.eraseBehaviours() {
 	val params = layoutParams as CoordinatorLayout.LayoutParams
 	params.behavior = null
 	requestLayout()
@@ -182,7 +182,7 @@ fun View.getScreenshotBitmap(): Bitmap? {
 	return bitmap
 }
 
-fun View.showOverflow(menuResId: Int, onMenuItemClick: (menuItem: MenuItem) -> Boolean){
+fun View.showOverflow(menuResId: Int, onMenuItemClick: (menuItem: MenuItem) -> Boolean) {
 	val popup = PopupMenu(context, this)
 	val inflater = popup.menuInflater
 	inflater.inflate(menuResId, popup.menu)
@@ -214,23 +214,21 @@ fun View.cancelTransition() {
 
 fun View.isVisible() = this.visibility == View.VISIBLE
 
-fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
-		LayoutInflater.from(context).inflate(layoutRes, this, false)
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View = LayoutInflater.from(context).inflate(layoutRes, this, false)
 
-
-fun CollapsingToolbarLayout.disableCollapse(){
+fun CollapsingToolbarLayout.disableCollapse() {
 	(layoutParams as AppBarLayout.LayoutParams?)?.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
 }
 
-fun CollapsingToolbarLayout.allowCollapseExitUntilCollapse(){
+fun CollapsingToolbarLayout.allowCollapseExitUntilCollapse() {
 	(layoutParams as AppBarLayout.LayoutParams?)?.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
 }
 
-fun CollapsingToolbarLayout.allowCollapseEnterAlways(){
+fun CollapsingToolbarLayout.allowCollapseEnterAlways() {
 	(layoutParams as AppBarLayout.LayoutParams?)?.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
 }
 
-internal fun View.setBackgroundCompat(drawable: Drawable){
+internal fun View.setBackgroundCompat(drawable: Drawable) {
 	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 		this.background = drawable
 	}else{
@@ -247,7 +245,7 @@ internal fun View.centerHorizontal() {
 	}
 }
 
-internal fun View.centerVertical(){
+internal fun View.centerVertical() {
 	layoutParams?.let { layoutParams ->
 		if(layoutParams is RelativeLayout.LayoutParams){
 			layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, 0)
@@ -403,7 +401,9 @@ fun View.resizeHeightObs(from: Int, to: Int, durationMillis: Long): Observable<F
 		}
 }
 
-// Convert a view to bitmap
+/**
+ * Convert a view to bitmap
+ */
 fun View.toBitmap(): Bitmap {
 	val displayMetrics = DisplayMetrics()
 	(context as AppCompatActivity).windowManager.defaultDisplay.getMetrics(displayMetrics)

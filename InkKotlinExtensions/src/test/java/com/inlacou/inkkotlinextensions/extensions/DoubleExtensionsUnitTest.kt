@@ -138,5 +138,26 @@ class DoubleExtensionsUnitTest {
 	@Test fun `percentage -100 of max 200 min -100 with current  0_75f is   0f`() = assertEquals(0f, (-100f).percentageOf(0.75f, 200f, -100f))
 	@Test fun `percentage  -20 of max 200 min -100 with current  0_75f is 0_6f`() = assertEquals(0.6f, (-20f).percentageOf(0.75f, 200f, -100f))
 	@Test fun `percentage   40 of max 200 min -100 with current  0_75f is 0_8f`() = assertEquals(0.8f, (40f).percentageOf(0.75f, 200f, -100f))
-	
+
+
+	@Test fun `1dot3334f round to -3 decimals is 1`() = assertEquals(1f, 1.3334f.roundDecimals(-3))
+	@Test fun `1dot3334f round to -2 decimals is 1`() = assertEquals(1f, 1.3334f.roundDecimals(-2))
+	@Test fun `1dot3334f round to -1 decimals is 1`() = assertEquals(1f, 1.3334f.roundDecimals(-1))
+	@Test fun `1dot3334f round to 0 decimals is 1`() = assertEquals(1f, 1.3334f.roundDecimals(0))
+	@Test fun `1dot3334f round to 1 decimals is 1dot3`() = assertEquals(1.3f, 1.3334f.roundDecimals(1))
+	@Test fun `1dot3334f round to 2 decimals is 1dot33`() = assertEquals(1.33f, 1.3334f.roundDecimals(2))
+	@Test fun `1dot3334f round to 3 decimals is 1dot333`() = assertEquals(1.333f, 1.3334f.roundDecimals(3))
+	@Test fun `1dot3334f round to 4 decimals is 1dot3334`() = assertEquals(1.3334f, 1.3334f.roundDecimals(4))
+	@Test fun `1dot3334f round to 5 decimals is 1dot3334`() = assertEquals(1.3334f, 1.3334f.roundDecimals(5))
+
+	@Test fun `1dot3334 round to -3 decimals is 1`() = assertEquals(1.0, 1.3334.roundDecimals(-3), 0.0)
+	@Test fun `1dot3334 round to -2 decimals is 1`() = assertEquals(1.0, 1.3334.roundDecimals(-2), 0.0)
+	@Test fun `1dot3334 round to -1 decimals is 1`() = assertEquals(1.0, 1.3334.roundDecimals(-1), 0.0)
+	@Test fun `1dot3334 round to 0 decimals is 1`() = assertEquals(1.0, 1.3334.roundDecimals(0), 0.0)
+	@Test fun `1dot3334 round to 1 decimals is 1dot3`() = assertEquals(1.3, 1.3334.roundDecimals(1), 0.0)
+	@Test fun `1dot3334 round to 2 decimals is 1dot33`() = assertEquals(1.33, 1.3334.roundDecimals(2), 0.0)
+	@Test fun `1dot3334 round to 3 decimals is 1dot333`() = assertEquals(1.333, 1.3334.roundDecimals(3), 0.0)
+	@Test fun `1dot3334 round to 4 decimals is 1dot3334`() = assertEquals(1.3334, 1.3334.roundDecimals(4), 0.0)
+	@Test fun `1dot3334 round to 5 decimals is 1dot3334`() = assertEquals(1.3334, 1.3334.roundDecimals(5), 0.0)
+
 }

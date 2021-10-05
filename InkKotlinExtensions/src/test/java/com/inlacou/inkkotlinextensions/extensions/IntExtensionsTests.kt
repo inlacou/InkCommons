@@ -35,10 +35,14 @@ class IntExtensionsTests {
 	//Intuitive cases
 	@Test fun `10 change range from 0-20 to 0-10 is 5`() = assertEquals(5, 10.changeValueFromOneRangeToAnother(0, 20, 0, 10))
 	@Test fun `10 change range from 0-30 to 0-10 is 3`() = assertEquals(3, 10.changeValueFromOneRangeToAnother(0, 30, 0, 10))
+	@Test fun `10 change range from 0-20 to 0-10 is dot5f (float)`() = assertEquals(.5f, 10.changeValueFromOneRangeToAnother(0, 20, 0f, 1f))
+	@Test fun `10 change range from 0-30 to 0-10 is dot3f (limit to one decimal) (float)`() = assertEquals(.3f, 10.changeValueFromOneRangeToAnother(0, 30, 0f, 1f).roundDecimals(1))
+	@Test fun `10 change range from 0-20 to 0-10 is dot5f (float(2))`() = assertEquals(0.5f, 10f.changeValueFromOneRangeToAnother(0f, 20f, 0f, 1f))
+	@Test fun `10 change range from 0-30 to 0-10 is fot3f (limit to one decimal) (float(2))`() = assertEquals(0.3f, 10f.changeValueFromOneRangeToAnother(0f, 30f, 0f, 1f).roundDecimals(1))
 	//Non-intuitive cases
 	@Test fun `11 change range from 0-22 to 0-15 is 7`() = assertEquals(7, 11.changeValueFromOneRangeToAnother(0, 22, 0, 15))
 	@Test fun `12 change range from 0-22 to 0-15 is 8`() = assertEquals(8, 12.changeValueFromOneRangeToAnother(0, 22, 0, 15))
-	
+
 	@Test fun `12 is between 10 and 20`() = assertTrue(12.between(10, 20))
 	@Test fun `12 is between 0 and 15`() = assertTrue(12.between(0, 15))
 	@Test fun `12 is between 11 and 13`() = assertTrue(12.between(11, 13))
