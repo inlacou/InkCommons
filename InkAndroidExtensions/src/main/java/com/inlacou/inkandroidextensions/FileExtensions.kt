@@ -77,28 +77,19 @@ val audioFileExtensions = listOf(".3gp", ".aa", ".aac", ".aax", ".act", ".aiff",
 	".flac", ".gsm", ".iklax", ".ivs", ".m4a", ".m4b", ".m4p", ".mmf", ".mp3", ".mpc", ".msv", ".nmf", ".nsf", ".ogg", ".oga", ".mogg", ".opus", "ra", ".rm",
 	".rf64", ".sln", ".tta", ".voc", ".vox", ".wav", ".wma", ".wv", ".webm", "8svx", ".cda") //source https://en.wikipedia.org/wiki/Audio_file_format
 val androidSupportedAudioFileExtensions = listOf(".3gp", ".acc", ".flac", ".ogg", ".m4a", ".mid", ".mp3", ".xmf", ".wav") //source https://blog.online-convert.com/files-supported-by-android/
-val androidSupportedVideoFileExtensions = listOf(".3gp", ".mkv", ".mp4", ".ts", ".webm") //source https://blog.online-convert.com/files-supported-by-android/
+val androidSupportedVideoFileExtensions = listOf(".3gp", ".mkv", ".mp4", ".ts", ".webm", /*avi and flv added because I want*/ ".avi", ".flv") //source https://blog.online-convert.com/files-supported-by-android/
 
 val musicRegex = Regex(".*(${androidSupportedAudioFileExtensions.map{"($it)|"}.toString().replace(" ", "").replace(",", "").replace("[", "").replace("]", "")})$".removeLast("|"))
 val videoRegex = Regex(".*(${androidSupportedVideoFileExtensions.map{"($it)|"}.toString().replace(" ", "").replace(",", "").replace("[", "").replace("]", "")})$".removeLast("|"))
 
 @RequiresPermission("android.permission.READ_EXTERNAL_STORAGE")
-fun File.isMusic(): Boolean {
-	Timber.d("regex to ${this.absolutePath} | ${musicRegex.pattern} " +
-		"| ${musicRegex.matches(absolutePath)} " +
-		"| hasVideo: ${hasVideoLight()}")
-	return !isDirectory && musicRegex.matches(absolutePath) && !hasVideoLight()
-}
+fun File.isMusic(): Boolean = !isDirectory && musicRegex.matches(absolutePath) && !hasVideoLight()
 
 @RequiresPermission("android.permission.READ_EXTERNAL_STORAGE")
-fun File.isVideo(): Boolean {
-	return videoRegex.matches(absolutePath) && hasVideoLight()
-}
+fun File.isVideo(): Boolean = videoRegex.matches(absolutePath) && hasVideoLight()
 
 @RequiresPermission("android.permission.READ_EXTERNAL_STORAGE")
-fun File.getFiles(): List<File> {
-	return readFolder().filter { it.isFile }
-}
+fun File.getFiles(): List<File> = readFolder().filter { it.isFile }
 
 /**
  * @param blackRegex example to check file extension "(jpg|jpeg|png|mp4|mp3)$"
@@ -144,7 +135,6 @@ fun File.hasVideoLight(): Boolean {
 val File.mimeType
 	get() = URLConnection.guessContentTypeFromName(path)
 
-@RequiresPermission("android.permission.READ_EXTERNAL_STORAGE")
 fun File.toMetadata(): MediaMetadataRetriever {
 	//val path = absolutePath.replace("[", "%5B").replace("]", "%5D") //FileNotFoundException
 	//val path = absolutePath.replace("[", "\\[").replace("]", "\\]") //FileNotFoundException
