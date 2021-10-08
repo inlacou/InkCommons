@@ -322,14 +322,16 @@ internal fun View.matchParent() {
 fun View.showAlphaObs(durationMillis: Long): Observable<Float> {
 	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS).map { it.toFloat()/100 }.toUi().doOnNext{ factor ->
 		alpha = factor
-		if(factor==0f) setVisible(true, holdSpaceOnDisappear = true)
+	}.doOnComplete {
+		setVisible(true, holdSpaceOnDisappear = true)
 	}
 }
 
 fun View.hideAlphaObs(durationMillis: Long, holdSpaceOnDisappear: Boolean = true): Observable<Float> {
 	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS).map { 1f-(it.toFloat()/100) }.toUi().doOnNext{ factor ->
 		alpha = factor
-		if(factor==0f) setVisible(false, holdSpaceOnDisappear = holdSpaceOnDisappear)
+	}.doOnComplete {
+		setVisible(false, holdSpaceOnDisappear = holdSpaceOnDisappear)
 	}
 }
 
