@@ -389,12 +389,12 @@ fun View.resizeHeightObs(from: Float, to: Float, durationMillis: Long): Observab
 		}
 }
 
-fun View.resizeHeightObs(from: Int, to: Int, durationMillis: Long): Observable<Float> {
+fun View.resizeHeightObs(from: Int, to: Int, durationMillis: Long, log: Boolean = false): Observable<Float> {
 	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS)
 		.map { it.toFloat()/100 } //internal progress
 		.map { from+((abs(to-from)*it)*(if(from<to) 1 else -1)) }
 		.toUi().doOnNext{ factor ->
-			Timber.d("resize | factor: $factor")
+			if(log) Timber.d("resize | factor: $factor")
 			View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED).let { measure(it, it) }
 			resizeView(width, factor.toInt())
 			setVisible(true, holdSpaceOnDisappear = false)

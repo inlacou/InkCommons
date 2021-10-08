@@ -1,5 +1,6 @@
 package com.inlacou.inkandroidextensions
 
+import android.content.Context
 import android.media.MediaMetadataRetriever
 import androidx.annotation.RequiresPermission
 import com.inlacou.inkkotlinextensions.removeLast
@@ -77,7 +78,7 @@ val audioFileExtensions = listOf(".3gp", ".aa", ".aac", ".aax", ".act", ".aiff",
 	".flac", ".gsm", ".iklax", ".ivs", ".m4a", ".m4b", ".m4p", ".mmf", ".mp3", ".mpc", ".msv", ".nmf", ".nsf", ".ogg", ".oga", ".mogg", ".opus", "ra", ".rm",
 	".rf64", ".sln", ".tta", ".voc", ".vox", ".wav", ".wma", ".wv", ".webm", "8svx", ".cda") //source https://en.wikipedia.org/wiki/Audio_file_format
 val androidSupportedAudioFileExtensions = listOf(".3gp", ".acc", ".flac", ".ogg", ".m4a", ".mid", ".mp3", ".xmf", ".wav") //source https://blog.online-convert.com/files-supported-by-android/
-val androidSupportedVideoFileExtensions = listOf(".3gp", ".mkv", ".mp4", ".ts", ".webm", /*avi and flv added because I want*/ ".avi", ".flv") //source https://blog.online-convert.com/files-supported-by-android/
+val androidSupportedVideoFileExtensions = listOf(".3gp", ".mkv", ".mp4", ".ts", ".webm", /*avi, mov, and flv added because I want*/ ".avi", ".flv", ".mov") //source https://blog.online-convert.com/files-supported-by-android/
 
 val musicRegex = Regex(".*(${androidSupportedAudioFileExtensions.map{"($it)|"}.toString().replace(" ", "").replace(",", "").replace("[", "").replace("]", "")})$".removeLast("|"))
 val videoRegex = Regex(".*(${androidSupportedVideoFileExtensions.map{"($it)|"}.toString().replace(" ", "").replace(",", "").replace("[", "").replace("]", "")})$".removeLast("|"))
@@ -135,7 +136,7 @@ fun File.hasVideoLight(): Boolean {
 val File.mimeType
 	get() = URLConnection.guessContentTypeFromName(path)
 
-fun File.toMetadata(): MediaMetadataRetriever {
+fun File.toMetadata(context: Context): MediaMetadataRetriever {
 	//val path = absolutePath.replace("[", "%5B").replace("]", "%5D") //FileNotFoundException
 	//val path = absolutePath.replace("[", "\\[").replace("]", "\\]") //FileNotFoundException
 	//val path = absolutePath.replace("[", "").replace("]", "") //FileNotFoundException
@@ -145,6 +146,12 @@ fun File.toMetadata(): MediaMetadataRetriever {
 	//Timber.d("readFolder | toURI().rawPath: ${toURI().rawPath}")
 	val inputStream = FileInputStream(path)
 	val mmr = MediaMetadataRetriever()
-	mmr.setDataSource(inputStream.fd)
+	try{
+		mmr.setDataSource(inputStream.fd)
+	}catch (rte: RuntimeException) {
+		Timber.w(rte)
+		val afd = context.assets.openFd(path)
+		mmr.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+	}
 	return mmr
 }
