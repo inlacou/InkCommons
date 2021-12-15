@@ -13,6 +13,7 @@ import com.inlacou.commons.R
 import com.inlacou.commons.databinding.FragmentDialogsBinding
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
+import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkandroidextensions.toast
 import com.inlacou.inkandroidextensions.view.tint
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
@@ -121,7 +122,9 @@ class DialogsFrag: BaseFrag() {
             setOnClickListener {
                 TextInputDialogView(this.context, model = TextInputDialogViewMdl(
                     title = InkSpannableBuilder().addTextBold("List Dialog").build(),
-                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build(),
+                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextColor("ipsum", context.getColorCompat(R.color.red_text)).addBlank().addText("dolor sit amet").build(),
+                    prefix = "prefix",
+                    prefixColorResId = R.color.red_text,
                     hint = "Name",
                     input = name,
                     onAccepted = {

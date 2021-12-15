@@ -1,12 +1,15 @@
 package com.inlacou.inkbetterandroidviews.dialogs.input
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.exinput.free.text.TextInput
+import com.inlacou.inkandroidextensions.getColorCompat
+import com.inlacou.inkandroidextensions.view.tint
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputTextBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogView
 
@@ -33,6 +36,11 @@ class TextInputDialogView @JvmOverloads constructor(
 		model.hint = newModel.hint
 		model.minLength = newModel.minLength
 		model.required = newModel.required
+		model.prefix = newModel.prefix
+		model.suffix = newModel.suffix
+		model.prefixColorResId = newModel.prefixColorResId
+		model.suffixColorResId = newModel.suffixColorResId
+		model.hintColorResId = newModel.hintColorResId
 		super.applyModel(newModel)
 	}
 
@@ -51,6 +59,15 @@ class TextInputDialogView @JvmOverloads constructor(
 		eiText?.text = model.input
 		eiText?.hint = model.hint
 		eiLayout?.hint = model.hint
+		eiLayout?.suffixText = model.suffix
+		eiLayout?.prefixText = model.prefix
+		tvTitle?.setTextColor(context.getColorCompat(model.titleColorResId))
+		tvContent?.setTextColor(context.getColorCompat(model.contentColorResId))
+		eiText?.setTextColor(context.getColorCompat(model.textColorResId))
+		eiText?.setHintTextColor(context.getColorCompat(model.hintColorResId))
+		eiLayout?.hintTextColor = ColorStateList.valueOf(context.getColorCompat(model.hintColorResId))
+		eiLayout?.setSuffixTextColor(ColorStateList.valueOf(context.getColorCompat(model.suffixColorResId)))
+		eiLayout?.setPrefixTextColor(ColorStateList.valueOf(context.getColorCompat(model.prefixColorResId)))
 		eiText?.minLength = model.minLength
 		eiText?.required = model.required
 		eiText?.requestFocus()
