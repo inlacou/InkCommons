@@ -1,11 +1,12 @@
 package com.inlacou.inkbetterandroidviews.dialogs.simple
 
 import android.text.SpannableStringBuilder
+import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogViewMdl
 
 data class SimpleDialogViewMdl(
-	var title: SpannableStringBuilder?,
+	override var title: SpannableStringBuilder?,
 	var content: SpannableStringBuilder? = null,
-	var cancel: Boolean = true,
-	var onClick: ((item: Any) -> Unit)? = null,
-	var onDelete: ((item: Any) -> Unit)? = null,
-)
+	override var cancelOnOutsideClick: Boolean = true,
+	override var onAccepted: (() -> Unit)? = null,
+	override var onCancelled: (() -> Unit)? = null,
+): BasicDialogViewMdl(title, cancelOnOutsideClick, true, onAccepted, onCancelled)

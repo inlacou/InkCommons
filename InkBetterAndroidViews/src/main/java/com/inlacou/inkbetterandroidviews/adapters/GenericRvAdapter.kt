@@ -9,7 +9,7 @@ import com.inlacou.inkbetterandroidviews.R
 class GenericRvAdapter<CustomView: View, CustomModel>(
 	private val itemList: List<CustomModel>,
 	val layoutResourceId: Int,
-	val onViewInitialize: (CustomView, View) -> Unit,
+	val onViewInitialize: ((CustomView, View) -> Unit)? = null,
 	val onViewPopulate: (CustomView, CustomModel) -> Unit,
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 	
@@ -23,7 +23,7 @@ class GenericRvAdapter<CustomView: View, CustomModel>(
 	
 	inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 		val view: CustomView = itemView.findViewById(R.id.view)
-		init { onViewInitialize.invoke(view, itemView) }
+		init { onViewInitialize?.invoke(view, itemView) }
 	}
 	
 }

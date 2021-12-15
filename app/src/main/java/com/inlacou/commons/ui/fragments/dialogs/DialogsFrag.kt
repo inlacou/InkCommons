@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.SimpleAdapter
 import com.google.gson.Gson
 import com.inlacou.commons.R
 import com.inlacou.commons.databinding.FragmentDialogsBinding
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
+import com.inlacou.inkandroidextensions.toast
+import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
+import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogView
+import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogViewMdl
 import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogView
 import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogViewMdl
 import com.inlacou.inkkotlinextensions.fromJson
@@ -63,12 +68,23 @@ class DialogsFrag: BaseFrag() {
             text = "Simple dialog"
             setOnClickListener {
                 SimpleDialogView(this.context, model = SimpleDialogViewMdl(
-                    InkSpannableBuilder().addTextBold("TITLE").build(),
-                    InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build()
-                )).show(this@DialogsFrag.requireActivity())
+                    title = InkSpannableBuilder().addTextBold("Simple Dialog").build(),
+                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build()
+                )).show()
+            }
+        })
+        lv?.addView(Button(this.context).apply {
+            text = "List dialog"
+            setOnClickListener {
+                SimpleListDialogView(this.context, model = SimpleListDialogViewMdl(
+                    title = InkSpannableBuilder().addTextBold("List Dialog").build(),
+                    items = listOf(Row("Perro"), Row("Gato"), Row("Pez"), Row("Pájaro")), onItemSelected = { requireActivity().toast(it.displayAsRow) }
+                )).show()
             }
         })
     }
 
     private fun setListeners() {  }
+
+    class Row(override val displayAsRow: String): SimpleRvAdapter.Row
 }

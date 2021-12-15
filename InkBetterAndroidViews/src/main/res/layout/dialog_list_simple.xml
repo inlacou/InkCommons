@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/view_base_layout_surface"
+	android:id="@+id/shadow"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:paddingTop="@dimen/inkbetterandroidviews_general_all"
@@ -13,6 +13,7 @@
 	android:background="#3000">
 
 	<com.inlacou.pripple.RippleLinearLayout
+		android:id="@+id/dialog"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_centerInParent="true"
@@ -32,14 +33,10 @@
 			android:textColor="@color/basic_black"
 			tools:text="Holi" />
 
-		<TextView
-			android:id="@+id/tv_content"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:paddingStart="@dimen/inkbetterandroidviews_general_all_half"
-			android:paddingBottom="@dimen/inkbetterandroidviews_general_all"
-			android:textColor="@color/basic_black"
-			tools:text="Holi" />
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/rv_content"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
 
 		<LinearLayout
 			android:layout_width="wrap_content"

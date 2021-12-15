@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/view"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:padding="@dimen/inkbetterandroidviews_general_all"/>
+	android:padding="@dimen/inkbetterandroidviews_general_all"
+	android:textColor="@color/basic_black"
+	tools:text="Lorem ipsum"/>
