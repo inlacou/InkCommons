@@ -9,4 +9,11 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="Unknown_error_happened">Ha ocurrido un error desconocido</string>
+    <string name="navigation_drawer_open">Cajón de navegación abierto</string>
+    <string name="navigation_drawer_close">Cajón de navegación cerrado</string>
+    <string name="Use_side_panel_to_navigate">Usa el panel de navegación lateral para visitar las diferentes secciones de la app.</string>
+    <string name="TextView_Bitmap">TextView Bitmap</string>
+    <string name="Accept">Accept</string>
+    <string name="Cancel">Cancel</string>
 </resources>

@@ -1,0 +1,117 @@
+<resources>
+
+	<!-- Base -->
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+		<!-- Customize your theme here. -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<!-- Deshabilitar la Toolbar -->
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+	
+	<style name="NavDrawerStyle" parent="Theme.AppCompat.Light">
+		<item name="colorPrimary">@color/colorAccent</item>
+		<item name="android:textColorPrimary">@color/basic_white</item>
+		<item name="android:textColorSecondary">@color/basic_white</item>
+	</style>
+	
+	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+	
+	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+	
+	<!-- /Base -->
+	
+	<!-- Inputs -->
+	<style name="TextLimitStyle" parent="TextAppearance.AppCompat.Small">
+		<item name="android:textColor">@color/colorAccent</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textSize">18sp</item>
+	</style>
+	
+	<style name="inputDisabled">
+		<!-- Inputted text color at all times -->
+		<item name="android:textColor">@color/transparent</item>
+		<item name="colorControlNormal">@color/transparent</item>
+		<item name="colorControlActivated">@color/transparent</item>
+		<!--<item name="colorControlHighlight">@color/basic_cyan</item>-->
+	</style>
+	
+	<style name="input">
+		<!-- Inputted text color at all times -->
+		<item name="android:textColor">@color/basic_black</item>
+		<item name="colorControlNormal">@color/basic_black</item>
+		<item name="colorControlActivated">@color/basic_black</item>
+		<item name="android:drawablePadding">@dimen/inkbetterandroidviews_general_all</item>
+		<!--<item name="colorControlHighlight">@color/basic_cyan</item>-->
+	</style>
+	
+	<style name="editText" parent="input">
+		<!-- Inputted text color at all times -->
+		<item name="android:textColor">@color/basic_black</item>
+		<item name="android:paddingTop">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingBottom">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:textSize">17sp</item>
+		<item name="android:inputType">text</item>
+	</style>
+
+	<style name="spinner" parent="input">
+		<!-- Inputted text color at all times -->
+		<item name="android:textColor">@color/basic_black</item>
+		<item name="android:textSize">17sp</item>
+		<item name="android:maxLines">1</item>
+		<item name="android:ellipsize">end</item>
+		<item name="android:textColorHint">@color/unfocused_hint</item>
+		<item name="android:paddingTop">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingBottom">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingRight">3dp</item>
+		<item name="android:paddingLeft">3dp</item>
+		<item name="android:background">@color/transparent</item>
+	</style>
+	
+	<style name="spinnerDisabled" parent="inputDisabled">
+		<!-- Inputted text color at all times -->
+		<item name="android:textColor">@color/basic_black</item>
+		<item name="android:maxLines">1</item>
+		<item name="android:ellipsize">end</item>
+		<item name="android:paddingTop">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingBottom">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:background">@color/transparent</item>
+	</style>
+	
+	<!-- /Inputs -->
+	
+	<style name="ButtonTheme" parent="@android:style/Widget.TextView">
+		<item name="android:paddingRight">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingLeft">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingTop">@dimen/inkbetterandroidviews_general_all_half</item>
+		<item name="android:paddingBottom">@dimen/inkbetterandroidviews_general_all_half</item>
+		<item name="android:textColor">@color/basic_black</item>
+		<item name="android:textStyle">normal</item>
+		<item name="android:gravity">center</item>
+		<item name="android:fontFamily">sans-serif</item>
+		<item name="android:textSize">18sp</item>
+		<item name="android:lineSpacingExtra">4sp</item>
+		<item name="android:clickable">true</item>
+	</style>
+	
+	<style name="RippleButtonTheme" parent="@android:style/Widget.TextView">
+		<item name="android:paddingRight">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingLeft">@dimen/inkbetterandroidviews_general_all</item>
+		<item name="android:paddingTop">@dimen/inkbetterandroidviews_general_all_half</item>
+		<item name="android:paddingBottom">@dimen/inkbetterandroidviews_general_all_half</item>
+		<item name="android:textColor">@color/basic_white</item>
+		<item name="android:textStyle">normal</item>
+		<item name="android:gravity">center</item>
+		<item name="android:fontFamily">sans-serif</item>
+		<item name="android:textSize">18sp</item>
+		<item name="android:lineSpacingExtra">4sp</item>
+		<item name="android:clickable">true</item>
+		<item name="backgroundNormal">@color/colorPrimary</item>
+		<item name="backgroundRipple">@color/colorAccent</item>
+		<item name="corners">@dimen/inkbetterandroidviews_general_all</item>
+	</style>
+
+</resources>

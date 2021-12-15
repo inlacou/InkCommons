@@ -6,7 +6,6 @@ import android.widget.AutoCompleteTextView
 import android.widget.CheckBox
 import android.widget.TextView
 import com.inlacou.inkbetterandroidviews.listenerstoobservable.*
-import com.inlacou.inkbetterandroidviews.BetterSpinner
 import com.inlacou.inkbetterandroidviews.listenerstoobservable.AutoCompleteTextViewObs
 import io.reactivex.rxjava3.core.Observable
 

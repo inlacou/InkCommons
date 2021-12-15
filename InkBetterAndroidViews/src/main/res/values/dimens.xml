@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="inkbetterandroidviews_general_all_half">8dp</dimen>
     <dimen name="inkbetterandroidviews_general_all">16dp</dimen>
+    <dimen name="inkbetterandroidviews_general_all_double">32dp</dimen>
     <dimen name="inkbetterandroidviews_checkbox_normal">22dp</dimen>
 </resources>

@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.*
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.RelativeLayout
@@ -417,4 +418,31 @@ fun View.toBitmap(): Bitmap {
 	val canvas = Canvas(bitmap)
 	this.draw(canvas)
 	return bitmap
+}
+
+/**
+ * For wrap content and match parent use ViewGroup.LayoutParams.WRAP_CONTENT or ViewGroup.LayoutParams.MATCH_PARENT.
+ */
+fun View.setWidthHeight(width: Int?, height: Int?) {
+	var layoutParams = this.layoutParams
+	when(layoutParams) {
+		is RelativeLayout.LayoutParams -> { if(width!=null) layoutParams.width = width; if(height!=null) layoutParams.height = height }
+		is LinearLayout.LayoutParams -> { if(width!=null) layoutParams.width = width; if(height!=null) layoutParams.height = height }
+		is FrameLayout.LayoutParams -> { if(width!=null) layoutParams.width = width; if(height!=null) layoutParams.height = height }
+		is CollapsingToolbarLayout.LayoutParams -> { if(width!=null) layoutParams.width = width; if(height!=null) layoutParams.height = height }
+		is CoordinatorLayout.LayoutParams -> { if(width!=null) layoutParams.width = width; if(height!=null) layoutParams.height = height }
+		is LinearLayoutCompat.LayoutParams -> { if(width!=null) layoutParams.width = width; if(height!=null) layoutParams.height = height }
+		null -> { when(parent) {
+			is RelativeLayout -> layoutParams = RelativeLayout.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
+			is LinearLayout -> layoutParams = LinearLayout.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
+			is FrameLayout -> layoutParams = FrameLayout.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
+			is CollapsingToolbarLayout -> layoutParams = CollapsingToolbarLayout.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
+			is CoordinatorLayout -> layoutParams = CoordinatorLayout.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
+			is LinearLayoutCompat -> layoutParams = LinearLayoutCompat.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
+			null -> layoutParams = LinearLayoutCompat.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
+			else -> Timber.d("parent is ${parent.javaClass}")
+		} }
+	}
+	Timber.d("new layoutParams: $layoutParams")
+	this.layoutParams = layoutParams
 }

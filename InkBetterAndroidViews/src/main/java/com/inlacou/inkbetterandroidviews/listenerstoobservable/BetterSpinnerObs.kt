@@ -1,6 +1,6 @@
 package com.inlacou.inkbetterandroidviews.listenerstoobservable
 
-import com.inlacou.inkbetterandroidviews.BetterSpinner
+import com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
 
 import io.reactivex.rxjava3.core.ObservableEmitter
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
