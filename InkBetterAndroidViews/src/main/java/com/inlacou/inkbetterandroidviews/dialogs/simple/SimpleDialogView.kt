@@ -12,7 +12,7 @@ class SimpleDialogView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
-	override val model: SimpleDialogViewMdl = SimpleDialogViewMdl(null)
+	override val model: SimpleDialogViewMdl
 ) : BasicDialogView(context, attrs, defStyleAttr) {
 
 	private var binder: DialogSimpleBinding? = null

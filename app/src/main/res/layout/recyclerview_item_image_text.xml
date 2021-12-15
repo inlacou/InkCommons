@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.inlacou.pripple.RippleLinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/view"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:backgroundNormal="@color/basic_white"
+	app:backgroundRipple="@color/colorAccent"
+	android:paddingTop="@dimen/inkbetterandroidviews_general_all"
+	android:paddingBottom="@dimen/inkbetterandroidviews_general_all"
+	android:padding="@dimen/inkbetterandroidviews_general_all"
+	android:orientation="horizontal"
+	android:clickable="false">
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
+		tools:src="@drawable/space_invader" />
+	<TextView
+		android:id="@+id/text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/inkbetterandroidviews_general_all"
+		android:textSize="14sp"
+		android:fontFamily="sans-serif"
+		android:textStyle="bold"
+		android:textColor="#6a6a6a"
+		android:textAllCaps="true"
+		tools:text="Mi taller"/>
+</com.inlacou.pripple.RippleLinearLayout>

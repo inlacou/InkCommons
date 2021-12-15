@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.SimpleAdapter
+import android.widget.TextView
 import com.google.gson.Gson
 import com.inlacou.commons.R
 import com.inlacou.commons.databinding.FragmentDialogsBinding
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.inkandroidextensions.toast
+import com.inlacou.inkandroidextensions.view.tint
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
+import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialogView
+import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialogViewMdl
 import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogView
 import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogViewMdl
 import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogView
@@ -74,11 +78,37 @@ class DialogsFrag: BaseFrag() {
             }
         })
         lv?.addView(Button(this.context).apply {
-            text = "List dialog"
+            text = "Simple List dialog"
             setOnClickListener {
                 SimpleListDialogView(this.context, model = SimpleListDialogViewMdl(
                     title = InkSpannableBuilder().addTextBold("List Dialog").build(),
-                    items = listOf(Row("Perro"), Row("Gato"), Row("Pez"), Row("Pájaro")), onItemSelected = { requireActivity().toast(it.displayAsRow) }
+                    items = listOf(Row("Perro"), Row("Gato"), Row("Pez"), Row("Pájaro")),
+                    onItemSelected = { requireActivity().toast(it.displayAsRow) }
+                )).show()
+            }
+        })
+        lv?.addView(Button(this.context).apply {
+            text = "Complex List dialog"
+            setOnClickListener {
+                ComplexListDialogView<LinearLayout, ImageText>(this.context, model = ComplexListDialogViewMdl(
+                    title = InkSpannableBuilder().addTextBold("List Dialog").build(),
+                    itemLayoutResId = R.layout.recyclerview_item_image_text, /* Set desired layout here */
+                    items = listOf(ImageText("Perro", iconTintColorResId = R.color.basic_red),
+                        ImageText("Gato", iconTintColorResId = R.color.basic_blue),
+                        ImageText("Pez", iconTintColorResId = R.color.basic_green),
+                        ImageText("Pájaro", iconTintColorResId = R.color.basic_pink)),
+                    onViewPopulate = { dialog, layout, model ->
+                        /* Populate provided layout here */
+                        layout.findViewById<TextView>(R.id.text).text = model.name
+                        layout.findViewById<ImageView>(R.id.icon).apply {
+                            setImageResource(model.resId)
+                            tint(model.iconTintColorResId)
+                        }
+                        layout.setOnClickListener {
+                            requireActivity().toast(model.name)
+                            dialog.dismiss()
+                        }
+                    }
                 )).show()
             }
         })
@@ -87,4 +117,5 @@ class DialogsFrag: BaseFrag() {
     private fun setListeners() {  }
 
     class Row(override val displayAsRow: String): SimpleRvAdapter.Row
+    class ImageText(val name: String, val resId: Int = R.drawable.space_invader, val iconTintColorResId: Int)
 }
