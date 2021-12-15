@@ -11,4 +11,4 @@ data class ComplexListDialogViewMdl<CustomView: View, CustomModel>(
 	override var cancelOnOutsideClick: Boolean = true,
 	var onViewPopulate: ((ComplexListDialogView<CustomView, CustomModel>, CustomView, CustomModel) -> Unit),
 	override var onCancelled: (() -> Unit)? = null,
-): BasicDialogViewMdl(title, cancelOnOutsideClick, false, null, onCancelled)
+): BasicDialogViewMdl(title, cancelOnOutsideClick, onCancelled)

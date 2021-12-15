@@ -16,6 +16,8 @@ import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.inkandroidextensions.toast
 import com.inlacou.inkandroidextensions.view.tint
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
+import com.inlacou.inkbetterandroidviews.dialogs.input.TextInputDialogView
+import com.inlacou.inkbetterandroidviews.dialogs.input.TextInputDialogViewMdl
 import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialogView
 import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialogViewMdl
 import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogView
@@ -31,7 +33,9 @@ class DialogsFrag: BaseFrag() {
     override val title: String? = AppCtrl.instance.packageName
 
     val lv: LinearLayout? get() = binder?.lv
-    
+
+    var name = ""
+
     companion object {
         @JvmOverloads
         fun create(model: DialogsFragMdl = DialogsFragMdl()): DialogsFrag {
@@ -108,6 +112,21 @@ class DialogsFrag: BaseFrag() {
                             requireActivity().toast(model.name)
                             dialog.dismiss()
                         }
+                    }
+                )).show()
+            }
+        })
+        lv?.addView(Button(this.context).apply {
+            text = "Text input dialog"
+            setOnClickListener {
+                TextInputDialogView(this.context, model = TextInputDialogViewMdl(
+                    title = InkSpannableBuilder().addTextBold("List Dialog").build(),
+                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build(),
+                    hint = "Name",
+                    input = name,
+                    onAccepted = {
+                        name = it
+                        requireActivity().toast(it)
                     }
                 )).show()
             }

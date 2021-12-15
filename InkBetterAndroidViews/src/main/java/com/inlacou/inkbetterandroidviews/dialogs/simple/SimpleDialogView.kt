@@ -25,6 +25,8 @@ class SimpleDialogView @JvmOverloads constructor(
 
 	fun applyModel(newModel: SimpleDialogViewMdl) { //Copy contents
 		model.content = newModel.content
+		model.onAccepted = newModel.onAccepted
+		model.showAcceptButton = newModel.showAcceptButton
 		super.applyModel(newModel)
 	}
 

@@ -60,4 +60,5 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"                                  	//RX
     implementation 'com.github.inlacou:PRipple:1.6.3'
     implementation 'com.github.irontec:InkSpannable:1.2.0'
+    implementation 'com.github.inlacou:ExInput:2.1.2'
 }

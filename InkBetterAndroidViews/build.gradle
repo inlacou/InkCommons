@@ -69,4 +69,5 @@ dependencies {
 
     compileOnly 'com.github.inlacou:InkSwitch:1.0.10'
     compileOnly 'com.github.inlacou:ExInput:2.1.2'
-    compileOnly 'com.github.inlacou:PRipple:1.6.3'}
+    compileOnly 'com.github.inlacou:PRipple:1.6.3'
+}

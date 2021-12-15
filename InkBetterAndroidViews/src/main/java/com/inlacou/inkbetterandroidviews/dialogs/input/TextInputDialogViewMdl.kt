@@ -1,13 +1,16 @@
-package com.inlacou.inkbetterandroidviews.dialogs.list.simple
+package com.inlacou.inkbetterandroidviews.dialogs.input
 
 import android.text.SpannableStringBuilder
-import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogViewMdl
 
-data class SimpleListDialogViewMdl(
+data class TextInputDialogViewMdl(
 	override var title: SpannableStringBuilder?,
-	var items: List<SimpleRvAdapter.Row>,
+	var content: SpannableStringBuilder? = null,
+	var hint: String = "",
+	var input: String = "",
+	var minLength: Int = 0,
+	var required: Boolean = true,
 	override var cancelOnOutsideClick: Boolean = true,
-	var onItemSelected: ((SimpleRvAdapter.Row) -> Unit),
+	var onAccepted: ((String) -> Unit),
 	override var onCancelled: (() -> Unit)? = null,
 ): BasicDialogViewMdl(title, cancelOnOutsideClick, onCancelled)

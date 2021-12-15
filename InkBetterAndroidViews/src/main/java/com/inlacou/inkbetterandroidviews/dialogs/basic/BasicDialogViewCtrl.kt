@@ -12,9 +12,4 @@ abstract class BasicDialogViewCtrl(open val view: BasicDialogView, open val mode
 
 	open fun onCancelClick() = view.dismiss(view.context as Activity)
 
-	open fun onAcceptClick() {
-		model.onAccepted?.invoke()
-		view.dismiss()
-	}
-
 }

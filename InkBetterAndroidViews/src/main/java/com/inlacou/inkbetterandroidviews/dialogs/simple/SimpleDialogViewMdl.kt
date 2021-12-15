@@ -7,6 +7,7 @@ data class SimpleDialogViewMdl(
 	override var title: SpannableStringBuilder?,
 	var content: SpannableStringBuilder? = null,
 	override var cancelOnOutsideClick: Boolean = true,
-	override var onAccepted: (() -> Unit)? = null,
+	var showAcceptButton: Boolean = true,
+	var onAccepted: (() -> Unit)? = null,
 	override var onCancelled: (() -> Unit)? = null,
-): BasicDialogViewMdl(title, cancelOnOutsideClick, true, onAccepted, onCancelled)
+): BasicDialogViewMdl(title, cancelOnOutsideClick, onCancelled)

@@ -23,7 +23,6 @@ abstract class BasicDialogView @JvmOverloads constructor(
 	fun applyModel(newModel: BasicDialogViewMdl) { //Copy contents
 		model.title = newModel.title
 		model.cancelOnOutsideClick = newModel.cancelOnOutsideClick
-		model.onAccepted = newModel.onAccepted
 		model.onCancelled = newModel.onCancelled
 		disposeAll()
 		setListeners()
@@ -42,13 +41,11 @@ abstract class BasicDialogView @JvmOverloads constructor(
 
 	open fun populate() {
 		tvTitle?.text = model.title
-		btnAccept?.setVisible(model.showAcceptButton, holdSpaceOnDisappear = false)
 	}
 
 	protected open fun setListeners() {
 		shadow?.setOnClickListener { controller.onOutsideClick() }
 		dialog?.setOnClickListener { /*Do nothing*/ }
-		btnAccept?.setOnClickListener { controller.onAcceptClick() }
 		btnCancel?.setOnClickListener { controller.onCancelClick() }
 	}
 
