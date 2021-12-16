@@ -24,4 +24,31 @@ data class IntInputDialogMdl(
 	override var cancelOnOutsideClick: Boolean = true,
 	var onAccepted: ((Int) -> Unit),
 	override var onCancelled: (() -> Unit)? = null,
-): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled, backgroundColorResId)
+): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled, backgroundColorResId) {
+	constructor(
+		title: String?,
+		backgroundColorResId: Int? = null,
+		content: String? = null,
+		hint: String = "",
+		input: Int? = null,
+		suffix: String = "",
+		prefix: String = "",
+		titleColorResId: Int = R.color.basic_black,
+		contentColorResId: Int = R.color.basic_black,
+		textColorResId: Int = R.color.basic_black,
+		hintColorResId: Int = R.color.basic_black,
+		inputColorResId: Int = R.color.basic_black,
+		suffixColorResId: Int = R.color.basic_black,
+		prefixColorResId: Int = R.color.basic_black,
+		minLength: Int = 0,
+		required: Boolean = true,
+		cancelOnOutsideClick: Boolean = true,
+		onAccepted: ((Int) -> Unit),
+		onCancelled: (() -> Unit)? = null
+	): this(SpannableStringBuilder(title), backgroundColorResId, SpannableStringBuilder(content),
+		hint, input, suffix, prefix,
+		titleColorResId, contentColorResId, textColorResId, hintColorResId,
+		inputColorResId, suffixColorResId, prefixColorResId, minLength,
+		required, cancelOnOutsideClick, onAccepted, onCancelled
+	)
+}

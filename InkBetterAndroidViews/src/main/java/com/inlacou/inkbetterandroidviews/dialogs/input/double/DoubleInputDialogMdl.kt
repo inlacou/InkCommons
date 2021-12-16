@@ -25,4 +25,32 @@ data class DoubleInputDialogMdl(
 	override var cancelOnOutsideClick: Boolean = true,
 	var onAccepted: ((Double) -> Unit),
 	override var onCancelled: (() -> Unit)? = null,
-): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled, backgroundColorResId)
+): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled, backgroundColorResId) {
+	constructor(
+		title: String?,
+		backgroundColorResId: Int? = null,
+		content: String? = null,
+		hint: String = "",
+		input: Double? = null,
+		suffix: String = "",
+		prefix: String = "",
+		titleColorResId: Int = R.color.basic_black,
+		contentColorResId: Int = R.color.basic_black,
+		textColorResId: Int = R.color.basic_black,
+		hintColorResId: Int = R.color.basic_black,
+		inputColorResId: Int = R.color.basic_black,
+		suffixColorResId: Int = R.color.basic_black,
+		prefixColorResId: Int = R.color.basic_black,
+		maxDecimals: Int? = null,
+		maxDigits: Int? = null,
+		required: Boolean = true,
+		cancelOnOutsideClick: Boolean = true,
+		onAccepted: ((Double) -> Unit),
+		onCancelled: (() -> Unit)? = null
+	): this(SpannableStringBuilder(title), backgroundColorResId, SpannableStringBuilder(content),
+		hint, input, suffix, prefix,
+		titleColorResId, contentColorResId, textColorResId, hintColorResId,
+		inputColorResId, suffixColorResId, prefixColorResId, maxDecimals,
+		maxDigits, required, cancelOnOutsideClick, onAccepted, onCancelled
+	)
+}
