@@ -6,6 +6,7 @@ import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogMdl
 
 data class TextInputDialogMdl(
 	override var title: SpannableStringBuilder?,
+	override var backgroundColorResId: Int? = null,
 	var content: SpannableStringBuilder? = null,
 	var hint: String = "",
 	var input: String = "",
@@ -23,4 +24,4 @@ data class TextInputDialogMdl(
 	override var cancelOnOutsideClick: Boolean = true,
 	var onAccepted: ((String) -> Unit),
 	override var onCancelled: (() -> Unit)? = null,
-): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled)
+): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled, backgroundColorResId)

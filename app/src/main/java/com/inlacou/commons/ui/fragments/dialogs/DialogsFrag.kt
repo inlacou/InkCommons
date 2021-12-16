@@ -86,6 +86,7 @@ class DialogsFrag: BaseFrag() {
                 SimpleDialog(this.context, model = SimpleDialogMdl(
                     title = InkSpannableBuilder().addTextBold("Simple Dialog").build(),
                     content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build()
+                    , backgroundColorResId = R.color.custom_dialog_shadow
                 )).show()
             }
         })

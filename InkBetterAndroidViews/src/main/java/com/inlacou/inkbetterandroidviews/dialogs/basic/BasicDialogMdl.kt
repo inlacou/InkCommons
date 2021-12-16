@@ -6,4 +6,5 @@ abstract class BasicDialogMdl(
 	open var title: SpannableStringBuilder?,
 	open var cancelOnOutsideClick: Boolean = true,
 	open var onCancelled: (() -> Unit)? = null,
+	open var backgroundColorResId: Int? = null,
 )

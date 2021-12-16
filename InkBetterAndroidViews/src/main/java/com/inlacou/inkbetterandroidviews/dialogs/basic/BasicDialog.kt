@@ -40,6 +40,7 @@ abstract class BasicDialog @JvmOverloads constructor(
 
 	open fun populate() {
 		tvTitle?.text = model.title
+		model.backgroundColorResId?.let { shadow?.setBackgroundResource(it) }
 	}
 
 	protected open fun setListeners() {
