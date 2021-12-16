@@ -58,3 +58,23 @@ fun Int.changeValueFromOneRangeToAnother(oldMin: Int, oldMax: Int, newMin: Float
 	return  if  (oldRange == 0) newMin
 			else (((oldValue - oldMin) * newRange) / oldRange) + newMin
 }
+
+/**
+ * Example:
+ *   10000f.calculateCompoundInterestAndLogIt(0.02f, 10, "año", "€")
+ * gives:
+ *   12189€ (+2189.0) en 10 años con una mejora por año de un 2.0% y partiendo de un inicio de 10000.0€
+ */
+fun Float.calculateCompoundInterestAndLogIt(interes: Float, timeUnits: Int, timeUnitName: String, initialValueUnit: String): Float {
+	val increment = 1f+interes
+	val result = this.calculateCompoundInterest(interes, timeUnits)
+	println("${result.toInt()}$initialValueUnit (+${result.toInt()-this}) en $timeUnits ${timeUnitName}s con una mejora por $timeUnitName de un ${(increment*100-100f)}% y partiendo de un inicio de $this$initialValueUnit")
+	return result
+}
+
+fun Float.calculateCompoundInterest(interes: Float, timeUnits: Int): Float {
+	val increment = 1f+interes
+	var result = this
+	repeat(timeUnits) { result*=increment }
+	return result
+}

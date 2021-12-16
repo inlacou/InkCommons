@@ -29,6 +29,7 @@ import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialog
 import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogMdl
 import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialog
 import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogMdl
+import com.inlacou.inkkotlinextensions.calculateCompoundInterestAndLogIt
 import com.inlacou.inkkotlinextensions.fromJson
 import com.inlacou.inkspannable.InkSpannableBuilder
 
@@ -179,14 +180,4 @@ class DialogsFrag: BaseFrag() {
 
     class Row(override val displayAsRow: String): SimpleRvAdapter.Row
     class ImageText(val name: String, val resId: Int = R.drawable.space_invader, val iconTintColorResId: Int)
-}
-
-fun main() {
-    val increment = 1.01f
-    val days = 365
-    var result = 100f
-
-    repeat(days) { result*=increment }
-
-    println("${result.toInt()-100}% de mejora en $days con una mejora diaria de un ${(increment*100-100f)}%")
 }
