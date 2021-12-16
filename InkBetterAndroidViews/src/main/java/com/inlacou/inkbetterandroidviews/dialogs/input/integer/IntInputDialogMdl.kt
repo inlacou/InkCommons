@@ -40,7 +40,7 @@ data class IntInputDialogMdl(
 		inputColorResId: Int = R.color.basic_black,
 		suffixColorResId: Int = R.color.basic_black,
 		prefixColorResId: Int = R.color.basic_black,
-		minLength: Int = 0,
+		maxDigits: Int? = null,
 		required: Boolean = true,
 		cancelOnOutsideClick: Boolean = true,
 		onAccepted: ((Int) -> Unit),
@@ -48,7 +48,7 @@ data class IntInputDialogMdl(
 	): this(SpannableStringBuilder(title), backgroundColorResId, SpannableStringBuilder(content),
 		hint, input, suffix, prefix,
 		titleColorResId, contentColorResId, textColorResId, hintColorResId,
-		inputColorResId, suffixColorResId, prefixColorResId, minLength,
+		inputColorResId, suffixColorResId, prefixColorResId, maxDigits,
 		required, cancelOnOutsideClick, onAccepted, onCancelled
 	)
 }
