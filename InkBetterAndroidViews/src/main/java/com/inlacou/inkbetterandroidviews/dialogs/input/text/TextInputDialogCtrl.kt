@@ -6,8 +6,8 @@ class TextInputDialogCtrl(override val view: TextInputDialog, override val model
 
 	fun onAcceptClick(text: String) {
 		if(view.eiText?.isValid()==true) {
-			model.onAccepted.invoke(text)
 			view.dismiss()
+			model.onAccepted.invoke(text)
 		}
 	}
 

@@ -118,8 +118,8 @@ class DialogsFrag: BaseFrag() {
                             tint(model.iconTintColorResId)
                         }
                         layout.setOnClickListener {
-                            requireActivity().toast(model.name)
                             dialog.dismiss()
+                            requireActivity().toast(model.name)
                         }
                     }
                 )).show()
