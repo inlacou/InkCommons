@@ -1,4 +1,4 @@
-package com.inlacou.inkbetterandroidviews.dialogs.input
+package com.inlacou.inkbetterandroidviews.dialogs.input.double
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -7,34 +7,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
-import com.inlacou.exinput.free.text.TextInput
+import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
+import com.inlacou.exinput.free.numeric.vint.IntInput
 import com.inlacou.inkandroidextensions.getColorCompat
-import com.inlacou.inkandroidextensions.view.tint
-import com.inlacou.inkbetterandroidviews.databinding.DialogInputTextBinding
-import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogView
+import com.inlacou.inkbetterandroidviews.databinding.DialogInputDoubleBinding
+import com.inlacou.inkbetterandroidviews.databinding.DialogInputIntegerBinding
+import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class TextInputDialogView @JvmOverloads constructor(
+class DoubleInputDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
-	override val model: TextInputDialogViewMdl
-) : BasicDialogView(context, attrs, defStyleAttr) {
+	override val model: DoubleInputDialogMdl
+) : BasicDialog(context, attrs, defStyleAttr) {
 
-	private var binder: DialogInputTextBinding? = null
+	private var binder: DialogInputDoubleBinding? = null
 	override val shadow: View? get() = binder?.shadow
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
 	val tvContent: TextView? get() = binder?.tvContent
-	val eiText: TextInput? get() = binder?.eiText
+	val eiDouble: DoubleInput? get() = binder?.eiDouble
 	val eiLayout: TextInputLayout? get() = binder?.eiLayout
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnAccept
 
-	fun applyModel(newModel: TextInputDialogViewMdl) { //Copy contents
+	fun applyModel(newModel: DoubleInputDialogMdl) { //Copy contents
 		model.content = newModel.content
 		model.input = newModel.input
 		model.hint = newModel.hint
-		model.minLength = newModel.minLength
+		model.maxDigits = newModel.maxDigits
 		model.required = newModel.required
 		model.prefix = newModel.prefix
 		model.suffix = newModel.suffix
@@ -44,38 +45,37 @@ class TextInputDialogView @JvmOverloads constructor(
 		super.applyModel(newModel)
 	}
 
-	private val controller: TextInputDialogViewCtrl by lazy { baseController as TextInputDialogViewCtrl }
+	private val controller: DoubleInputDialogCtrl by lazy { baseController as DoubleInputDialogCtrl }
 
 	override fun initialize() {
 		super.initialize()
-		if(binder==null) binder = DialogInputTextBinding.inflate(LayoutInflater.from(context), this, true)
-		baseController = TextInputDialogViewCtrl(view = this, model = model)
+		if(binder==null) binder = DialogInputDoubleBinding.inflate(LayoutInflater.from(context), this, true)
+		baseController = DoubleInputDialogCtrl(view = this, model = model)
 	}
 
 	override fun populate() {
 		super.populate()
 		tvTitle?.text = model.title
 		tvContent?.text = model.content
-		eiText?.text = model.input
-		eiText?.hint = model.hint
+		eiDouble?.double = model.input
 		eiLayout?.hint = model.hint
 		eiLayout?.suffixText = model.suffix
 		eiLayout?.prefixText = model.prefix
 		tvTitle?.setTextColor(context.getColorCompat(model.titleColorResId))
 		tvContent?.setTextColor(context.getColorCompat(model.contentColorResId))
-		eiText?.setTextColor(context.getColorCompat(model.textColorResId))
-		eiText?.setHintTextColor(context.getColorCompat(model.hintColorResId))
+		eiDouble?.setTextColor(context.getColorCompat(model.textColorResId))
+		eiDouble?.setHintTextColor(context.getColorCompat(model.hintColorResId))
 		eiLayout?.hintTextColor = ColorStateList.valueOf(context.getColorCompat(model.hintColorResId))
 		eiLayout?.setSuffixTextColor(ColorStateList.valueOf(context.getColorCompat(model.suffixColorResId)))
 		eiLayout?.setPrefixTextColor(ColorStateList.valueOf(context.getColorCompat(model.prefixColorResId)))
-		eiText?.minLength = model.minLength
-		eiText?.required = model.required
-		eiText?.requestFocus()
+		eiDouble?.maxDigits = model.maxDigits
+		eiDouble?.required = model.required
+		eiDouble?.requestFocus()
 	}
 
 	override fun setListeners() {
 		super.setListeners()
-		btnAccept?.setOnClickListener { controller.onAcceptClick(eiText?.text ?: "") }
+		btnAccept?.setOnClickListener { controller.onAcceptClick(eiDouble?.double) }
 	}
 
 }

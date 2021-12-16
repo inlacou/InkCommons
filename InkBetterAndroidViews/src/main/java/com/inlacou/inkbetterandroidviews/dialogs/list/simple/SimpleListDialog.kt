@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
 import com.inlacou.inkbetterandroidviews.databinding.DialogListSimpleBinding
-import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogView
+import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class SimpleListDialogView @JvmOverloads constructor(
+class SimpleListDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
-	override val model: SimpleListDialogViewMdl
-) : BasicDialogView(context, attrs, defStyleAttr) {
+	override val model: SimpleListDialogMdl
+) : BasicDialog(context, attrs, defStyleAttr) {
 
 	private var binder: DialogListSimpleBinding? = null
 	override val shadow: View? get() = binder?.shadow
@@ -26,17 +26,17 @@ class SimpleListDialogView @JvmOverloads constructor(
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnAccept
 
-	fun applyModel(newModel: SimpleListDialogViewMdl) { //Copy contents
+	fun applyModel(newModel: SimpleListDialogMdl) { //Copy contents
 		model.items = newModel.items
 		super.applyModel(newModel)
 	}
 
-	private val controller: SimpleListDialogViewCtrl by lazy { baseController as SimpleListDialogViewCtrl }
+	private val controller: SimpleListDialogCtrl by lazy { baseController as SimpleListDialogCtrl }
 
 	override fun initialize() {
 		super.initialize()
 		if(binder==null) binder = DialogListSimpleBinding.inflate(LayoutInflater.from(context), this, true)
-		baseController = SimpleListDialogViewCtrl(view = this, model = model)
+		baseController = SimpleListDialogCtrl(view = this, model = model)
 	}
 
 	override fun populate() {

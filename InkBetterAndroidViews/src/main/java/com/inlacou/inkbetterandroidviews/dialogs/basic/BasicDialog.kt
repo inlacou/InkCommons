@@ -4,10 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
-import com.inlacou.inkandroidextensions.view.setVisible
 import com.inlacou.inkbetterandroidviews.dialogs.BaseDialog
 
-abstract class BasicDialogView @JvmOverloads constructor(
+abstract class BasicDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -19,8 +18,8 @@ abstract class BasicDialogView @JvmOverloads constructor(
 	abstract val btnCancel: View?
 	abstract val btnAccept: View?
 
-	abstract val model: BasicDialogViewMdl
-	fun applyModel(newModel: BasicDialogViewMdl) { //Copy contents
+	abstract val model: BasicDialogMdl
+	fun applyModel(newModel: BasicDialogMdl) { //Copy contents
 		model.title = newModel.title
 		model.cancelOnOutsideClick = newModel.cancelOnOutsideClick
 		model.onCancelled = newModel.onCancelled
@@ -29,7 +28,7 @@ abstract class BasicDialogView @JvmOverloads constructor(
 		populate()
 	}
 
-	private val controller: BasicDialogViewCtrl by lazy { baseController as BasicDialogViewCtrl }
+	private val controller: BasicDialogCtrl by lazy { baseController as BasicDialogCtrl }
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()

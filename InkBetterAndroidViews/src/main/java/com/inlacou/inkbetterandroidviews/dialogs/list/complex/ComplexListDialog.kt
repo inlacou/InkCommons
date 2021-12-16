@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inlacou.inkbetterandroidviews.adapters.GenericRvAdapter
 import com.inlacou.inkbetterandroidviews.databinding.DialogListSimpleBinding
-import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogView
+import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class ComplexListDialogView<CustomView: View, CustomModel> @JvmOverloads constructor(
+class ComplexListDialog<CustomView: View, CustomModel> @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
-	override val model: ComplexListDialogViewMdl<CustomView, CustomModel>
-) : BasicDialogView(context, attrs, defStyleAttr) {
+	override val model: ComplexListDialogMdl<CustomView, CustomModel>
+) : BasicDialog(context, attrs, defStyleAttr) {
 
 	private var binder: DialogListSimpleBinding? = null
 	override val shadow: View? get() = binder?.shadow
@@ -26,17 +26,17 @@ class ComplexListDialogView<CustomView: View, CustomModel> @JvmOverloads constru
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnAccept
 
-	fun applyModel(newModel: ComplexListDialogViewMdl<CustomView, CustomModel>) { //Copy contents
+	fun applyModel(newModel: ComplexListDialogMdl<CustomView, CustomModel>) { //Copy contents
 		model.items = newModel.items
 		super.applyModel(newModel)
 	}
 
-	private val controller: ComplexListDialogViewCtrl<CustomView, CustomModel> by lazy { baseController as ComplexListDialogViewCtrl<CustomView, CustomModel> }
+	private val controller: ComplexListDialogCtrl<CustomView, CustomModel> by lazy { baseController as ComplexListDialogCtrl<CustomView, CustomModel> }
 
 	override fun initialize() {
 		super.initialize()
 		if(binder==null) binder = DialogListSimpleBinding.inflate(LayoutInflater.from(context), this, true)
-		baseController = ComplexListDialogViewCtrl(view = this, model = model)
+		baseController = ComplexListDialogCtrl(view = this, model = model)
 	}
 
 	override fun populate() {

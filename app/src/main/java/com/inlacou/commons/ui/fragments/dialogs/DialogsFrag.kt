@@ -17,14 +17,18 @@ import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkandroidextensions.toast
 import com.inlacou.inkandroidextensions.view.tint
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
-import com.inlacou.inkbetterandroidviews.dialogs.input.TextInputDialogView
-import com.inlacou.inkbetterandroidviews.dialogs.input.TextInputDialogViewMdl
-import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialogView
-import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialogViewMdl
-import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogView
-import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogViewMdl
-import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogView
-import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogViewMdl
+import com.inlacou.inkbetterandroidviews.dialogs.input.double.DoubleInputDialog
+import com.inlacou.inkbetterandroidviews.dialogs.input.double.DoubleInputDialogMdl
+import com.inlacou.inkbetterandroidviews.dialogs.input.integer.IntInputDialog
+import com.inlacou.inkbetterandroidviews.dialogs.input.integer.IntInputDialogMdl
+import com.inlacou.inkbetterandroidviews.dialogs.input.text.TextInputDialog
+import com.inlacou.inkbetterandroidviews.dialogs.input.text.TextInputDialogMdl
+import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialog
+import com.inlacou.inkbetterandroidviews.dialogs.list.complex.ComplexListDialogMdl
+import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialog
+import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogMdl
+import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialog
+import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogMdl
 import com.inlacou.inkkotlinextensions.fromJson
 import com.inlacou.inkspannable.InkSpannableBuilder
 
@@ -36,6 +40,8 @@ class DialogsFrag: BaseFrag() {
     val lv: LinearLayout? get() = binder?.lv
 
     var name = ""
+    var intNumber: Int? = null
+    var doubleNumber: Double? = null
 
     companion object {
         @JvmOverloads
@@ -76,7 +82,7 @@ class DialogsFrag: BaseFrag() {
         lv?.addView(Button(this.context).apply {
             text = "Simple dialog"
             setOnClickListener {
-                SimpleDialogView(this.context, model = SimpleDialogViewMdl(
+                SimpleDialog(this.context, model = SimpleDialogMdl(
                     title = InkSpannableBuilder().addTextBold("Simple Dialog").build(),
                     content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build()
                 )).show()
@@ -85,8 +91,8 @@ class DialogsFrag: BaseFrag() {
         lv?.addView(Button(this.context).apply {
             text = "Simple List dialog"
             setOnClickListener {
-                SimpleListDialogView(this.context, model = SimpleListDialogViewMdl(
-                    title = InkSpannableBuilder().addTextBold("List Dialog").build(),
+                SimpleListDialog(this.context, model = SimpleListDialogMdl(
+                    title = InkSpannableBuilder().addTextBold("Simple List dialog").build(),
                     items = listOf(Row("Perro"), Row("Gato"), Row("Pez"), Row("Pájaro")),
                     onItemSelected = { requireActivity().toast(it.displayAsRow) }
                 )).show()
@@ -95,8 +101,8 @@ class DialogsFrag: BaseFrag() {
         lv?.addView(Button(this.context).apply {
             text = "Complex List dialog"
             setOnClickListener {
-                ComplexListDialogView<LinearLayout, ImageText>(this.context, model = ComplexListDialogViewMdl(
-                    title = InkSpannableBuilder().addTextBold("List Dialog").build(),
+                ComplexListDialog<LinearLayout, ImageText>(this.context, model = ComplexListDialogMdl(
+                    title = InkSpannableBuilder().addTextBold("Complex List dialog").build(),
                     itemLayoutResId = R.layout.recyclerview_item_image_text, /* Set desired layout here */
                     items = listOf(ImageText("Perro", iconTintColorResId = R.color.basic_red),
                         ImageText("Gato", iconTintColorResId = R.color.basic_blue),
@@ -120,8 +126,8 @@ class DialogsFrag: BaseFrag() {
         lv?.addView(Button(this.context).apply {
             text = "Text input dialog"
             setOnClickListener {
-                TextInputDialogView(this.context, model = TextInputDialogViewMdl(
-                    title = InkSpannableBuilder().addTextBold("List Dialog").build(),
+                TextInputDialog(this.context, model = TextInputDialogMdl(
+                    title = InkSpannableBuilder().addTextBold("Text input dialog").build(),
                     content = InkSpannableBuilder().addText("Lorem").addBlank().addTextColor("ipsum", context.getColorCompat(R.color.red_text)).addBlank().addText("dolor sit amet").build(),
                     prefix = "prefix",
                     prefixColorResId = R.color.red_text,
@@ -134,10 +140,53 @@ class DialogsFrag: BaseFrag() {
                 )).show()
             }
         })
+        lv?.addView(Button(this.context).apply {
+            text = "Integer input dialog"
+            setOnClickListener {
+                IntInputDialog(this.context, model = IntInputDialogMdl(
+                    title = InkSpannableBuilder().addTextBold("Integer input dialog").build(),
+                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build(),
+                    suffix = "units",
+                    suffixColorResId = R.color.red_text,
+                    hint = "Some value",
+                    input = intNumber,
+                    onAccepted = {
+                        intNumber = it
+                        requireActivity().toast(it.toString())
+                    }
+                )).show()
+            }
+        })
+        lv?.addView(Button(this.context).apply {
+            text = "Double input dialog"
+            setOnClickListener {
+                DoubleInputDialog(this.context, model = DoubleInputDialogMdl(
+                    title = InkSpannableBuilder().addTextBold("Double input dialog").build(),
+                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextColor("ipsum", context.getColorCompat(R.color.red_text)).addBlank().addText("dolor sit amet").build(),
+                    suffix = "gr",
+                    hint = "Some value",
+                    input = doubleNumber,
+                    onAccepted = {
+                        doubleNumber = it
+                        requireActivity().toast(it.toString())
+                    }
+                )).show()
+            }
+        })
     }
 
     private fun setListeners() {  }
 
     class Row(override val displayAsRow: String): SimpleRvAdapter.Row
     class ImageText(val name: String, val resId: Int = R.drawable.space_invader, val iconTintColorResId: Int)
+}
+
+fun main() {
+    val increment = 1.01f
+    val days = 365
+    var result = 100f
+
+    repeat(days) { result*=increment }
+
+    println("${result.toInt()-100}% de mejora en $days con una mejora diaria de un ${(increment*100-100f)}%")
 }

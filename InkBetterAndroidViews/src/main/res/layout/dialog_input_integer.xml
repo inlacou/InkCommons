@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/shadow"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingTop="@dimen/inkbetterandroidviews_general_all"
+	android:paddingBottom="@dimen/inkbetterandroidviews_general_all"
+	android:paddingHorizontal="@dimen/inkbetterandroidviews_general_all_double"
+	android:clickable="true"
+	android:background="#3000">
+
+	<com.inlacou.pripple.RippleLinearLayout
+		android:id="@+id/dialog"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:minHeight="50dp"
+		android:orientation="vertical"
+		android:padding="@dimen/inkbetterandroidviews_general_all"
+		app:backgroundNormal="@color/basic_white"
+		app:backgroundRipple="@color/basic_white"
+		app:corners="@dimen/inkbetterandroidviews_general_all">
+
+		<TextView
+			android:id="@+id/tv_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingStart="@dimen/inkbetterandroidviews_general_all_half"
+			android:paddingBottom="@dimen/inkbetterandroidviews_general_all_half"
+			android:textColor="@color/basic_black"
+			tools:text="Holi" />
+
+		<TextView
+			android:id="@+id/tv_content"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingStart="@dimen/inkbetterandroidviews_general_all_half"
+			android:paddingBottom="@dimen/inkbetterandroidviews_general_all_half"
+			android:textColor="@color/basic_black"
+			tools:text="Holi" />
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/ei_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="@dimen/inkbetterandroidviews_general_all_half"
+			app:hintTextColor="@color/basic_grey">
+			<com.inlacou.exinput.free.numeric.vint.IntInput
+				android:id="@+id/ei_int"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColorHint="@color/basic_grey"
+				android:textColor="@color/basic_black"
+				tools:hint="Hola"/>
+		</com.google.android.material.textfield.TextInputLayout>
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end">
+
+			<com.inlacou.pripple.RippleButton
+				android:id="@+id/btn_cancel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingHorizontal="@dimen/inkbetterandroidviews_general_all"
+				android:paddingVertical="@dimen/inkbetterandroidviews_general_all_half"
+				android:text="@string/Cancel"
+				android:textAllCaps="true"
+				android:textColor="@color/basic_black"
+				android:textStyle="bold"
+				app:backgroundNormal="@color/basic_white"
+				app:backgroundRipple="@color/colorAccent"
+				app:corners="@dimen/inkbetterandroidviews_general_all_half" />
+
+			<com.inlacou.pripple.RippleButton
+				android:id="@+id/btn_accept"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingHorizontal="@dimen/inkbetterandroidviews_general_all"
+				android:paddingVertical="@dimen/inkbetterandroidviews_general_all_half"
+				android:layout_marginStart="@dimen/inkbetterandroidviews_general_all_half"
+				android:text="@string/Accept"
+				android:textAllCaps="true"
+				android:textColor="@color/basic_black"
+				android:textStyle="bold"
+				app:backgroundNormal="@color/basic_white"
+				app:backgroundRipple="@color/colorAccent"
+				app:corners="@dimen/inkbetterandroidviews_general_all_half" />
+		</LinearLayout>
+	</com.inlacou.pripple.RippleLinearLayout>
+</RelativeLayout>
