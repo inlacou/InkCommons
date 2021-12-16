@@ -53,12 +53,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation ('androidx.multidex:multidex:2.0.1')
-    implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"                                   //RX
-    implementation "io.reactivex.rxjava3:rxjava:3.1.1"                                      //RX
-    implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"                                  	//RX
-    implementation 'com.github.inlacou:PRipple:1.6.3'
-    implementation 'com.github.irontec:InkSpannable:1.2.0'
-    implementation 'com.github.inlacou:ExInput:2.1.2'
+    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxandroid_version"                                   //RX
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX
+    implementation "com.github.inlacou:PRipple:$pripple_version"
+    implementation "com.github.irontec:InkSpannable:$inkspannable_version"
+    implementation "com.github.inlacou:ExInput:$exinput_version"
 }

@@ -65,11 +65,11 @@ dependencies {
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
-    compileOnly 'com.jakewharton.timber:timber:4.7.1'
+    compileOnly "com.jakewharton.timber:timber:$timber_version"
 
-    compileOnly "io.reactivex.rxjava3:rxandroid:3.0.0"									//RX
+    compileOnly "io.reactivex.rxjava3:rxandroid:$rxandroid_version"									//RX
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava"s latest version for bug fixes and new features.
-    compileOnly "io.reactivex.rxjava3:rxjava:3.1.1"                                     //RX
-    compileOnly "io.reactivex.rxjava3:rxkotlin:3.0.1"                                  	//RX
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX
 }
