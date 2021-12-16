@@ -6,8 +6,7 @@ class DoubleInputDialogCtrl(override val view: DoubleInputDialog, override val m
 
 	fun onAcceptClick(input: Double?) {
 		if(view.eiDouble?.isValid()==true && input!=null) {
-			view.dismiss()
-			model.onAccepted.invoke(input)
+			view.dismiss(onEnd = { model.onAccepted.invoke(input) })
 		}
 	}
 

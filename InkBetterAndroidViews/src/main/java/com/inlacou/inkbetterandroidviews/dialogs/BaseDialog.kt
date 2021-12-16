@@ -9,17 +9,17 @@ import com.inlacou.inkbetterandroidviews.BaseView
 abstract class BaseDialog @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
 	: BaseView(context, attrs, defStyleAttr) {
 
-	fun show() = showAsDialog(context as Activity)
-	fun show(act: Activity) = showAsDialog(act)
-	fun showAsDialog(act: Activity) {
+	fun show(onEnd: (() -> Unit)? = null) = showAsDialog(context as Activity, onEnd)
+	fun show(act: Activity, onEnd: (() -> Unit)? = null) = showAsDialog(act, onEnd)
+	fun showAsDialog(act: Activity, onEnd: (() -> Unit)? = null) {
 		(act.window.decorView as ViewGroup).addView(this)
-		inAnimation()
+		inAnimation(onEnd = onEnd)
 	}
 
-	fun dismiss() = dismissAsDialog(context as Activity)
-	fun dismiss(act: Activity) = dismissAsDialog(act)
-	fun dismissAsDialog(act: Activity) {
-		outAnimation(onEnd = { (act.window.decorView as ViewGroup).removeView(this) })
+	fun dismiss(onEnd: (() -> Unit)? = null) = dismissAsDialog(context as Activity, onEnd)
+	fun dismiss(act: Activity, onEnd: (() -> Unit)? = null) = dismissAsDialog(act, onEnd)
+	fun dismissAsDialog(act: Activity, onEnd: (() -> Unit)? = null) {
+		outAnimation(onEnd = { (act.window.decorView as ViewGroup).removeView(this); onEnd?.invoke() })
 	}
 
 	override val inAnimation: Int get() = android.R.anim.fade_in
