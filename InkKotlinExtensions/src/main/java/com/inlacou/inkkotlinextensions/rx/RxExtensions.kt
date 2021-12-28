@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.annotations.CheckReturnValue
 import io.reactivex.rxjava3.annotations.SchedulerSupport
+import io.reactivex.rxjava3.core.ObservableSource
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
@@ -33,6 +34,20 @@ fun <T> Observable<T>.filterRapidClicks(windowDuration: Long = 1000, timeUnit: T
 fun <T> Observable<T>.debounce(time: Long): Observable<T> = debounce(time, TimeUnit.MILLISECONDS)
 fun <T> Observable<T>.withPrevious(): Observable<Pair<T, T>> = buffer(2, 1).map { Pair(it[0], it[1]) }
 fun <T> Observable<T>.takeUntil(time: Long, timeUnit: TimeUnit = TimeUnit.MILLISECONDS): Observable<MutableList<T>> = buffer(time, timeUnit).takeUntil { true }
+
+fun <T> Observable<T>.onErrorDo(returnItem: T, action: ((Throwable) -> Unit)?) {
+	onErrorResumeNext {
+		action?.invoke(it)
+		ObservableSource { it.onNext(returnItem) }
+	}
+}
+
+fun <T> Observable<T>.onErrorPrint(returnItem: T, action: ((Throwable) -> Unit)?) {
+	onErrorDo(returnItem, {
+		it.printStackTrace()
+		action?.invoke(it)
+	})
+}
 
 /**
  * Sugar

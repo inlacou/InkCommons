@@ -20,10 +20,10 @@ import com.inlacou.inkbetterandroidviews.BaseView
 open class SidebarRowView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
 	: BaseView(context, attrs, defStyleAttr) {
 	
-	lateinit var binder: ViewSidebarRowBinding
-	val surfaceLayout: View? get() = binder.viewBaseLayoutSurface
-	val tvTitle: TextView? get() = binder.title
-	val ivIcon: ImageView? get() = binder.iv
+	var binder: ViewSidebarRowBinding? = null
+	val surfaceLayout: View? get() = binder?.viewBaseLayoutSurface
+	val tvTitle: TextView? get() = binder?.title
+	val ivIcon: ImageView? get() = binder?.iv
 
 	var model: SidebarViewMdl = SidebarViewMdl(Section.values().first())
 		set(value) {

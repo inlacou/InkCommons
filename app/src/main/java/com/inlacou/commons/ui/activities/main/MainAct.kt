@@ -57,11 +57,9 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 		}
 
 		fun intent(activity: AppCompatActivity, model: MainActMdl = MainActMdl()): Intent {
-			val intent = Intent(activity, MainAct::class.java)
-
-			intent.putExtra("model", model.toJson())
-
-			return intent
+			return Intent(activity, MainAct::class.java).apply {
+				putExtra("model", model.toJson())
+			}
 		}
 	}
 

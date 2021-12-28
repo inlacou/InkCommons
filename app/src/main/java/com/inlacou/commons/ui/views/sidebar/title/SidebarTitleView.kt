@@ -14,9 +14,9 @@ import com.inlacou.inkbetterandroidviews.BaseView
 open class SidebarTitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
 	: BaseView(context, attrs, defStyleAttr) {
 	
-	lateinit var binder: ViewSidebarTitleBinding
-	val surfaceLayout: View? get() = binder.viewBaseLayoutSurface
-	val tvTitle: TextView? get() = binder.title
+	var binder: ViewSidebarTitleBinding? = null
+	val surfaceLayout: View? get() = binder?.viewBaseLayoutSurface
+	val tvTitle: TextView? get() = binder?.title
 
 	var model: SidebarViewMdl = SidebarViewMdl(Section.values().first())
 		set(value) {
