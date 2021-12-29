@@ -177,6 +177,38 @@ fun <T> List<T>.sublistFrom(item: T): List<T> {
 	}
 }*/
 
+fun <T> List<T>.sublistBy(by: (T) -> Any?): List<List<T>> {
+	val map = hashMapOf<Any, MutableList<T>>()
+	val unKeyed = mutableListOf<T>()
+	this.forEach {
+		val key = by.invoke(it)
+		if(key!=null) {
+			val list = map[key] ?: mutableListOf()
+			list.add(it)
+			map[key] = list
+		} else unKeyed.add(it)
+	}
+	val result = map.toList().map { it.second }
+	result.toMutableList().add(unKeyed)
+	return result
+}
+
+fun <T, P> List<T>.pairSublistBy(by: (T) -> P?): List<Pair<P?, List<T>>> {
+	val map = hashMapOf<P?, MutableList<T>>()
+	val unKeyed = mutableListOf<T>()
+	this.forEach {
+		val key = by.invoke(it)
+		if(key!=null) {
+			val list = map[key] ?: mutableListOf()
+			list.add(it)
+			map[key] = list
+		} else unKeyed.add(it)
+	}
+	val result = map.toList()
+	result.toMutableList().add(Pair(null, unKeyed))
+	return result
+}
+
 /**
  * Get next value (given index+1) safely (always return value) and looping (if index==maxIndex, index+1 is the first value, i.e. start again from the start)
  */

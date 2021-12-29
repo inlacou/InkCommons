@@ -2,6 +2,7 @@ package com.inlacou.inkkotlinextensions
 
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.text.Normalizer
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -10,6 +11,8 @@ val String.digitsNum: Int
 
 fun String.removeLast(c: Char): String = removeRange(lastIndexOf(c), lastIndexOf(c)+1)
 fun String.removeLast(s: String): String = removeRange(lastIndexOf(s), lastIndexOf(s)+s.length)
+
+fun String.deAccent(): String = Normalizer.normalize(this, Normalizer.Form.NFD).replace("\\p{Mn}+".toRegex(), "")
 
 /**
  * Finds pair of given char. Only works with "|'|`|(|{|[
