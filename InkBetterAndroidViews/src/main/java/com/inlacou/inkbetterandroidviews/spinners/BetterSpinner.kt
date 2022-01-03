@@ -14,7 +14,6 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.inkbetterandroidviews.R
-import timber.log.Timber
 import java.util.*
 
 open class BetterSpinner: AppCompatAutoCompleteTextView {
@@ -22,7 +21,12 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	constructor(context: Context?) : super(context!!)
 	constructor(arg0: Context?, arg1: AttributeSet?) : super(arg0!!, arg1)
 	constructor(arg0: Context?, arg1: AttributeSet?, arg2: Int) : super(arg0!!, arg1, arg2)
-	
+
+	/**
+	 * TODO when filtering it is hidden by the suggestions.
+	 */
+	var allowFilter: Boolean = false
+	var clearOnClick: Boolean = false
 	private var startClickTime: Long = 0
 	private var isPopup = false
 	
@@ -49,10 +53,13 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
 		super.onFocusChanged(focused, direction, previouslyFocusedRect)
 		if (focused) {
-			performFiltering("", 0)
-			val imm = this.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-			imm.hideSoftInputFromWindow(this.windowToken, 0)
-			this.keyListener = null
+			if(!allowFilter) {
+				performFiltering(if(clearOnClick) "" else this.text, 0)
+				(this.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(this.windowToken, 0)
+				this.keyListener = null
+			}else{
+				performFiltering("", 0)
+			}
 			dismissDropDown()
 			isPopup = false
 		} else {
@@ -70,11 +77,9 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 					val clickDuration = Calendar.getInstance().timeInMillis - startClickTime
 					if (clickDuration < MAX_CLICK_DURATION) {
 						isPopup = if (isPopup) {
-							Timber.d("dismiss")
 							dismissDropDown()
 							false
 						} else {
-							Timber.d("show")
 							this.requestFocus()
 							showDropDown()
 							true
@@ -86,13 +91,18 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 		}
 	}
 	
-	fun onItemClick() {
-		Timber.d("onItemClick()")
+	private fun onItemClick() {
 		isPopup = false
 	}
-	
+
+	/**
+	 * Utility function
+	 */
 	fun setCompoundDrawablesWithIntrinsicBounds() = setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-	
+
+	/**
+	 * Used to set drawables for elements
+	 */
 	override fun setCompoundDrawablesWithIntrinsicBounds(
 		left: Drawable?,
 		top: Drawable?,
@@ -107,7 +117,10 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 		}
 		super.setCompoundDrawablesWithIntrinsicBounds(left, top, newRight, bottom)
 	}
-	
+
+	/**
+	 * Reset view state
+	 */
 	fun reset() {
 		setSimpleAdapter(listOf())
 		super.setOnDismissListener { clearFocus() }
@@ -119,7 +132,26 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	fun setSimpleAdapter(titles: List<String>) {
 		setAdapter(ArrayAdapter(context, R.layout.common_simple_list_item, titles))
 	}
-	
+
+	private var complexItems: List<ComplexItem>? = null
+
+	fun setComplexAdapter(items: List<ComplexItem>) {
+		complexItems = items
+		setSimpleAdapter(items.map { it.display })
+	}
+
+	override fun performFiltering(text: CharSequence?, keyCode: Int) {
+		complexItems.let { complexItems ->
+			if(complexItems==null) super.performFiltering(text, keyCode)
+			else setSimpleAdapter(complexItems.filter { it.filter(text.toString()) }.map { it.display })
+		}
+	}
+
+	interface ComplexItem {
+		val display: String
+		fun filter(s: String): Boolean
+	}
+
 	override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
 		super.onTextChanged(text, start, lengthBefore, lengthAfter)
 		try {

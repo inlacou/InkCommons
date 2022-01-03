@@ -3,7 +3,7 @@ package com.inlacou.inkkotlincommons
 import com.inlacou.inkkotlincommons.lists.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.jupiter.api.Test
+import org.junit.Test
 
 class ListsUnitTests {
 	

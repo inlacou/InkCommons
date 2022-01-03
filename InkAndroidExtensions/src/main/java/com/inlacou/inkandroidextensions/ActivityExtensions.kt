@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.Point
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Display
 import android.view.View
@@ -222,3 +223,5 @@ fun Activity?.snackbar(messageResId: Int, length: Int = Snackbar.LENGTH_LONG) = 
 fun Activity?.getView(): View? = this?.window?.decorView?.findViewById(android.R.id.content)
 fun Activity?.disableScreenTimeout() = this?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 fun Activity?.enableScreenTimeout() = this?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+fun Bundle.dumbPairs() = keySet().map { Pair(it, get(it)) }

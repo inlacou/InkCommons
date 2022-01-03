@@ -2,7 +2,7 @@ package com.inlacou.inkkotlinextensions.extensions
 
 import com.inlacou.inkkotlinextensions.*
 import org.junit.Assert.assertEquals
-import org.junit.jupiter.api.Test
+import org.junit.Test
 
 class ByteArrayExtensionsTests {
 	@Test fun `char A to byte 41`() = assertEquals(0x41.toByte(), 'A'.toByte())

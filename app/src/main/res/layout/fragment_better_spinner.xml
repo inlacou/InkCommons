@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Non filterable spinner:"/>
+	<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
+		android:id="@+id/better_spinner"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/general_all"
+		android:text="Filterable spinner:"/>
+	<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
+		android:id="@+id/better_spinner_filterable"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/general_all"
+		android:text="Filterable complex spinner:"/>
+	<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
+		android:id="@+id/better_spinner_filterable_complex"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

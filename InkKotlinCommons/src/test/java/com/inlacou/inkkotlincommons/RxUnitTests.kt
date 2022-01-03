@@ -4,7 +4,7 @@ import com.inlacou.inkkotlincommons.rx.observables.AnyObs
 import com.inlacou.inkkotlincommons.rx.observables.CombineSequentialObs
 import com.inlacou.inkkotlincommons.rx.observables.CombineSequentialSingles
 import io.reactivex.rxjava3.core.Observable
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import java.util.concurrent.TimeUnit
 
 class RxUnitTests {

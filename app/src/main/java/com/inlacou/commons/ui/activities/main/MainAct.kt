@@ -20,6 +20,8 @@ import com.inlacou.commons.databinding.ActivityMainBinding
 import com.inlacou.commons.list.adapters.SidebarRvAdapter
 import com.inlacou.commons.ui.activities.BaseFragAct
 import com.inlacou.commons.ui.fragments.BaseFrag
+import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFrag
+import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFragMdl
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFrag
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFragMdl
 import com.inlacou.commons.ui.fragments.general.GeneralFrag
@@ -116,6 +118,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 		loadFragment(when (section) {
 			GENERAL -> GeneralFrag.create(GeneralFragMdl())
 			TEXTVIEW_BITMAP -> TextViewBitmapFrag.create(TextViewBitmapFragMdl())
+			BETTER_SPINNER -> BetterSpinnerFrag.create(BetterSpinnerFragMdl())
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())
 		}, section, extras)
 	}
