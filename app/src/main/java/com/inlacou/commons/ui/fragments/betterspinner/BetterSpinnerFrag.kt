@@ -85,8 +85,8 @@ class BetterSpinnerFrag: BaseFrag() {
     }
 
     private fun setListeners() {
-        betterSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        betterSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        betterSpinnerFilterableComplex?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
+        betterSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
+        betterSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
+        betterSpinnerFilterableComplex?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
     }
 }

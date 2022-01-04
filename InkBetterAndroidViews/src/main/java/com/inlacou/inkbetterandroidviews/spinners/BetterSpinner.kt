@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.inkbetterandroidviews.R
+import timber.log.Timber
 import java.util.*
 
 open class BetterSpinner: AppCompatAutoCompleteTextView {
@@ -23,13 +24,38 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	constructor(arg0: Context?, arg1: AttributeSet?, arg2: Int) : super(arg0!!, arg1, arg2)
 
 	/**
-	 * TODO when filtering it is hidden by the suggestions.
+	 * Whether to allow filtering by inputting text.
 	 */
 	var allowFilter: Boolean = false
+	/**
+	 * Clear current filter on new click.
+	 */
 	var clearOnClick: Boolean = false
+	/**
+	 * Sets suggestion dropdown height.
+	 * Used to avoid it from occupying the whole screen.
+	 */
+	var desiredDropdownHeight = 400
+
+	/**
+	 * Variable to control time passed since first click.
+	 */
 	private var startClickTime: Long = 0
+	/**
+	 * Variable to control if popup is showing.
+	 */
 	private var isPopup = false
-	
+
+	/**
+	 * Simple items, just strings.
+	 */
+	private var simpleItems: List<String>? = null
+
+	/**
+	 * Complex items, so you can filter by something other than display text if you want.
+	 */
+	private var complexItems: List<ComplexItem>? = null
+
 	init {
 		reset()
 		gravity = Gravity.CENTER_VERTICAL
@@ -49,22 +75,29 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	override fun enoughToFilter(): Boolean {
 		return true
 	}
-	
+
+	private var unfocusTimeMillis = 0L
+
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
-		super.onFocusChanged(focused, direction, previouslyFocusedRect)
+		Timber.d("onFocusChanged $focused | direction: $direction | previous $previouslyFocusedRect")
 		if (focused) {
 			if(!allowFilter) {
-				performFiltering(if(clearOnClick) "" else this.text, 0)
+				performFiltering("", 0)
 				(this.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(this.windowToken, 0)
 				this.keyListener = null
-			}else{
-				performFiltering("", 0)
+			} else {
+				val clear = clearOnClick && System.currentTimeMillis()-unfocusTimeMillis>200
+				if(clear) setText("")
+				performFiltering(if(clear) "" else this.text, 0)
+				dropDownHeight = desiredDropdownHeight
 			}
 			dismissDropDown()
 			isPopup = false
 		} else {
+			unfocusTimeMillis = System.currentTimeMillis()
 			isPopup = false
 		}
+		super.onFocusChanged(focused, direction, previouslyFocusedRect)
 	}
 	
 	override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -122,7 +155,7 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	 * Reset view state
 	 */
 	fun reset() {
-		setSimpleAdapter(listOf())
+		setTitles(listOf())
 		super.setOnDismissListener { clearFocus() }
 		setText("")
 		replaceText("")
@@ -130,20 +163,28 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	}
 	
 	fun setSimpleAdapter(titles: List<String>) {
+		simpleItems = titles
+		setTitles(titles)
+	}
+
+	private fun setTitles(titles: List<String>) {
 		setAdapter(ArrayAdapter(context, R.layout.common_simple_list_item, titles))
 	}
 
-	private var complexItems: List<ComplexItem>? = null
-
 	fun setComplexAdapter(items: List<ComplexItem>) {
 		complexItems = items
-		setSimpleAdapter(items.map { it.display })
+		setTitles(items.map { it.display })
 	}
 
 	override fun performFiltering(text: CharSequence?, keyCode: Int) {
-		complexItems.let { complexItems ->
-			if(complexItems==null) super.performFiltering(text, keyCode)
-			else setSimpleAdapter(complexItems.filter { it.filter(text.toString()) }.map { it.display })
+		simpleItems.let { simpleItems ->
+			complexItems.let { complexItems ->
+				when {
+					complexItems != null -> setTitles(complexItems.filter { it.filter(text.toString()) }.map { it.display })
+					simpleItems != null -> setTitles(simpleItems.filter { it.contains(text.toString()) })
+					else -> super.performFiltering(text, keyCode)
+				}
+			}
 		}
 	}
 
