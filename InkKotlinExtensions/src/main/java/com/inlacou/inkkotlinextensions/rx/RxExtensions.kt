@@ -1,15 +1,17 @@
 package com.inlacou.inkkotlinextensions.rx
 
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.annotations.CheckReturnValue
 import io.reactivex.rxjava3.annotations.SchedulerSupport
-import io.reactivex.rxjava3.core.ObservableSource
+import io.reactivex.rxjava3.core.*
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 /* Utils */
+inline fun <reified R> Flowable<*>.filterIsInstance(): Flowable<R> = filter { it is R }.map { it as R }
+inline fun <reified R> Maybe<*>.filterIsInstance(): Maybe<R> = filter { it is R }.map { it as R }
+inline fun <reified R> Observable<*>.filterIsInstance(): Observable<R> = filter { it is R }.map { it as R }
+inline fun <reified R> Single<*>.filterIsInstance(): Maybe<R> = filter { it is R }.map { it as R }
+
 /**
  * Applies [transform] to values from the [Observable] and forwards values with non-null results.
  */
