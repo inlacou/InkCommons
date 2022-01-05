@@ -27,6 +27,9 @@ object EventBusChannel {
     inline fun <reified T: Event> getStickyEvent(): T? = stickies[T::class.java.classLoader?.loadClass(T::class.java.name)] as T?
     inline fun <reified T: Event> getStickyEvent(type: Class<T>): T? = stickies[T::class.java.classLoader?.loadClass(T::class.java.name)] as T?
 
+    inline fun <reified T: Event> removeStickyEvent() = stickies.remove(T::class.java.classLoader?.loadClass(T::class.java.name))
+    inline fun <reified T: Event> removeStickyEvent(type: Class<T>) = stickies.remove(T::class.java.classLoader?.loadClass(T::class.java.name))
+
     interface Event
 
 }
