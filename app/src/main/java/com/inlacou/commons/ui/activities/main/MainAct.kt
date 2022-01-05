@@ -24,6 +24,8 @@ import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFragMdl
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFrag
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFragMdl
+import com.inlacou.commons.ui.fragments.eventbusvsrx.EventBusVsRxFrag
+import com.inlacou.commons.ui.fragments.eventbusvsrx.EventBusVsRxFragMdl
 import com.inlacou.commons.ui.fragments.general.GeneralFrag
 import com.inlacou.commons.ui.fragments.textviewbitmap.TextViewBitmapFrag
 import com.inlacou.commons.ui.fragments.textviewbitmap.TextViewBitmapFragMdl
@@ -117,6 +119,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 	fun loadSection(section: Section, extras: String? = null) {
 		loadFragment(when (section) {
 			GENERAL -> GeneralFrag.create(GeneralFragMdl())
+			EVENTBUS_VS_RX -> EventBusVsRxFrag.create(EventBusVsRxFragMdl())
 			TEXTVIEW_BITMAP -> TextViewBitmapFrag.create(TextViewBitmapFragMdl())
 			BETTER_SPINNER -> BetterSpinnerFrag.create(BetterSpinnerFragMdl())
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())

@@ -7,7 +7,8 @@
         android:name=".general.AppCtrl"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activities.main.MainAct"
             android:label="@string/app_name"
@@ -19,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activities.eventbusvsrx.EventBusVsRxAct"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
