@@ -22,16 +22,41 @@ object EventBusChannel {
         subject.onNext(item)
     }
 
-    fun postSticky(item: Event) {
+    fun postSticky(item: Event, permanent: Boolean = false) {
         stickies[item::class.java] = item
+        if(permanent) savePermanent?.invoke(item)
         post(item)
     }
 
-    inline fun <reified T: Event> getStickyEvent(): T? = stickies[T::class.java.classLoader?.loadClass(T::class.java.name)] as T?
-    inline fun <reified T: Event> getStickyEvent(type: Class<T>): T? = stickies[T::class.java.classLoader?.loadClass(T::class.java.name)] as T?
+    var savePermanent: ((Event) -> Unit)? = null
+    var loadPermanent: ((Class<out Event>) -> Event?)? = null
+    var removePermanent: ((Class<out Event>) -> Unit)? = null
 
-    inline fun <reified T: Event> removeStickyEvent() = stickies.remove(T::class.java.classLoader?.loadClass(T::class.java.name))
-    inline fun <reified T: Event> removeStickyEvent(type: Class<T>) = stickies.remove(T::class.java.classLoader?.loadClass(T::class.java.name))
+    inline fun <reified T: Event> getStickyEvent(permanent: Boolean = false): T? {
+        val mem = stickies[T::class.java.classLoader?.loadClass(T::class.java.name)] as T?
+        val perm = loadPermanent?.invoke(T::class.java) as T?
+        println("DEBUGINLACOU | mem: $mem | perm: $perm")
+        return mem ?: if(permanent) perm else null
+    }
+    /**
+     * Alias for [EventBusChannel.getStickyEvent]
+     * This overload method does not use the parameter, yeah.
+     * It is here to allow the sintax: getStickyEvent(Event::class.java) instead of getStickyEvent<Event>().
+     * @see Event
+     */
+    inline fun <reified T: Event> getStickyEvent(type: Class<T>, permanent: Boolean = false): T? = getStickyEvent(permanent)
+
+    inline fun <reified T: Event> removeStickyEvent() {
+        stickies.remove(T::class.java.classLoader?.loadClass(T::class.java.name))
+        removePermanent?.invoke(T::class.java)
+    }
+    /**
+     * Alias for [EventBusChannel.removeStickyEvent]
+     * This overload method does not use the parameter, yeah.
+     * It is here to allow the sintax: removeStickyEvent(Event::class.java) instead of removeStickyEvent<Event>().
+     * @see Event
+     */
+    inline fun <reified T: Event> removeStickyEvent(type: Class<T>) = removeStickyEvent<T>()
 
     interface Event
 

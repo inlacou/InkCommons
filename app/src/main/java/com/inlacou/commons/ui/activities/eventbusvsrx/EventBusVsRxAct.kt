@@ -137,10 +137,10 @@ class EventBusVsRxAct : BaseAct() {
 		tvEventbusAccess3?.text = "3: ${EventBus.getDefault().getStickyEvent(Event3::class.java)?.s}"
 		tvEventbusAccess4?.text = "4: ${EventBus.getDefault().getStickyEvent(Event4::class.java)?.s}"
 
-		tvRxAccess1?.text = "1: ${EventBusChannel.getStickyEvent(Event1::class.java)?.s}"
-		tvRxAccess2?.text = "2: ${EventBusChannel.getStickyEvent(Event2::class.java)?.s}"
-		tvRxAccess3?.text = "3: ${EventBusChannel.getStickyEvent<Event3>()?.s}"
-		tvRxAccess4?.text = "4: ${EventBusChannel.getStickyEvent<Event4>()?.s}"
+		tvRxAccess1?.text = "1: ${EventBusChannel.getStickyEvent(Event1::class.java, permanent = true)?.s}"
+		tvRxAccess2?.text = "2: ${EventBusChannel.getStickyEvent(Event2::class.java, permanent = true)?.s}"
+		tvRxAccess3?.text = "3: ${EventBusChannel.getStickyEvent<Event3>(permanent = true)?.s}"
+		tvRxAccess4?.text = "4: ${EventBusChannel.getStickyEvent<Event4>(permanent = true)?.s}"
 
 		EventBusChannel.filteredObs<Event1>(sticky = true).subscribe({ tvRxSticky1?.text = "1: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
 		EventBusChannel.filteredObs<Event1>(sticky = false).subscribe({ tvRxNonSticky1?.text = "1: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })

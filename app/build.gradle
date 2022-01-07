@@ -61,11 +61,12 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$timber_version"
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "io.reactivex.rxjava3:rxandroid:$rxandroid_version"                                   //RX
-    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
-    implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                         //RX
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	 //RX
     implementation "com.github.inlacou:PRipple:$pripple_version"
     implementation "com.github.irontec:InkSpannable:$inkspannable_version"
     implementation "com.github.inlacou:ExInput:$exinput_version"
 
     implementation "org.greenrobot:eventbus:3.3.1"
+    implementation 'com.github.inlacou:InkPersistor:1.1.3'
 }

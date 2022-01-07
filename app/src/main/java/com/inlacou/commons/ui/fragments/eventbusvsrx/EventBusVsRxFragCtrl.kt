@@ -12,12 +12,12 @@ import org.greenrobot.eventbus.EventBus
 class EventBusVsRxFragCtrl(val view: EventBusVsRxFrag, val model: EventBusVsRxFragMdl) : BaseFragCtrl(view, model) {
 
 	fun onSticky1Changed(s: String) {
-		EventBusChannel.postSticky(Event1(s))
+		EventBusChannel.postSticky(Event1(s), permanent = true)
 		EventBus.getDefault().postSticky(Event1(s))
 	}
 
 	fun onSticky2Changed(s: String) {
-		EventBusChannel.postSticky(Event2(s))
+		EventBusChannel.postSticky(Event2(s), permanent = true)
 		EventBus.getDefault().postSticky(Event2(s))
 	}
 
