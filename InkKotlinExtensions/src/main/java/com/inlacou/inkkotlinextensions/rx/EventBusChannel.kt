@@ -7,12 +7,15 @@ import io.reactivex.rxjava3.subjects.Subject
 object EventBusChannel {
 
     private val subject: Subject<Event> = PublishSubject.create()
-    var stickies: HashMap<Class<Event>, Event> = hashMapOf()
+    var stickies: HashMap<Class<out Event>, Event> = hashMapOf()
 
     val obs get() = subject as Observable<Event>
     inline fun <reified T: Event> filteredObs(sticky: Boolean): Observable<T> {
-        return if(sticky && getStickyEvent<T>()!=null) obs.filterIsInstance<T>().startWithItem(getStickyEvent<T>())
-        else obs.filterIsInstance()
+        if(sticky) {
+            val stickyEvent = getStickyEvent<T>()
+            if(stickyEvent!=null) return obs.filterIsInstance<T>().startWithItem(stickyEvent)
+        }
+        return obs.filterIsInstance()
     }
 
     fun post(item: Event) {
@@ -20,7 +23,7 @@ object EventBusChannel {
     }
 
     fun postSticky(item: Event) {
-        stickies[item::class.java as Class<Event>] = item
+        stickies[item::class.java] = item
         post(item)
     }
 
