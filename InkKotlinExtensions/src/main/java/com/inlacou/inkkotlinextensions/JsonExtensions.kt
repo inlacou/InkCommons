@@ -10,7 +10,7 @@ fun Any.toJson(): String {
 	return Gson().toJson(this)
 }
 
-inline fun <reified T: Any> String.fromJson(): T? = try {
+inline fun <reified T> String.fromJson(): T? = try {
 	val aux: T? = if(this=="" || this=="{}") null else Gson().fromJson(this, typeToken<T>())
 	aux
 } catch (e: Exception) {
@@ -18,8 +18,16 @@ inline fun <reified T: Any> String.fromJson(): T? = try {
 	null
 }
 
+inline fun <reified T> String.fromJson(clazz: Class<out T>): T? = try {
+	val aux: T? = if(this=="" || this=="{}") null else Gson().fromJson(this, clazz)
+	aux
+} catch (e: Exception) {
+	System.err.println("Error raised during fromJson: ${e.message} ${e.stackTrace}")
+	null
+}
+
 @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
-inline fun <reified T: Any> typeToken(): Type {
+inline fun <reified T> typeToken(): Type {
 	val type = gsonTypeToken<T>()
 	
 	if (type is ParameterizedType && type.isWildcard())
@@ -59,7 +67,7 @@ fun ParameterizedType.isWildcard() : Boolean {
 }
 
 @Suppress("PROTECTED_CALL_FROM_PUBLIC_INLINE")
-inline fun <reified T: Any> gsonTypeToken(): Type = object : TypeToken<T>() {} .type
+inline fun <reified T> gsonTypeToken(): Type = object : TypeToken<T>() {} .type
 
 fun removeTypeWildcards(type: Type): Type {
 	return if (type is ParameterizedType) {
