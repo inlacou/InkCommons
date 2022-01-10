@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.core.Observable
 /* UI */
 fun View.clicks(): Observable<View> = Observable.create(OnClickObs(this))
 fun View.longClicks(cosumeEvent: Boolean = true): Observable<View> = Observable.create(OnLongClickObs(this, consumeEvent = cosumeEvent))
-fun AutoCompleteTextView.itemClicks(): Observable<Pair<Int, String>> = Observable.create(AutoCompleteTextViewObs(this))
+fun AutoCompleteTextView.itemClicks(): Observable<Pair<Int, Any>> = Observable.create(AutoCompleteTextViewObs(this))
 fun View.touchs(): Observable<Triple<MotionEvent, Float, Float>> = Observable.create(OnTouchObs(this))
 fun TextView.textChanges(): Observable<String> = Observable.create(TextChangeObs(this))
 fun CheckBox.checkedChanges(): Observable<Boolean> = Observable.create(CheckBoxObs(this))
