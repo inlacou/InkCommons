@@ -1,5 +1,6 @@
 package com.inlacou.commons.ui.activities.eventbusvsrx
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -7,7 +8,6 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.inlacou.commons.R
 import com.inlacou.commons.databinding.ActivityEventbusVsRxBinding
-import com.inlacou.commons.databinding.ActivityMainBinding
 import com.inlacou.commons.eventbusvsrx.Event1
 import com.inlacou.commons.eventbusvsrx.Event2
 import com.inlacou.commons.eventbusvsrx.Event3
@@ -23,6 +23,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 
+@SuppressLint("SetTextI18n")
 class EventBusVsRxAct : BaseAct() {
 
 	private lateinit var model: EventBusVsRxActMdl
@@ -91,7 +92,7 @@ class EventBusVsRxAct : BaseAct() {
 		val toolbar = findViewById<Toolbar>(R.id.toolbar)
 		if (toolbar != null) {
 			setSupportActionBar(toolbar)
-			supportActionBar?.title = "TODO"
+			supportActionBar?.title = "EventBus vs Rx"
 			supportActionBar?.setDisplayHomeAsUpEnabled(true)
 		}
 	}
@@ -141,19 +142,23 @@ class EventBusVsRxAct : BaseAct() {
 		tvRxAccess2?.text = "2: ${EventBusChannel.getStickyEvent(Event2::class.java, permanent = true)?.s}"
 		tvRxAccess3?.text = "3: ${EventBusChannel.getStickyEvent<Event3>(permanent = true)?.s}"
 		tvRxAccess4?.text = "4: ${EventBusChannel.getStickyEvent<Event4>(permanent = true)?.s}"
-
-		EventBusChannel.filteredObs<Event1>(sticky = true).subscribe({ tvRxSticky1?.text = "1: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
-		EventBusChannel.filteredObs<Event1>(sticky = false).subscribe({ tvRxNonSticky1?.text = "1: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
-		EventBusChannel.filteredObs<Event2>(sticky = true).subscribe({ tvRxSticky2?.text = "2: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
-		EventBusChannel.filteredObs<Event2>(sticky = false).subscribe({ tvRxNonSticky2?.text = "2: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
-		EventBusChannel.filteredObs<Event3>(sticky = true).subscribe({ tvRxSticky3?.text = "3: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
-		EventBusChannel.filteredObs<Event3>(sticky = false).subscribe({ tvRxNonSticky3?.text = "3: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
-		EventBusChannel.filteredObs<Event4>(sticky = true).subscribe({ tvRxSticky4?.text = "4: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
-		EventBusChannel.filteredObs<Event4>(sticky = false).subscribe({ tvRxNonSticky4?.text = "4: ${it.s}" }, { toast(it.message ?: "Unknown error happened") })
 	}
 
 	private fun setListeners() {
+		//Register to EventBus
 		EventBus.getDefault().register(this)
+
+		//Register to RX EventBusChannel
+		disposables.add(EventBusChannel.filteredObs<Event1>(sticky = true).subscribe({ tvRxSticky1?.text = "1: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+		disposables.add(EventBusChannel.filteredObs<Event1>(sticky = false).subscribe({ tvRxNonSticky1?.text = "1: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+		disposables.add(EventBusChannel.filteredObs<Event2>(sticky = true).subscribe({ tvRxSticky2?.text = "2: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+		disposables.add(EventBusChannel.filteredObs<Event2>(sticky = false).subscribe({ tvRxNonSticky2?.text = "2: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+		disposables.add(EventBusChannel.filteredObs<Event3>(sticky = true).subscribe({ tvRxSticky3?.text = "3: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+		disposables.add(EventBusChannel.filteredObs<Event3>(sticky = false).subscribe({ tvRxNonSticky3?.text = "3: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+		disposables.add(EventBusChannel.filteredObs<Event4>(sticky = true).subscribe({ tvRxSticky4?.text = "4: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+		disposables.add(EventBusChannel.filteredObs<Event4>(sticky = false).subscribe({ tvRxNonSticky4?.text = "4: ${it.s}" }, { toast(it.message ?: "Unknown error happened") }))
+
+		//UI button listener
 		btn?.clicks()?.subscribe({
 			EventBusChannel.postSticky(Event1("forced by button click"))
 			EventBus.getDefault().postSticky(Event1("forced by button click"))
@@ -179,7 +184,9 @@ class EventBusVsRxAct : BaseAct() {
 	@Subscribe(threadMode = ThreadMode.MAIN, sticky = false) fun onEvent4NonSticky(event: Event4?) { eventbusNonSticky4?.text = "4: ${event?.s}" }
 
 	override fun onDestroy() {
+		//Unsubscribe frm EventBus
 		EventBus.getDefault().unregister(this)
+		//Unsubscribe from RX EventBusChannel is delegated on super
 		super.onDestroy()
 	}
 

@@ -8,12 +8,17 @@ import android.view.ViewGroup
 import com.google.gson.Gson
 import com.inlacou.commons.R
 import com.inlacou.commons.databinding.FragmentEventbusVsRxBinding
+import com.inlacou.commons.eventbusvsrx.Event1
+import com.inlacou.commons.eventbusvsrx.Event2
+import com.inlacou.commons.eventbusvsrx.Event3
+import com.inlacou.commons.eventbusvsrx.Event4
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.inkandroidextensions.toast
 import com.inlacou.inkbetterandroidviews.extensions.clicks
 import com.inlacou.inkbetterandroidviews.extensions.textChanges
 import com.inlacou.inkkotlinextensions.fromJson
+import com.inlacou.inkkotlinextensions.rx.EventBusChannel
 
 class EventBusVsRxFrag: BaseFrag() {
     
@@ -31,6 +36,12 @@ class EventBusVsRxFrag: BaseFrag() {
     override val title: String? = AppCtrl.instance.packageName
     
     companion object {
+
+        const val permanent1 = true
+        const val permanent2 = true
+        const val permanent3 = false
+        const val permanent4 = false
+
         @JvmOverloads
         fun create(model: EventBusVsRxFragMdl = EventBusVsRxFragMdl()): EventBusVsRxFrag {
             val fragment = EventBusVsRxFrag()
@@ -46,7 +57,6 @@ class EventBusVsRxFrag: BaseFrag() {
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        Timber.d("onCreateView")
         val rootView = inflater.inflate(R.layout.fragment_eventbus_vs_rx, container, false)
         binder = FragmentEventbusVsRxBinding.bind(rootView)
         
@@ -70,7 +80,12 @@ class EventBusVsRxFrag: BaseFrag() {
         baseController = EventBusVsRxFragCtrl(view = this, model = model)
     }
     
-    fun populate(rootView: View? = null) {}
+    fun populate(rootView: View? = null) {
+        sticky1?.text = EventBusChannel.getStickyEvent(Event1::class.java, permanent = true)?.s ?: ""
+        sticky2?.text = EventBusChannel.getStickyEvent(Event2::class.java, permanent = true)?.s ?: ""
+        sticky3?.text = EventBusChannel.getStickyEvent<Event3>(permanent = true)?.s ?: ""
+        sticky4?.text = EventBusChannel.getStickyEvent<Event4>(permanent = true)?.s ?: ""
+    }
     
     private fun setListeners() {
         btnNext?.clicks()?.subscribe({ controller.onBtnNextClick() }, { activity?.toast(it.message ?: "Unknown error happened") })
