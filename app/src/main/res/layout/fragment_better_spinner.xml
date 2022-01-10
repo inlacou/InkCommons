@@ -5,36 +5,61 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/root"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:focusable="true"
+	android:focusableInTouchMode="true">
 	<androidx.appcompat.widget.LinearLayoutCompat
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
-		<TextView
+		<com.google.android.material.textfield.TextInputLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="Non filterable spinner:"/>
-		<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
-			android:id="@+id/better_spinner"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/general_all"
-			android:text="Filterable spinner:"/>
-		<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
-			android:id="@+id/better_spinner_filterable"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
-		<TextView
+			android:hint="Non filterable spinner">
+			<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
+				android:id="@+id/better_spinner"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+		</com.google.android.material.textfield.TextInputLayout>
+		<com.google.android.material.textfield.TextInputLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/general_all"
-			android:text="Filterable complex spinner:"/>
-		<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
-			android:id="@+id/better_spinner_filterable_complex"
+			android:hint="Filterable spinner">
+			<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
+				android:id="@+id/better_spinner_filterable"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+		</com.google.android.material.textfield.TextInputLayout>
+		<com.google.android.material.textfield.TextInputLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/general_all"
+			android:hint="Filterable complex spinner">
+			<com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
+				android:id="@+id/better_spinner_filterable_complex"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+		</com.google.android.material.textfield.TextInputLayout>
+		<com.google.android.material.textfield.TextInputLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/general_all"
+			android:hint="Tag spinner">
+			<com.inlacou.commons.ui.views.spinner.TagSpinner
+				android:id="@+id/tag_spinner"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+		</com.google.android.material.textfield.TextInputLayout>
+		<com.google.android.material.textfield.TextInputLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/general_all"
+			android:hint="Filterable tag spinner">
+			<com.inlacou.commons.ui.views.spinner.TagSpinner
+				android:id="@+id/tag_spinner_filterable"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+		</com.google.android.material.textfield.TextInputLayout>
 	</androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
