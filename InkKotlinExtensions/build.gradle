@@ -35,7 +35,7 @@ afterEvaluate {
 
 dependencies {
     compileOnly project(':InkKotlinCommons')
-    testCompileOnly project(':InkKotlinCommons')
+    testImplementation project(':InkKotlinCommons')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -48,7 +48,7 @@ dependencies {
     compileOnly "com.google.code.gson:gson:$gson_version"
     compileOnly "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
     compileOnly "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX
-    testCompileOnly "com.google.code.gson:gson:$gson_version"
-    testCompileOnly "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
-    testCompileOnly "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX
+    testImplementation "com.google.code.gson:gson:$gson_version"
+    testImplementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
+    testImplementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX
 }

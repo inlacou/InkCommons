@@ -158,28 +158,28 @@ class ListsUnitTests {
 	@Test
 	fun no_dupe_mutable_list() {
 		val noDupe = noDupeMutableListOf<Int>()
-		noDupe.push(1)
-		noDupe.push(2)
-		noDupe.push(2)
-		assertEquals(2, noDupe.size)
-		noDupe.push(3)
-		assertEquals(3, noDupe.size)
-		noDupe.push(3)
-		assertEquals(3, noDupe.size)
-		noDupe.push(3)
-		assertEquals(3, noDupe.size)
-		noDupe.remove(2)
-		assertEquals(2, noDupe.size)
-		noDupe.remove(2)
-		assertEquals(2, noDupe.size)
+		noDupe.push(1) //1
+		noDupe.push(2) //1, 2
+		noDupe.push(2) //1, 2
+		assertEquals(2, noDupe.size) //2 items
+		noDupe.push(3) //1, 2, 3
+		assertEquals(3, noDupe.size) // 3 items
+		noDupe.push(3) //1, 2, 3
+		assertEquals(3, noDupe.size) // 3 items
+		noDupe.push(3) //1, 2, 3
+		assertEquals(3, noDupe.size) // 3 items
+		noDupe.remove(2) //1, 3
+		assertEquals(2, noDupe.size) // 2 items
+		noDupe.remove(2) //1, 3
+		assertEquals(2, noDupe.size) // 2 items
 
-		assertEquals(1, noDupe.items.first())
-		noDupe.removeAt(0)
-		assertEquals(2, noDupe.items.first())
-		assertEquals(1, noDupe.size)
-		noDupe.push(3)
-		noDupe.removeAll(listOf(2, 3))
-		assertEquals(0, noDupe.size)
+		assertEquals(1, noDupe.items.first()) //first item is 1
+		noDupe.removeAt(0) //3
+		assertEquals(3, noDupe.items.first()) //First item is 3
+		assertEquals(1, noDupe.size) // 1 item
+		noDupe.push(3) //3
+		noDupe.removeAll(listOf(2, 3)) //remove 2 and 3 from {3}
+		assertEquals(0, noDupe.size) // empty
 	}
 	
 }

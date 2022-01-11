@@ -44,6 +44,6 @@ dependencies {
 
     compileOnly "io.reactivex.rxjava3:rxjava:$rxjava_version"
     compileOnly "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
-    testCompileOnly "io.reactivex.rxjava3:rxjava:$rxjava_version"
-    testCompileOnly "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
+    testImplementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
+    testImplementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
 }
