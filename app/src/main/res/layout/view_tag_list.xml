@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.inlacou.pripple.RippleLinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/view_base_layout_surface"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:backgroundNormal="@color/basic_white"
+	app:backgroundRipple="@color/colorAccent"
+	android:paddingTop="@dimen/general_all"
+	android:paddingBottom="@dimen/general_all"
+	android:padding="@dimen/general_all"
+	android:orientation="horizontal"
+	android:clickable="true">
+	<ImageView
+		android:id="@+id/iv_icon"
+		android:layout_width="50dp"
+		android:layout_height="50dp"
+		android:src="@drawable/space_invader"/>
+	<TextView
+		android:id="@+id/tv_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_centerVertical="true"
+		android:layout_marginStart="@dimen/general_all"
+		android:textSize="14sp"
+		android:fontFamily="sans-serif"
+		android:textStyle="bold"
+		android:textColor="#6a6a6a"
+		tools:text="Mi etiqueta"/>
+</com.inlacou.pripple.RippleLinearLayout>
