@@ -46,8 +46,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/general_all"
 			android:hint="Tag spinner">
-			<com.inlacou.commons.ui.views.spinner.TagSpinner
-				android:id="@+id/tag_spinner"
+			<com.inlacou.commons.ui.views.spinner.CustomItemSpinner
+				android:id="@+id/custom_item_spinner"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
 		</com.google.android.material.textfield.TextInputLayout>
@@ -56,8 +56,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/general_all"
 			android:hint="Filterable tag spinner">
-			<com.inlacou.commons.ui.views.spinner.TagSpinner
-				android:id="@+id/tag_spinner_filterable"
+			<com.inlacou.commons.ui.views.spinner.CustomItemSpinner
+				android:id="@+id/custom_item_spinner_filterable"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
 		</com.google.android.material.textfield.TextInputLayout>

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
 import com.inlacou.commons.R
-import com.inlacou.commons.business.Tag
+import com.inlacou.commons.business.CustomItem
 import com.inlacou.commons.databinding.FragmentBetterSpinnerBinding
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
@@ -32,12 +32,12 @@ class BetterSpinnerFrag: BaseFrag() {
         ComplexItem("Pera", "Fruta"), ComplexItem("Kaki", "Fruta"), ComplexItem("DragonFruit", "Fruta"), ComplexItem("Guayaba", "Fruta")).sortedBy { it.display }
 
     val tags = listOf(
-        Tag(name = "Red", colorHexadecimal = "#FF0000", iconResourceName = "space_invader", typeName = "Color"),
-        Tag(name = "Green", colorHexadecimal = "#00FF00", iconResourceName = "space_invader", typeName = "Color"),
-        Tag(name = "Blue", colorHexadecimal = "#0000FF", iconResourceName = "space_invader", typeName = "Color"),
-        Tag(name = "Banana", colorHexadecimal = "#FAFAD2", iconResourceName = "space_invader", typeName = "Fruit"),
-        Tag(name = "Apple", colorHexadecimal = "#DD1811", iconResourceName = "space_invader", typeName = "Fruit"),
-        Tag(name = "Kiwi", colorHexadecimal = "#9B673C", iconResourceName = "space_invader", typeName = "Fruit"),
+        CustomItem(name = "Red", colorHexadecimal = "#FF0000", iconResourceName = "space_invader", type = "Color"),
+        CustomItem(name = "Green", colorHexadecimal = "#00FF00", iconResourceName = "space_invader", type = "Color"),
+        CustomItem(name = "Blue", colorHexadecimal = "#0000FF", iconResourceName = "space_invader", type = "Color"),
+        CustomItem(name = "Banana", colorHexadecimal = "#FAFAD2", iconResourceName = "space_invader", type = "Fruit"),
+        CustomItem(name = "Apple", colorHexadecimal = "#DD1811", iconResourceName = "space_invader", type = "Fruit"),
+        CustomItem(name = "Kiwi", colorHexadecimal = "#9B673C", iconResourceName = "space_invader", type = "Fruit"),
     )
 
     data class ComplexItem(override val display: String, val category: String): BetterSpinner.ComplexItem {
@@ -48,8 +48,8 @@ class BetterSpinnerFrag: BaseFrag() {
     val betterSpinner get() = binder?.betterSpinner
     val betterSpinnerFilterable get() = binder?.betterSpinnerFilterable
     val betterSpinnerFilterableComplex get() = binder?.betterSpinnerFilterableComplex
-    val tagSpinner get() = binder?.tagSpinner
-    val tagSpinnerFilterable get() = binder?.tagSpinnerFilterable
+    val customItemSpinner get() = binder?.customItemSpinner
+    val customItemSpinnerFilterable get() = binder?.customItemSpinnerFilterable
 
     companion object {
         @JvmOverloads
@@ -97,17 +97,17 @@ class BetterSpinnerFrag: BaseFrag() {
         betterSpinnerFilterableComplex?.clearOnClick = true
         betterSpinnerFilterableComplex?.setComplexAdapter(complexItems)
 
-        tagSpinner?.setTagAdapter(tags)
-        tagSpinnerFilterable?.allowFilter = true
-        tagSpinnerFilterable?.clearOnClick = true
-        tagSpinnerFilterable?.setTagAdapter(tags)
+        customItemSpinner?.setTagAdapter(tags)
+        customItemSpinnerFilterable?.allowFilter = true
+        customItemSpinnerFilterable?.clearOnClick = true
+        customItemSpinnerFilterable?.setTagAdapter(tags)
     }
 
     private fun setListeners() {
         betterSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
         betterSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
         betterSpinnerFilterableComplex?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        tagSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        tagSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
+        customItemSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
+        customItemSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
     }
 }

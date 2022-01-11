@@ -8,7 +8,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.inlacou.commons.R
-import com.inlacou.commons.business.Tag
+import com.inlacou.commons.business.CustomItem
 import com.inlacou.exinput.utils.extensions.setDrawableLeft
 import com.inlacou.inkandroidextensions.dpToPx
 import com.inlacou.inkandroidextensions.view.setDrawableRes
@@ -21,15 +21,14 @@ import timber.log.Timber
 /**
  * Created by inlacou on 26/08/21.
  */
-class TagSpinner @JvmOverloads
+class CustomItemSpinner @JvmOverloads
 constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : BetterSpinner(context, attrs, defStyleAttr) {
 
-	fun setItem(item: Tag?) {
-		Timber.d("setItem | item: $item")
+	fun setItem(item: CustomItem?) {
 		if(item==null) return
 		setText(item.name)
 		setDrawableLeft(ResourcesCompat.getDrawable(context.resources, resources.getIdentifier(item.iconResourceName, "drawable", context?.packageName), null)?.tint(item.colorHexadecimal), 16.dpToPx())
-		//TODO fuck onItemClick()
+		dismissDropDown()
 	}
 
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
@@ -37,25 +36,22 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 		Timber.d("onFocusChanged")
 	}
 
-	fun setTagAdapter(items: List<Tag>) {
+	fun setTagAdapter(items: List<CustomItem>) {
 		Timber.d("setTagAdapter | items: $items")
 		setComplexAdapter(items) {
 			GenericListAdapter(
-				context, itemList = it.filterIsInstance<Tag>(),
+				context, itemList = it.filterIsInstance<CustomItem>(),
 				layoutResourceId = R.layout.view_tag_list,
-				onViewPopulate = { base: RippleLinearLayout, item: Tag, pos: Int -> },
+				onViewPopulate = { base: RippleLinearLayout, item: CustomItem, pos: Int -> },
 			).apply {
-				this.onViewPopulate = { base: RippleLinearLayout, item: Tag, pos: Int ->
+				this.onViewPopulate = { base: RippleLinearLayout, item: CustomItem, pos: Int ->
 					base.findViewById<TextView>(R.id.tv_title).text = item.name
 					resources.getIdentifier(item.iconResourceName, "drawable", context.packageName)
 						.let { base.findViewById<ImageView>(R.id.iv_icon)?.setDrawableRes(if (it != 0) it else R.color.transparent) }
 					base.findViewById<ImageView>(R.id.iv_icon)?.tint(item.colorHexadecimal)
 					base.setOnClickListener {
+						onItemClickListener.onItemClick(base.parent as ListView, it, pos, this.getItemId(pos))
 						setItem(item)
-						Timber.d("base: $base")
-						Timber.d("base.parent: ${base.parent}")
-						onItemClickListener.onItemClick(base.parent as ListView?, it, pos, this.getItemId(pos))
-						setTagAdapter(items)
 					}
 				}
 			}
