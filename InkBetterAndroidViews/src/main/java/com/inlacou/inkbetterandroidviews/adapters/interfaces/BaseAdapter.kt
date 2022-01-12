@@ -1,4 +1,4 @@
-package com.inlacou.project.template.list.interfaces
+package com.inlacou.inkbetterandroidviews.adapters.interfaces
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

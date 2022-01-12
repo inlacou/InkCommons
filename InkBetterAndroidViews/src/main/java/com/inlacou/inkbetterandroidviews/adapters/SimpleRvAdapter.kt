@@ -13,14 +13,10 @@ class SimpleRvAdapter(
     private val onClick: ((index: Row) -> Unit)? = null,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     
-    override fun getItemViewType(position: Int): Int {
-        // Return type
-        return 0
-    }
+    override fun getItemViewType(position: Int): Int = 0
     
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item_simple, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+        = MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item_simple, parent, false))
     
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as MyViewHolder).let {
@@ -35,10 +31,8 @@ class SimpleRvAdapter(
         val tv: TextView = itemView.findViewById(R.id.view)
     }
     
-    override fun getItemCount(): Int {
-        return this.itemList.size
-    }
-    
+    override fun getItemCount(): Int = this.itemList.size
+
     interface Row {
         val displayAsRow: String
     }

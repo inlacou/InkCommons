@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.inlacou.commons.R
 import com.inlacou.commons.ui.views.sidebar.row.SidebarRowView
-import com.inlacou.project.template.list.interfaces.SingleChoiceAdapter
+import com.inlacou.inkbetterandroidviews.adapters.interfaces.SingleChoiceAdapter
 import com.inlacou.commons.ui.views.sidebar.SidebarViewMdl
 import com.inlacou.commons.ui.views.sidebar.title.SidebarTitleView
 
 class SidebarRvAdapter(override val recyclerView: RecyclerView?, private val itemList: MutableList<SidebarViewMdl>)
 	: RecyclerView.Adapter<RecyclerView.ViewHolder>(), SingleChoiceAdapter<SidebarViewMdl> {
-	override var currentlySelected: SidebarViewMdl? = null
-	
+	override var currentlySelected: MutableList<SidebarViewMdl> = mutableListOf()
+
 	override fun updateItem(item: SidebarViewMdl) {
 		getViewAt(itemList.indexOf(item)).apply {
 			if(this is SidebarTitleView) populate()

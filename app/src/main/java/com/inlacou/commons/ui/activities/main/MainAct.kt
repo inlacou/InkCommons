@@ -100,7 +100,9 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 		if(model.drawerOpenedOnStart) drawerLayout?.openDrawer(GravityCompat.START)
 
 		val drawerMenuItems = mutableListOf<SidebarViewMdl>()
-		values().forEach { drawerMenuItems.add(SidebarViewMdl(it, onClick = { adapterDrawer?.onItemSelected(it); loadSection(it.item) })) }
+		values().forEach { drawerMenuItems.add(SidebarViewMdl(it, onClick = {
+			Timber.d("adapterDrawer: $adapterDrawer")
+			adapterDrawer?.onItemSelected(it); loadSection(it.item) })) }
 		adapterDrawer = SidebarRvAdapter(rvDrawer, drawerMenuItems)
 		rvDrawer?.adapter = adapterDrawer
 		rvDrawer?.isNestedScrollingEnabled = false

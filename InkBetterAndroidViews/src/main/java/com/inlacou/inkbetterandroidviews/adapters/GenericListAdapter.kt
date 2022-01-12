@@ -9,7 +9,7 @@ import android.widget.Filter
 import com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
 import timber.log.Timber
 
-class GenericListAdapter<CustomView: View, CustomModel: BetterSpinner.ComplexItem>(
+class GenericListAdapter<CustomView: View, CustomModel>(
 	context: Context,
 	private val itemList: List<CustomModel>,
 	val layoutResourceId: Int,
