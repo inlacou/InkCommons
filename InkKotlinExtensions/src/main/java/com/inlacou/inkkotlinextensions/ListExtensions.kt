@@ -1,8 +1,11 @@
 package com.inlacou.inkkotlinextensions
 
+import java.lang.AssertionError
 import java.lang.IllegalArgumentException
 import java.util.stream.Stream
 import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.roundToInt
 
 /**
@@ -52,8 +55,6 @@ fun <T> Iterator<T>.toList(): List<T> {
 	while (hasNext()) mutableList.add(next())
 	return mutableList
 }
-
-fun <T> Stream<T>.toList(): List<T> = mutableListOf<T>().apply { this@toList.forEach { this.add(it) } }
 
 fun <T> MutableList<T>.concat(otherList: List<T>): MutableList<T> {
 	addAll(otherList)
@@ -115,8 +116,8 @@ private fun <T> List<T>.getNextNearestSelectable(lastIndex: Int, stepSize: Int =
 	var auxTopReached = topReached
 	var auxBottomReached = bottomReached
 	val newIndex = lastIndex+
-			if(goUp) stepSize
-			else -stepSize
+	  if(goUp) stepSize
+	  else -stepSize
 	val currentItem = try {
 		get(newIndex)
 	}catch (ioobe: IndexOutOfBoundsException){
@@ -376,3 +377,80 @@ fun <T> List<T>.changeStartToIndex(index: Int): List<T> {
 
 inline fun <T> Iterable<T>.tapIndexed(function: (index: Int, T) -> Unit): Iterable<T> = this.also { forEachIndexed(function) }
 inline fun <T> Iterable<T>.tap(function: (T) -> Unit): Iterable<T> = this.also { forEach(function) }
+
+fun <T> List<T>.swap(index: Int, index2: Int): List<T> {
+	return if(index==index2) this
+	else toMutableList().apply {
+		val firstIndex = min(index, index2)
+		val secondIndex = max(index, index2)
+		val firstAux = removeAt(index)
+		val secondAux = removeAt(index2-1 /*after the first removeAt, we have now one item less on the list*/)
+		add(firstIndex, secondAux)
+		add(secondIndex, firstAux)
+	}
+}
+
+/**
+ * -1 or less means A before B
+ * +1 or more means A after  B
+ *  0         means A equals B
+ *
+ * Idea: https://medium.com/dare-to-be-better/6-algorithms-every-developer-should-know-f78b609c7e7c
+ *
+ * Bubble Sort is the most basic sorting algorithm, and it works by repeatedly swapping adjacent elements if they are out of order.
+ */
+fun <T> List<T>.bubbleSort(compare: (first: T, second: T) -> Int): List<T> = bubbleSort(compare, 0)
+private fun <T> List<T>.bubbleSort(compare: (first: T, second: T) -> Int, startIndex: Int = 0): List<T> {
+	if(this.size<2) return this
+	var currentIndex = startIndex-1 /*Starting at -1 because we will add 1 before using*/
+	var currentComparation: Int
+	do {
+		currentIndex++
+		currentComparation = compare.invoke(this[currentIndex], this[currentIndex+1])
+	}while(currentComparation<+1 && currentIndex+2<this.size)
+	return if(currentComparation>=1) {
+		/*recursive*/ swap(currentIndex, currentIndex+1).bubbleSort(compare, startIndex = max(currentIndex-1, 0) /*For optimization purposes*/)
+	} else /*recursive end*/ this
+}
+
+private fun myAssertEquals(item1: List<String>, i: Int, i1: Int, item2: List<String>) {
+	println("assert: $item1 swapping ${item1[i]} and ${item1[i1]} is $item2")
+	val swapped = item1.swap(i, i1)
+	if (swapped != item2) throw AssertionError("$item1 swapping ${item1[i]} and ${item1[i1]} is NOT $item2, is $swapped")
+}
+
+fun main() {
+	myAssertEquals(listOf("a", "h", "j", "z"), 1, 2, listOf("a", "j", "h", "z"))
+	myAssertEquals(listOf("a", "h", "j", "z"), 0, 1, listOf("h", "a", "j", "z"))
+	myAssertEquals(listOf("a", "h", "j", "z"), 0, 2, listOf("j", "h", "a", "z"))
+	myAssertEquals(listOf("a", "h", "j", "z"), 0, 3, listOf("z", "h", "j", "a"))
+	val start = listOf("a", "h", "j", "z", "b", "c", "0", "w", "i", "l", "j", "7", "j", "jh", "ja")
+	val aux = start.bubbleSort { a, b ->
+		when {
+			a==b -> 0
+			a.isBlank() -> -1
+			b.isBlank() -> 1
+			else -> {
+				var index = 0
+				var aux1: Char
+				var aux2: Char
+				do {
+					aux1 = a[index]
+					aux2 = b[index]
+					index++
+				}while (aux1==aux2 && index<a.length && index<b.length)
+
+				val num1 = aux1.toSortableNumber()
+				val num2 = aux2.toSortableNumber()
+				when {
+					num1==num2   ->  0
+					num1<num2    -> -1
+					num1>num2    -> +1
+					else /*wtf*/ ->  0
+				}
+			}
+		}
+	}
+	println("before: $start")
+	println("after:  $aux")
+}

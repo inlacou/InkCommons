@@ -15,12 +15,16 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import java.util.*
+import java.util.stream.Stream
 
 fun Int.dpToPx() = (this * Resources.getSystem().displayMetrics.density).toInt()
 fun Float.dpToPx() = (this * Resources.getSystem().displayMetrics.density)
 fun Int.pxToDp() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+@RequiresApi(Build.VERSION_CODES.N) fun <T> Stream<T>.toList(): List<T> = mutableListOf<T>().apply { this@toList.forEach { this.add(it) } }
 
 fun Context.getColorCompat(resId: Int): Int {
 	return resources.getColorCompat(resId)

@@ -324,6 +324,7 @@ fun View.showAlphaObs(durationMillis: Long): Observable<Float> {
 	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS).map { it.toFloat()/100 }.toUi().doOnNext{ factor ->
 		alpha = factor
 	}.doOnComplete {
+		alpha = 1f /*Otherwise, on previous method factor can be limited to 0.99 instead*/
 		setVisible(true, holdSpaceOnDisappear = true)
 	}
 }
@@ -332,6 +333,7 @@ fun View.hideAlphaObs(durationMillis: Long, holdSpaceOnDisappear: Boolean = true
 	return Observable.intervalRange(0, 100, 0, (durationMillis/100), TimeUnit.MILLISECONDS).map { 1f-(it.toFloat()/100) }.toUi().doOnNext{ factor ->
 		alpha = factor
 	}.doOnComplete {
+		alpha = 0f /*To ensure it does not happen like in @see showAlphaObs*/
 		setVisible(false, holdSpaceOnDisappear = holdSpaceOnDisappear)
 	}
 }

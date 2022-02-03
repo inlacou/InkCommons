@@ -2,7 +2,8 @@ package com.inlacou.inkkotlinextensions.extensions
 
 import com.inlacou.inkkotlinextensions.*
 import org.junit.Assert
-import org.junit.jupiter.api.Test
+import org.junit.Test
+import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 import java.lang.IndexOutOfBoundsException
 
@@ -282,7 +283,7 @@ class ListExtensionsUnitTests {
         //TODO
     }
 
-    @Test fun `toPairs`() = listOf(1,2,3,4,5).toPairs(true).tapIndexed { index, pair -> Assert.assertEquals(Pair(index+1, true), pair) }
+    @Test fun `toPairs`() { listOf(1,2,3,4,5).toPairs(true).tapIndexed { index, pair -> Assert.assertEquals(Pair(index+1, true), pair) } }
 
     @Test fun `groupConsecutiveBy`() {
         listOf(1,2,3,4,5)
@@ -291,9 +292,44 @@ class ListExtensionsUnitTests {
     @Test fun `merge 12345 with 6789 is 123456789`() = Assert.assertEquals(listOf(1,2,3,4,5,6,7,8,9).toTypedArray(), listOf(1,2,3,4,5,).toPairs(true).toHashMap().merge(listOf(6,7,8,9), false).keys.toTypedArray())
     @Test fun `merge 12345 with 4567 is 1234567`() = Assert.assertEquals(listOf(1,2,3,4,5,6,7).toTypedArray(), listOf(1,2,3,4,5,).toPairs(true).toHashMap().merge(listOf(4,5,6,7), false).keys.toTypedArray())
 
-    @Test fun `tap`() = listOf(1,2,3,4,5,).tap { assert(it==1||it==2||it==3||it==4||it==5) }
+    @Test fun `tap`() { listOf(1,2,3,4,5,).tap { assert(it==1||it==2||it==3||it==4||it==5) } }
 
-    @Test fun `tapIndexed`() = listOf(1,2,3,4,5,).tapIndexed { index, item -> Assert.assertEquals(index+1, item) }
+    @Test fun `tapIndexed`() { listOf(1,2,3,4,5,).tapIndexed { index, item -> Assert.assertEquals(index+1, item) } }
+
+    @Test fun `swap 1 with 1 in 1234 gives 1234`() = assert(listOf(1,2,3,4,).swap(0, 0)==listOf(1,2,3,4))
+    @Test fun `swap 1 with 2 in 1234 gives 2134`() = assert(listOf(1,2,3,4,).swap(0,1)==listOf(2,1,3,4))
+    @Test fun `swap 1 with 3 in 1234 gives 3214`() = assert(listOf(1,2,3,4,).swap(0,2)==listOf(3,2,1,4))
+    @Test fun `swap 1 with 4 in 1234 gives 4231`() = assert(listOf(1,2,3,4,).swap(0,3)==listOf(4,2,3,1))
+    @Test fun `swap 1 with 5 in 1234 gives error`() { assertThrows<IndexOutOfBoundsException> { listOf(1,2,3,4,).swap(0,10)==listOf(2,1,3,4) } }
+
+    val compareStrings = { a: String, b: String ->
+        when {
+            a==b -> 0
+            a.isBlank() -> -1
+            b.isBlank() -> 1
+            else -> {
+                var index = 0
+                var aux1: Char
+                var aux2: Char
+                do {
+                    aux1 = a[index]
+                    aux2 = b[index]
+                    index++
+                }while (aux1==aux2 && index<a.length && index<b.length)
+
+                val num1 = aux1.toSortableNumber()
+                val num2 = aux2.toSortableNumber()
+                when {
+                    num1==num2   ->  0
+                    num1<num2    -> -1
+                    num1>num2    -> +1
+                    else /*wtf*/ ->  0
+                }
+            }
+        }
+    }
+
+    @Test fun `(a,h,j,z,b,0,c,w,i,l,j,j,jh,ja) sorted is (0,a,b,c,h,i,j,j,j,ja,jh,l,w,z)`() = assert(listOf("a", "h", "j", "z", "b", "0", "c", "w", "i", "l", "j", "j", "jh", "ja").bubbleSort(compareStrings)==listOf("0", "a", "b", "c", "h", "i", "j", "j", "j", "ja", "jh", "l", "w", "z"))
 
     data class SelectableItem(val position: Int, val selectable: Boolean)
 }
