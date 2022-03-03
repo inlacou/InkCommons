@@ -45,10 +45,10 @@ fun <T> Observable<T>.onErrorDo(returnItem: T, action: ((Throwable) -> Unit)?) {
 }
 
 fun <T> Observable<T>.onErrorPrint(returnItem: T, action: ((Throwable) -> Unit)?) {
-	onErrorDo(returnItem, {
+	onErrorDo(returnItem) {
 		it.printStackTrace()
 		action?.invoke(it)
-	})
+	}
 }
 
 /**
