@@ -2,7 +2,6 @@ package com.inlacou.inkkotlinextensions
 
 import java.lang.AssertionError
 import java.lang.IllegalArgumentException
-import java.util.stream.Stream
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min

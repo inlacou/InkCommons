@@ -9,21 +9,24 @@ import java.util.*
  * radix 16 -> it's hex value
  */
 fun ByteArray.toStringsRadix(radix: Int = 10): String {
-	return map { it.toString(radix) }.toString().replace(", ", "").replace("[", "").replace("]", "").toUpperCase(Locale.ROOT)
+	return map { it.toString(radix) }
+		.toString().replace(", ", "").replace("[", "").replace("]", "").toUpperCase(Locale.ROOT)
 }
 
 /**
  * Trasforms every byte to it's corresponding Char value
  */
 fun ByteArray.toChars(): String {
-	return map { it.toChar() }.toString().replace(", ", "").replace("[", "").replace("]", "")
+	return map { it.toChar() }
+		.toString().replace(", ", "").replace("[", "").replace("]", "")
 }
 
 /**
  * Trasforms every byte to it's corresponding Char value
  */
 fun Array<Byte>.toChars(): String {
-	return map { it.toChar() }.toString().replace(", ", "").replace("[", "").replace("]", "")
+	return map { it.toChar() }
+		.toString().replace(", ", "").replace("[", "").replace("]", "")
 }
 
 fun ByteArray.toStringIn(): String {
@@ -31,7 +34,8 @@ fun ByteArray.toStringIn(): String {
 }
 
 fun ByteArray.toPositiveInts(): String {
-	return map { it.toPositiveInt() }.toString().replace(", ", "").replace("[", "").replace("]", "")
+	return map { it.toPositiveInt() }
+		.toString().replace(", ", "").replace("[", "").replace("]", "")
 }
 
 fun ByteArray.toMultipleOf(multiple: Int): ByteArray {

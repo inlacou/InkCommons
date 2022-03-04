@@ -22,6 +22,8 @@ data class Maybe<T>(val value: T?) {
 fun <T, R> Observable<Maybe<T>>.flatMapMaybeMonad(callback: (T) -> Observable<Maybe<R>>): Observable<Maybe<R>>
   = flatMap { if(it.value==null) Observable.just(Maybe(null)) else callback(it.value) }
 
+fun <T, R> T?.maybeMap(callback: (T) -> R?): R? = if(this==null) null else callback(this)
+
 fun main() {
 	println("------------------------------ MAYBE MONAD")
 	/* MAYBE MONAD */
@@ -30,6 +32,14 @@ fun main() {
 	maybes("Frank")
 	println("---------------")
 	maybes("Laura")
+
+	println("------------------------------ Any? as Maybe")
+	/* MAYBE MONAD */
+	nullables("Joe")
+	println("---------------")
+	nullables("Frank")
+	println("---------------")
+	nullables("Laura")
 
 	println("------------------------------ LET")
 	/* LET */
@@ -65,6 +75,13 @@ private fun maybes(name: String): Country?
 	.flatMap { getHouseM(it.houseDirection) }.also { println("$name's house is ${it.value}") }
 	.flatMap { getCityM(it.cityName) }.also { println("$name's city is ${it.value}") }
 	.flatMap { getCountryM(it.countryName) }.also { println("$name's country is ${it.value}") }.value
+
+private fun nullables(name: String): Country?
+  = getUser(name)
+	.maybeMap { getFamily(it.familySurname) }.also { println("$name's family is $it") }
+	.maybeMap { getHouse(it.houseDirection) }.also { println("$name's house is $it") }
+	.maybeMap { getCity(it.cityName) }.also { println("$name's city is $it") }
+	.maybeMap { getCountry(it.countryName) }.also { println("$name's country is $it") }
 
 private fun lets(name: String): Country? {
 	getUser(name)?.let {

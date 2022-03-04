@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.inlacou.inkkotlincommons
+package com.inlacou.inkkotlincommons.monads
 
 import io.reactivex.rxjava3.core.Observable
 import java.lang.Exception
 import java.lang.NullPointerException
 import java.lang.NumberFormatException
-import javax.management.timer.TimerMBean
 
 /**
  * Represents left value of one of two possible types (left disjoint union).
@@ -64,9 +63,19 @@ fun <T, L, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T> =
 fun <T, L, R> Either<L, R>.map(fn: (R) -> (T)): Either<L, T> = this.flatMap(fn.compose(::right))
 
 /**
- * TODO document with code below
+ * Used to map an Either<L, R>.Right value to a new Either<L, R2>.
+ * Example:
+ * .flatMapEitherMonad { i: Int ->
+ *     val a: Either<NumberFormatException, String> = Either.Right(i.toString())
+ *     Observable.just(a)
+ * }.flatMapEitherMonad { i: String ->
+ *     val a: Either<NumberFormatException, Char> = Either.Right(i.first())
+ *     Observable.just(a)
+ * }.flatMapEitherMonad { c: Char ->
+ *     ...
+ * }
  */
-fun <L, R, R2> Observable<Either<L, R>>.flatMapEither(fn: (R) -> Observable<Either<L, R2>>): Observable<Either<L, R2>>
+fun <L, R, R2> Observable<Either<L, R>>.flatMapEitherMonad(fn: (R) -> Observable<Either<L, R2>>): Observable<Either<L, R2>>
   = flatMap {
 	when (it) {
 		is Either.Left -> Observable.just(Either.Left(it.left))
@@ -99,7 +108,7 @@ fun main() {
 	}
 
 	Observable.just(either)
-		.flatMapEither {
+		.flatMapEitherMonad {
 			Observable.just(Either.Right(it.toString()))
 		}
 		.flatMap {
@@ -109,12 +118,12 @@ fun main() {
 		},{})
 
 	(Observable.just(either) as Observable<Either<Exception, Int>>)
-		.flatMapEither {
-			val a: Either<NumberFormatException, Int> = Either.Right(2)
+		.flatMapEitherMonad { i: Int ->
+			val a: Either<NumberFormatException, String> = Either.Right(i.toString())
 			Observable.just(a)
-		}
-		.flatMap {
-			Observable.just("")
+		}.flatMapEitherMonad { i: String ->
+			val a: Either<NumberFormatException, Char> = Either.Right(i.first())
+			Observable.just(a)
 		}.subscribe({
 			println("change left side (common supertype)")
 		},{})
