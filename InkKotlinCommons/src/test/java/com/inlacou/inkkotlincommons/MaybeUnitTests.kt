@@ -1,5 +1,6 @@
 package com.inlacou.inkkotlincommons
 
+import com.inlacou.inkkotlincommons.monads.Maybe
 import org.junit.jupiter.api.Assertions
 import org.junit.Test
 

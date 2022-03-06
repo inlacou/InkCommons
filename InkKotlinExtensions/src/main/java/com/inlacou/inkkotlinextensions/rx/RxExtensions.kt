@@ -34,18 +34,21 @@ inline fun <T : Any, S : Any> Observable<T>.mapNotNull(
  */
 fun <T> Observable<T>.filterRapidClicks(windowDuration: Long = 1000, timeUnit: TimeUnit = TimeUnit.MILLISECONDS): Observable<T> = throttleFirst(windowDuration, timeUnit)
 fun <T> Observable<T>.debounce(time: Long): Observable<T> = debounce(time, TimeUnit.MILLISECONDS)
+/**
+ * Gives pairs of items
+ */
 fun <T> Observable<T>.withPrevious(): Observable<Pair<T, T>> = buffer(2, 1).map { Pair(it[0], it[1]) }
 fun <T> Observable<T>.takeUntil(time: Long, timeUnit: TimeUnit = TimeUnit.MILLISECONDS): Observable<MutableList<T>> = buffer(time, timeUnit).takeUntil { true }
 
-fun <T> Observable<T>.onErrorDo(returnItem: T, action: ((Throwable) -> Unit)?) {
+fun <T> Observable<T>.onErrorDoAndResumeNext(returnItem: T, action: ((Throwable) -> Unit)?) {
 	onErrorResumeNext {
 		action?.invoke(it)
 		ObservableSource { it.onNext(returnItem) }
 	}
 }
 
-fun <T> Observable<T>.onErrorPrint(returnItem: T, action: ((Throwable) -> Unit)?) {
-	onErrorDo(returnItem) {
+fun <T> Observable<T>.onErrorPrintAndResumeNext(returnItem: T, action: ((Throwable) -> Unit)?) {
+	onErrorDoAndResumeNext(returnItem) {
 		it.printStackTrace()
 		action?.invoke(it)
 	}

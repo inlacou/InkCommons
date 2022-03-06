@@ -22,6 +22,8 @@ import com.inlacou.commons.ui.activities.BaseFragAct
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFragMdl
+import com.inlacou.commons.ui.fragments.coroutines.CoroutinesFrag
+import com.inlacou.commons.ui.fragments.coroutines.CoroutinesFragMdl
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFrag
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFragMdl
 import com.inlacou.commons.ui.fragments.eventbusvsrx.EventBusVsRxFrag
@@ -125,6 +127,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			TEXTVIEW_BITMAP -> TextViewBitmapFrag.create(TextViewBitmapFragMdl())
 			BETTER_SPINNER -> BetterSpinnerFrag.create(BetterSpinnerFragMdl())
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())
+			COROUTINES -> CoroutinesFrag.create(CoroutinesFragMdl())
 		}, section, extras)
 	}
 
