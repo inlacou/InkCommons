@@ -110,3 +110,22 @@ fun <T> Observable<T>.debouncedBuffer(delay: Long, unit: TimeUnit): Observable<M
 }
 /* /Utils */
 
+fun <T> Observable<T>.doOnFirst(onFirstAction: (T) -> Unit): Observable<T> =
+	take(1)
+		.doOnNext { onFirstAction.invoke(it) }
+		.concatWith(skip(1))
+
+fun <T> Flowable<T>.doOnFirst(onFirstAction: (T) -> Unit): Flowable<T> =
+	take(1)
+		.doOnNext { onFirstAction.invoke(it) }
+		.concatWith(skip(1))
+
+fun <T> Observable<T>.doAfterFirst(afterFirstAction: (T) -> Unit): Observable<T> =
+	take(1)
+		.doAfterNext { afterFirstAction.invoke(it) }
+		.concatWith(skip(1))
+
+fun <T> Flowable<T>.doAfterFirst(afterFirstAction: (T) -> Unit): Flowable<T> =
+	take(1)
+		.doAfterNext { afterFirstAction.invoke(it) }
+		.concatWith(skip(1))

@@ -1,6 +1,8 @@
 package com.inlacou.inkkotlinextensions
 
 import com.inlacou.inkkotlincommons.rx.observables.ReInterval
+import com.inlacou.inkkotlinextensions.rx.doAfterFirst
+import com.inlacou.inkkotlinextensions.rx.doOnFirst
 import io.reactivex.rxjava3.core.Observable
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
@@ -42,6 +44,36 @@ class RxUnitTests {
 				await(10, TimeUnit.SECONDS) //Max time it will wait
 				assertNoErrors()
 				assertValueCount(11) /* 0 to 10, 11 elements */
+			}
+	}
+
+	@Test
+	fun `doOnFirst 1,2,3 is 1F,1,2,3`() {
+		val exceptedResults = listOf("1 doOnFirst", "1", "2", "3")
+		val results = mutableListOf<String>()
+		Observable.fromArray(1, 2, 3)
+			.doOnFirst { Assertions.assertEquals(1, it); results.add("$it doOnFirst") }
+			.doOnNext { results.add(it.toString()) }
+			.test().apply {
+				await(10, TimeUnit.SECONDS) //Max time it will wait
+				assertNoErrors()
+				assertValueCount(3) /* 0 to 10, 11 elements */
+				Assertions.assertEquals(exceptedResults, results)
+			}
+	}
+
+	@Test
+	fun `doAfterFirst 1,2,3 is 1,1F,2,3`() {
+		val exceptedResults = listOf("1", "1 doAfterFirst", "2", "3")
+		val results = mutableListOf<String>()
+		Observable.fromArray(1, 2, 3)
+			.doAfterFirst { Assertions.assertEquals(1, it); results.add("$it doAfterFirst") }
+			.doOnNext { results.add(it.toString()) }
+			.test().apply {
+				await(10, TimeUnit.SECONDS) //Max time it will wait
+				assertNoErrors()
+				assertValueCount(3) /* 0 to 10, 11 elements */
+				Assertions.assertEquals(exceptedResults, results)
 			}
 	}
 
