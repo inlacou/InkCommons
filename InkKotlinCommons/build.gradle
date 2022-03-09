@@ -34,6 +34,8 @@ afterEvaluate {
 }
 
 dependencies {
+    testImplementation project(':InkKotlinExtensions')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testImplementation 'junit:junit:4.13.2'
