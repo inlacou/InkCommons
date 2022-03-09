@@ -115,6 +115,22 @@ fun <T> Observable<T>.doOnFirst(onFirstAction: (T) -> Unit): Observable<T> =
 		.doOnNext { onFirstAction.invoke(it) }
 		.concatWith(skip(1))
 
+/**
+ * do @param work while @param whileCondition and then continues normal.
+ * For example we can handle all even ints in a sequence until an odd one appears, and further even items will not be handled:
+ *      2,4,6,8,10,11,12,13,14,15,16
+ *      would take only for the @param work
+ *      2,4,6,8,10, and not 12, 14, or 16
+ * @param consume determines if the elements captured with the doWhile will also continue to be used later
+ */
+fun <T> Observable<T>.doWhile(whileCondition: (T) -> Boolean, work: (T) -> Unit, consume: Boolean = true): Observable<T> {
+	return takeUntil { !whileCondition.invoke(it) }
+		.skipLast(1)
+		.doOnNext { work.invoke(it) }
+		.skipWhile { if(consume) whileCondition.invoke(it) else false }
+		.concatWith(skipWhile { whileCondition.invoke(it) })
+}
+
 fun <T> Flowable<T>.doOnFirst(onFirstAction: (T) -> Unit): Flowable<T> =
 	take(1)
 		.doOnNext { onFirstAction.invoke(it) }
