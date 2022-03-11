@@ -1,4 +1,5 @@
 package com.inlacou.inkkotlincommons.monads
+
 interface IWriter {
     var log: String
     val iWriterValue: Any
