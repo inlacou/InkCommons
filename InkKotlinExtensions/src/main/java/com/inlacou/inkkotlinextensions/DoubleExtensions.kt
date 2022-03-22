@@ -184,9 +184,9 @@ fun Float.roundDecimals(desiredDecimals: Int, roundingMode: RoundingMode = DOWN)
 			DOWN -> { /*default, do nothing */ }
 			CEILING -> decimalPart += 1
 			FLOOR -> { /*default, do nothing */ }
-			HALF_UP -> if(roundChar==5) decimalPart += 1
-			HALF_DOWN -> { /*default, do nothing */ }
-			HALF_EVEN -> if(roundChar==5 && decimalPart.last()%2!=0) decimalPart += 1
+			HALF_UP -> { decimalPart = if(roundChar==5) decimalPart+1 else if(roundChar>5) decimalPart+1 else decimalPart }
+			HALF_DOWN -> { decimalPart = if(roundChar==5) decimalPart else if(roundChar>5) decimalPart+1 else decimalPart }
+			HALF_EVEN -> { decimalPart = if(roundChar==5 && decimalPart.last()%2!=0) decimalPart+1 else if(roundChar>5) decimalPart+1 else decimalPart }
 			UNNECESSARY -> throw ArithmeticException("Rounding mode UNNECESSARY specified but rounding found necessary for current number $this with $desiredDecimals target decimals")
 		}
 		val sign = if(this<0) -1 else 1
@@ -236,9 +236,9 @@ fun Double.roundDecimals(desiredDecimals: Int, roundingMode: RoundingMode = DOWN
 			DOWN -> { /*default, do nothing */ }
 			CEILING -> decimalPart += 1
 			FLOOR -> { /*default, do nothing */ }
-			HALF_UP -> if(roundChar==5) decimalPart += 1
-			HALF_DOWN -> { /*default, do nothing */ }
-			HALF_EVEN -> if(roundChar==5 && decimalPart.last()%2!=0) decimalPart += 1
+			HALF_UP -> { decimalPart = if(roundChar==5) decimalPart+1 else if(roundChar>5) decimalPart+1 else decimalPart }
+			HALF_DOWN -> { decimalPart = if(roundChar==5) decimalPart else if(roundChar>5) decimalPart+1 else decimalPart }
+			HALF_EVEN -> { decimalPart = if(roundChar==5 && decimalPart.last()%2!=0) decimalPart+1 else if(roundChar>5) decimalPart+1 else decimalPart }
 			UNNECESSARY -> throw ArithmeticException("Rounding mode UNNECESSARY specified but rounding found necessary for current number $this with $desiredDecimals target decimals")
 		}
 		val sign = if(this<0) -1 else 1
