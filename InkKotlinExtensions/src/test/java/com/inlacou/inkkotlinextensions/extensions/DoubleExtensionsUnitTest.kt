@@ -2,7 +2,10 @@ package com.inlacou.inkkotlinextensions.extensions
 
 import com.inlacou.inkkotlinextensions.*
 import org.junit.Assert.assertEquals
+import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
+import java.math.RoundingMode
 import kotlin.math.roundToInt
 
 /**
@@ -10,6 +13,7 @@ import kotlin.math.roundToInt
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+@TestMethodOrder(MethodOrderer.MethodName::class)
 class DoubleExtensionsUnitTest {
 
 	@Test
@@ -159,5 +163,10 @@ class DoubleExtensionsUnitTest {
 	@Test fun `1dot3334 round to 3 decimals is 1dot333`() = assertEquals(1.333, 1.3334.roundDecimals(3), 0.0)
 	@Test fun `1dot3334 round to 4 decimals is 1dot3334`() = assertEquals(1.3334, 1.3334.roundDecimals(4), 0.0)
 	@Test fun `1dot3334 round to 5 decimals is 1dot3334`() = assertEquals(1.3334, 1.3334.roundDecimals(5), 0.0)
+	@Test fun `1dot3335 round to 3 decimals (HALF_UP) is 1dot334`() = assertEquals(1.334, 1.3335.roundDecimals(3, RoundingMode.HALF_UP), 0.0)
+	@Test fun `1dot3335 round to 3 decimals (HALF_EVEN) is 1dot334`() = assertEquals(1.334, 1.3335.roundDecimals(3, RoundingMode.HALF_EVEN), 0.0)
+	@Test fun `1dot3335 round to 3 decimals (HALF_DOWN) is 1dot333`() = assertEquals(1.333, 1.3335.roundDecimals(3, RoundingMode.HALF_DOWN), 0.0)
 
+	@Test fun `-1dot3337 round to 3 decimals (FLOOR) is 1dot334`() = assertEquals(-1.334, (-1.3337).roundDecimals(3, RoundingMode.FLOOR), 0.0)
+	@Test fun `-1dot3337 round to 3 decimals (DOWN) is 1dot333`() = assertEquals(-1.333, (-1.3337).roundDecimals(3, RoundingMode.DOWN), 0.0)
 }

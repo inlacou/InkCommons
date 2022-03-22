@@ -126,13 +126,6 @@ fun <T> Observable<T>.doWhile(whileCondition: (T) -> Boolean, work: (T) -> Unit,
 		.concatWith(skipWhile { whileCondition.invoke(it) })
 }
 
-fun <T> Observable<T>.doWhile2(whileCondition: (T) -> Boolean, work: (T) -> Unit): Observable<T> {
-	return takeWhile(whileCondition)
-		.doOnNext(work)
-		.skipWhile(whileCondition)
-		.concatWith(skipWhile(whileCondition))
-}
-
 fun <T> Observable<T>.doOnFirst(onFirstAction: (T) -> Unit): Observable<T> =
 	take(1)
 		.doOnNext { onFirstAction.invoke(it) }

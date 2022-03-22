@@ -73,11 +73,8 @@ fun <T, V> List<Pair<T, V>>.toHashMap(): HashMap<T, V> {
 }
 
 fun <T> List<T>.safeGet(i: Int): T? {
-	return try {
-		get(i)
-	}catch (ioobe: IndexOutOfBoundsException){
-		null
-	}
+	return try { get(i) }
+	catch (ioobe: IndexOutOfBoundsException) { null }
 }
 
 fun <T> List<T>.getItemByPercentage(f: Float): T? {
@@ -365,7 +362,7 @@ fun <T> HashMap<T, Boolean>.merge(list: List<T>, default: Boolean): HashMap<T, B
 /**
  * Takes current list and @return a new one with the same elements but different order.
  * Take elements from given @param index to end, and then adds too the elements from the start to @param index.
- * List A,B,C,D,E,F changed start to 1 would be B,C,D,E,F,A
+ * List A,B,C,D,E,F changed start to 1 would be B,C,D,E,F,A, starting now in B, the old 1 index item.
  */
 fun <T> List<T>.changeStartToIndex(index: Int): List<T> {
 	val result = mutableListOf<T>()
