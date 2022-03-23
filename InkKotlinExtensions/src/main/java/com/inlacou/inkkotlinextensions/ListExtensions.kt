@@ -49,6 +49,8 @@ fun <T> Iterable<T>.intersectBy(other: Iterable<T>, equals: (T, T) -> Boolean): 
 	return set
 }
 
+fun <T> Iterable<T>.containsBy(item: T, equals: (T, T) -> Boolean): Boolean = this.find { equals(item, it) }!=null
+
 fun <T> Iterator<T>.toList(): List<T> {
 	val mutableList = mutableListOf<T>()
 	while (hasNext()) mutableList.add(next())
@@ -220,15 +222,11 @@ fun <T> List<T>.safeNextLooping(currentIndex: Int): T {
 /**
  * Get previous value (given index-1) safely (return null if no value) and looping (if index==0, index-1 is the last value, i.e. start again from the rear)
  */
-fun <T> List<T>.safePreviousLooping(currentIndex: Int): T? {
+fun <T> List<T>.safePreviousLooping(currentIndex: Int): T {
 	return try {
 		get(currentIndex-1)
 	}catch (ioobe: IndexOutOfBoundsException){
-		try {
-			get(size-1)
-		}catch (ioobe: IndexOutOfBoundsException){
-			null
-		}
+		get(size-1)
 	}
 }
 

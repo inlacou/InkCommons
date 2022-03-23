@@ -10,7 +10,7 @@ import com.inlacou.inkanimationtypes.easetypes.Linear
 import kotlin.math.abs
 import kotlin.math.min
 
-class FadingFixedCarouselLinearLayoutManager(
+open class FadingFixedCarouselLinearLayoutManager(
     context: Context,
     reverseLayout: Boolean,
     val shrinkInterpolator: Interpolable = Linear(),
