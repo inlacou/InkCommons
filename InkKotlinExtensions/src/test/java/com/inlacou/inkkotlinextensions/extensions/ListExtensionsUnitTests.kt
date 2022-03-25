@@ -2,7 +2,7 @@ package com.inlacou.inkkotlinextensions.extensions
 
 import com.inlacou.inkkotlinextensions.*
 import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 import java.lang.IndexOutOfBoundsException
@@ -239,9 +239,17 @@ class ListExtensionsUnitTests {
         }catch (ioobe: IndexOutOfBoundsException){}
     }
 
-    @Test fun `replaceAll pairs with 1 in 12345 is 11315`() = Assert.assertEquals(mutableListOf(1,1,3,1,5), mutableListOf(1,2,3,4,5).replaceAll(1, { index, item ->
+    @Test fun `replaceAll pairs with 1 in 12345 is 11315`() = Assert.assertEquals(mutableListOf(1,1,3,1,5), mutableListOf(1,2,3,4,5).replaceAll(1) { index, item ->
         item%2==0
-    }))
+    })
+
+    @Test fun `replaceFirst pairs with 1 in 12345 is 11345`() = Assert.assertEquals(mutableListOf(1,1,3,4,5), mutableListOf(1,2,3,4,5).replaceFirst(1) { item ->
+        item%2==0
+    })
+
+    @Test fun `replaceLast pairs with 1 in 12345 is 12315`() = Assert.assertEquals(mutableListOf(1,2,3,1,5), mutableListOf(1,2,3,4,5).replaceLast(1) { item ->
+        item%2==0
+    })
 
     @Test fun `replaceAllOrAddAtIfNotFound 12345 replace 4 with 8 is 12385`() = Assert.assertEquals(mutableListOf(1,2,3,8,5), mutableListOf(1,2,3,4,5).replaceAllOrAddAtIfNotFound(8, -1, { it==4 }))
     @Test fun `replaceAllOrAddAtIfNotFound 12345 replace 6 with 8 is 123458`() = Assert.assertEquals(mutableListOf(1,2,3,4,5,8), mutableListOf(1,2,3,4,5).replaceAllOrAddAtIfNotFound(8, -1, { it==6 }))

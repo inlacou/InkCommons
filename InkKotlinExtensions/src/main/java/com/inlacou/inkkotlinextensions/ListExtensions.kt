@@ -272,6 +272,30 @@ fun <T> MutableList<T>.replaceAll(item: T, replaceCondition: (Int, T) -> Boolean
 	return this
 }
 
+fun <T> MutableList<T>.replaceFirst(item: T, replaceCondition: (T) -> Boolean): MutableList<T> {
+	(0 until size).forEach { index ->
+		val currentItem = get(index)
+		if(replaceCondition(currentItem)) {
+			remove(currentItem)
+			add(index, item)
+			return this
+		}
+	}
+	return this
+}
+
+fun <T> MutableList<T>.replaceLast(item: T, replaceCondition: (T) -> Boolean): MutableList<T> {
+	(0 until size).reversed().forEach { index ->
+		val currentItem = get(index)
+		if(replaceCondition(currentItem)) {
+			remove(currentItem)
+			add(index, item)
+			return this
+		}
+	}
+	return this
+}
+
 /**
  * @param indexToAddIfNotFound if -1, add at end
  */
