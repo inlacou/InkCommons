@@ -15,7 +15,9 @@
  */
 package com.inlacou.inkkotlincommons.monads
 
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import java.lang.Exception
 import java.lang.NullPointerException
 import java.lang.NumberFormatException
@@ -79,5 +81,45 @@ fun <L, R, R2> Observable<Either<L, R>>.flatMapEitherMonad(fn: (R) -> Observable
   = flatMap {
 	when (it) {
 		is Either.Left -> Observable.just(Either.Left(it.left))
+		is Either.Right -> fn(it.right)
+	} }
+
+/**
+ * Used to map an Either<L, R>.Right value to a new Either<L, R2>.
+ * Example:
+ * .flatMapEitherMonad { i: Int ->
+ *     val a: Either<NumberFormatException, String> = Either.Right(i.toString())
+ *     Single.just(a)
+ * }.flatMapEitherMonad { i: String ->
+ *     val a: Either<NumberFormatException, Char> = Either.Right(i.first())
+ *     Single.just(a)
+ * }.flatMapEitherMonad { c: Char ->
+ *     ...
+ * }
+ */
+fun <L, R, R2> Single<Either<L, R>>.flatMapEitherMonad(fn: (R) -> Single<Either<L, R2>>): Single<Either<L, R2>>
+  = flatMap {
+	when (it) {
+		is Either.Left -> Single.just(Either.Left(it.left))
+		is Either.Right -> fn(it.right)
+	} }
+
+/**
+ * Used to map an Either<L, R>.Right value to a new Either<L, R2>.
+ * Example:
+ * .flatMapEitherMonad { i: Int ->
+ *     val a: Either<NumberFormatException, String> = Either.Right(i.toString())
+ *     Maybe.just(a)
+ * }.flatMapEitherMonad { i: String ->
+ *     val a: Either<NumberFormatException, Char> = Either.Right(i.first())
+ *     Maybe.just(a)
+ * }.flatMapEitherMonad { c: Char ->
+ *     ...
+ * }
+ */
+fun <L, R, R2> Maybe<Either<L, R>>.flatMapEitherMonad(fn: (R) -> Maybe<Either<L, R2>>): Maybe<Either<L, R2>>
+  = flatMap {
+	when (it) {
+		is Either.Left -> Maybe.just(Either.Left(it.left))
 		is Either.Right -> fn(it.right)
 	} }
