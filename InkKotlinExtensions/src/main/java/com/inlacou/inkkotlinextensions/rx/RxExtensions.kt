@@ -92,6 +92,20 @@ inline fun <T> Observable<T>.tap(crossinline function: (T) -> Unit): Observable<
 	}
 }
 
+inline fun <T> Single<T>.tap(crossinline function: (T) -> Unit): Single<T> {
+	return this.map {
+		function.invoke(it)
+		it
+	}
+}
+
+inline fun <T> Maybe<T>.tap(crossinline function: (T) -> Unit): Maybe<T> {
+	return this.map {
+		function.invoke(it)
+		it
+	}
+}
+
 /**
  * Buffer emits every X second, independently of having received anything new.
  * Debounce starts after receiving the first element, and waits until the passed delay without new elements to call onNext, returns last item
