@@ -147,6 +147,14 @@ fun <T> List<T>.removeLastItem(item: T): List<T> {
 	return toMutableList().apply { removeAt(lastIndexOf(item)) }
 }
 
+fun <S, T : S> Collection<T>.safeReduce(operation: (acc: S, T) -> S): S?
+	= try {
+		reduce(operation)
+	} catch (uoe: UnsupportedOperationException) {
+		if(uoe.message?.contains("Empty collection can't be reduced")==true) null
+		else throw uoe
+	}
+
 /**
  * Returns a list containing all elements of the original collection from the given element onward (not containing given element)
  *

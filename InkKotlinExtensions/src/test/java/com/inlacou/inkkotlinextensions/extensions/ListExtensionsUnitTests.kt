@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 import java.lang.IndexOutOfBoundsException
+import java.lang.UnsupportedOperationException
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -338,6 +339,10 @@ class ListExtensionsUnitTests {
     }
 
     @Test fun `(a,h,j,z,b,0,c,w,i,l,j,j,jh,ja) sorted is (0,a,b,c,h,i,j,j,j,ja,jh,l,w,z)`() = assert(listOf("a", "h", "j", "z", "b", "0", "c", "w", "i", "l", "j", "j", "jh", "ja").bubbleSort(compareStrings)==listOf("0", "a", "b", "c", "h", "i", "j", "j", "j", "ja", "jh", "l", "w", "z"))
+
+    @Test fun `reduce empty list throws error`() { assertThrows<UnsupportedOperationException> { listOf<String>().reduce { acc, s -> acc+s } } }
+    @Test fun `safeReduce empty list gives null`() = Assert.assertEquals(null, listOf<String>().safeReduce { acc, s -> acc+s })
+    @Test fun `safeReduce list does not mask other UnsupportedOperationException errors`() { assertThrows<UnsupportedOperationException> { listOf("a", "b").safeReduce { acc, s -> throw UnsupportedOperationException("some UnsupportedOperationException") } } }
 
     data class SelectableItem(val position: Int, val selectable: Boolean)
 }
