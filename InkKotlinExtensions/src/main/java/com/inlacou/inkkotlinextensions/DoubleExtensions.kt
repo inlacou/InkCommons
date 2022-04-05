@@ -24,11 +24,13 @@ fun Double.decimals(): Int {
 }
 
 /**
- * Scraps superfluous decimals. Default 2 significant decimals.
+ * Scraps decimals. Default 0 significant decimals.
+ * Does not add superfluous 0s. For example setting [maxDecimals] to 3 on '2.2' does not result on '2.200', results on '2.2'.
  */
-fun Double.scrapDecimals(decimals: Int = 2): String {
-	var pattern = "#."
-	repeat(decimals) { pattern += "#" }
+fun Double.scrapDecimals(maxDecimals: Int = 0): String {
+	var pattern = "#"
+	if(maxDecimals>0) pattern+="."
+	repeat(maxDecimals) { pattern += "#" }
 	val df = DecimalFormat(pattern)
 	df.roundingMode = FLOOR
 	return df.format(this)

@@ -54,15 +54,21 @@ class DoubleExtensionsUnitTest {
 
 	@Test
 	fun scrap_decimals(){
-		assertEquals("2.2", 2.2.scrapDecimals())
-		assertEquals("2", 2.0.scrapDecimals())
-		assertEquals("2.12", 2.12.scrapDecimals())
-		assertEquals("2.12", 2.121.scrapDecimals())
-		assertEquals("2.12", 2.1212.scrapDecimals())
+		assertEquals("2.2", 2.2.scrapDecimals(2))
+		assertEquals("2", 2.2.scrapDecimals(0))
+		assertEquals("2.2", 2.2.scrapDecimals(5))
+		assertEquals("2", 2.0.scrapDecimals(2))
+		assertEquals("2", 2.0.scrapDecimals(0))
+		assertEquals("2", 2.0.scrapDecimals(-1))
+		assertEquals("2", 2.0.scrapDecimals(5))
+		assertEquals("2.12", 2.12.scrapDecimals(2))
+		assertEquals("2.12", 2.121.scrapDecimals(2))
+		assertEquals("2.12", 2.1212.scrapDecimals(2))
 		assertEquals("2.121", 2.121.scrapDecimals(3))
 		assertEquals("2.121", 2.1212.scrapDecimals(3))
 		assertEquals("2.121", 2.121.scrapDecimals(4))
 		assertEquals("2.1212", 2.1212.scrapDecimals(4))
+		assertEquals("2.1212", 2.1212.scrapDecimals(10))
 	}
 
 	@Test
