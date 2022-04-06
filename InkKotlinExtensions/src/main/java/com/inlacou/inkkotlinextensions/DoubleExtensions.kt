@@ -4,6 +4,7 @@ import java.lang.NumberFormatException
 import java.math.RoundingMode
 import java.math.RoundingMode.*
 import java.text.DecimalFormat
+import kotlin.math.abs
 import kotlin.math.floor
 import kotlin.math.pow
 
@@ -35,6 +36,8 @@ fun Double.scrapDecimals(maxDecimals: Int = 0): String {
 	df.roundingMode = FLOOR
 	return df.format(this)
 }
+
+fun Double.equalsDelta(other: Double, delta: Double = 0.00001) = abs(this-other) < delta
 
 /**
  * Compares two double values to see if they are equal. On the decimal part it only checks the defined number of digits.

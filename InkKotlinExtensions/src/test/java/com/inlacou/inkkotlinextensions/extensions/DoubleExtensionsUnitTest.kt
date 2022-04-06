@@ -6,6 +6,7 @@ import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import java.math.RoundingMode
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 /**
@@ -179,4 +180,31 @@ class DoubleExtensionsUnitTest {
 	@Test fun `1dot3337 round to 3 decimals (HALF_EVEN) is 1dot334`() = assertEquals(1.334, (1.3337).roundDecimals(3, RoundingMode.HALF_EVEN), 0.0)
 	@Test fun `1dot3337 round to 3 decimals (HALF_DOWN) is 1dot334`() = assertEquals(1.334, (1.3337).roundDecimals(3, RoundingMode.HALF_DOWN), 0.0)
 	@Test fun `1dot3337 round to 3 decimals (HALF_UP) is 1dot334`() = assertEquals(1.334, (1.3337).roundDecimals(3, RoundingMode.HALF_UP), 0.0)
+
+	@Test
+	fun real_example() {
+		val delta = 0.00001
+		var one =  43.26379
+		var two =  43.263790130615234
+		assert(one.equalsDelta(two, delta)) { "$one is not equal to $two with delta $delta and should be" }
+		one = 43.26379
+		two = 43.263799
+		assert(one.equalsDelta(two, delta)) { "$one is not equal to $two with delta $delta and should be" }
+		one = 43.26379
+		two = 43.263791
+		assert(one.equalsDelta(two, delta)) { "$one is not equal to $two with delta $delta and should be" }
+		one = 43.26379
+		two = 43.263790
+		assert(one.equalsDelta(two, delta)) { "$one is not equal to $two with delta $delta and should be" }
+		// d = 0.000005
+		one = 43.26379
+		two = 43.26380
+		assert(!one.equalsDelta(two, delta)) { "$one is equal to $two with delta $delta and should not" }
+		one = 43.26379
+		two = 43.26370
+		assert(!one.equalsDelta(two, delta)) { "$one is equal to $two with delta $delta and should not" }
+		one = 43.26379
+		two = 43.26378
+		assert(!one.equalsDelta(two, delta)) { "$one is equal to $two with delta $delta and should not" }
+	}
 }
