@@ -49,6 +49,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
+    compileOnly "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
     compileOnly "com.google.code.gson:gson:$gson_version"
     compileOnly "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
     compileOnly "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX

@@ -2,6 +2,7 @@ package com.inlacou.commons.ui.activities
 
 import android.content.Intent
 import android.view.Menu
+import androidx.fragment.app.Fragment
 import com.inlacou.commons.ui.fragments.BaseFrag
 
 /**
@@ -9,7 +10,7 @@ import com.inlacou.commons.ui.fragments.BaseFrag
  */
 abstract class BaseFragAct : BaseAct() {
 
-	protected var fragment: BaseFrag? = null
+	protected var fragment: Fragment? = null
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
 		fragment?.onCreateOptionsMenu(menu, menuInflater)

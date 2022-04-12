@@ -1,26 +1,19 @@
-package com.inlacou.commons.ui.fragments.coroutines
+package com.inlacou.commons.ui.fragments.coroutines.playground
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.google.gson.Gson
 import com.inlacou.commons.R
 import com.inlacou.commons.databinding.FragmentDialogsBinding
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.inkkotlinextensions.fromJson
-import com.inlacou.inkspannable.InkSpannableBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class CoroutinesFrag: BaseFrag() {
+class CoroutinesPlaygroundFrag: BaseFrag() {
 
     private var binder: FragmentDialogsBinding? = null
     override val title: String? = AppCtrl.instance.packageName
@@ -33,8 +26,8 @@ class CoroutinesFrag: BaseFrag() {
 
     companion object {
         @JvmOverloads
-        fun create(model: CoroutinesFragMdl = CoroutinesFragMdl()): CoroutinesFrag {
-            val fragment = CoroutinesFrag()
+        fun create(model: CoroutinesPlaygroundFragMdl = CoroutinesPlaygroundFragMdl()): CoroutinesPlaygroundFrag {
+            val fragment = CoroutinesPlaygroundFrag()
             val args = Bundle()
             args.putString("model", Gson().toJson(model))
             fragment.arguments = args
@@ -42,8 +35,8 @@ class CoroutinesFrag: BaseFrag() {
         }
     }
 
-    private val controller: CoroutinesFragCtrl get() = baseController as CoroutinesFragCtrl
-    private lateinit var model: CoroutinesFragMdl
+    private val controller: CoroutinesPlaygroundFragCtrl get() = baseController as CoroutinesPlaygroundFragCtrl
+    private lateinit var model: CoroutinesPlaygroundFragMdl
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -63,7 +56,7 @@ class CoroutinesFrag: BaseFrag() {
 
     protected fun initialize(rootView: View, savedInstanceState: Bundle?) {
         super.initialize(rootView)
-        baseController = CoroutinesFragCtrl(view = this, model = model)
+        baseController = CoroutinesPlaygroundFragCtrl(view = this, model = model)
     }
 
 

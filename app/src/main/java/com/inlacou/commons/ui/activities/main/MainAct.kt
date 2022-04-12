@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
@@ -22,8 +23,9 @@ import com.inlacou.commons.ui.activities.BaseFragAct
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFragMdl
-import com.inlacou.commons.ui.fragments.coroutines.CoroutinesFrag
-import com.inlacou.commons.ui.fragments.coroutines.CoroutinesFragMdl
+import com.inlacou.commons.ui.fragments.coroutines.playground.CoroutinesPlaygroundFrag
+import com.inlacou.commons.ui.fragments.coroutines.playground.CoroutinesPlaygroundFragMdl
+import com.inlacou.commons.ui.fragments.coroutines.counter.CoroutinesCounterFrag
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFrag
 import com.inlacou.commons.ui.fragments.dialogs.DialogsFragMdl
 import com.inlacou.commons.ui.fragments.eventbusvsrx.EventBusVsRxFrag
@@ -127,14 +129,15 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			TEXTVIEW_BITMAP -> TextViewBitmapFrag.create(TextViewBitmapFragMdl())
 			BETTER_SPINNER -> BetterSpinnerFrag.create(BetterSpinnerFragMdl())
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())
-			COROUTINES -> CoroutinesFrag.create(CoroutinesFragMdl())
+			COROUTINES_PLAYGROUND -> CoroutinesPlaygroundFrag.create(CoroutinesPlaygroundFragMdl())
+			COROUTINES_COUNTER -> CoroutinesCounterFrag.create(0)
 		}, section, extras)
 	}
 
-	private fun loadFragment(fragment: BaseFrag, section: Section, extras: String? = null){
+	private fun loadFragment(fragment: Fragment, section: Section, extras: String? = null){
 		this.fragment = fragment
 		model.section = section
-		toolbar?.title = fragment.title ?: section.mdl.textResId.let { if(it!=null) getString(it) else "" }
+		toolbar?.title = if(fragment is BaseFrag && fragment.title!=null) fragment.title else section.mdl.textResId.let { if(it!=null) getString(it) else "" }
 		if (extras != null && extras.isNotEmpty()) {
 			val bundle = Bundle()
 			val type = object : TypeToken<Map<String, String>>(){}.type
@@ -163,10 +166,12 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			if (it!=null && it.isDrawerOpen(GravityCompat.START)) {
 				drawerLayout?.closeDrawer(GravityCompat.START)
 			} else {
-				if(fragment?.onBackPressed()==true){
-					//Do nothing
-				}else{
-					finish()
+				fragment.let {
+					if(it is BaseFrag && it.onBackPressed()){
+						//Do nothing
+					}else{
+						finish()
+					}
 				}
 			}
 		}

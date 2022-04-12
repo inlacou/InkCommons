@@ -46,10 +46,10 @@ class RxUnitTests {
 
 	@Test
 	fun `doOnFirst 1,2,3 is 1F,1,2,3`() {
-		val exceptedResults = listOf("1 doOnFirst", "1", "2", "3")
+		val exceptedResults = listOf("1F", "1", "2", "3")
 		val results = mutableListOf<String>()
 		Observable.fromArray(1, 2, 3)
-			.doOnFirst { Assertions.assertEquals(1, it); results.add("$it doOnFirst") }
+			.doOnFirst { Assertions.assertEquals(1, it); results.add("${it}F") }
 			.doOnNext { results.add(it.toString()) }
 			.test().apply {
 				await(10, TimeUnit.SECONDS) //Max time it will wait

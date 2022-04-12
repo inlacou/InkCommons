@@ -1,4 +1,4 @@
-package com.inlacou.commons.ui.fragments.coroutines
+package com.inlacou.commons.ui.fragments.coroutines.playground
 
 import com.inlacou.commons.ui.fragments.BaseFragCtrl
 import io.reactivex.rxjava3.core.Observable
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class CoroutinesFragCtrl(val view: CoroutinesFrag, val model: CoroutinesFragMdl) : BaseFragCtrl(view, model) {
+class CoroutinesPlaygroundFragCtrl(val view: CoroutinesPlaygroundFrag, val model: CoroutinesPlaygroundFragMdl) : BaseFragCtrl(view, model) {
 
     private val coroutineExceptionHandler: CoroutineExceptionHandler =
         CoroutineExceptionHandler { _, throwable ->

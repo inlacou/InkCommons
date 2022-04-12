@@ -150,7 +150,6 @@ class DoubleExtensionsUnitTest {
 	@Test fun `percentage  -20 of max 200 min -100 with current  0_75f is 0_6f`() = assertEquals(0.6f, (-20f).percentageOf(0.75f, 200f, -100f))
 	@Test fun `percentage   40 of max 200 min -100 with current  0_75f is 0_8f`() = assertEquals(0.8f, (40f).percentageOf(0.75f, 200f, -100f))
 
-
 	@Test fun `1dot3334f round to -3 decimals is 1`() = assertEquals(1f, 1.3334f.roundDecimals(-3))
 	@Test fun `1dot3334f round to -2 decimals is 1`() = assertEquals(1f, 1.3334f.roundDecimals(-2))
 	@Test fun `1dot3334f round to -1 decimals is 1`() = assertEquals(1f, 1.3334f.roundDecimals(-1))

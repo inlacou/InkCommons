@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.CheckBox
 import android.widget.TextView
+import com.inlacou.inkbetterandroidviews.listenerstoflow.OnLongTouchIncrementFiringSpeedFlow
 import com.inlacou.inkbetterandroidviews.listenerstoobservable.*
 import com.inlacou.inkbetterandroidviews.listenerstoobservable.AutoCompleteTextViewObs
 import io.reactivex.rxjava3.core.Observable
@@ -19,7 +20,7 @@ fun CheckBox.checkedChanges(): Observable<Boolean> = Observable.create(CheckBoxO
 fun View.layoutChanges(): Observable<Triple<View, LayoutChangeObs.Dimensions, LayoutChangeObs.Dimensions>> = Observable.create(LayoutChangeObs(this))
 
 val slowFiringInterval = listOf(Pair(1500, 500))
-fun View.longClickSpeedingFiringIntervals(breakpointsAndSpeeds: List<Pair<Int, Int>>? = null): Observable<Long> = Observable.create(OnLongTouchIncrementFiringSpeedObs(this, breakpointsAndSpeeds))
+fun View.longClickSpeedingFiringIntervalsObs(breakpointsAndSpeeds: List<Pair<Int, Int>>? = null): Observable<Long> = Observable.create(OnLongTouchIncrementFiringSpeedObs(this, breakpointsAndSpeeds))
 
 /*fun InkSwitch.changes(): Observable<Pair<Int, Boolean>> {
 	return Observable.create(InkSwitchObs(this))

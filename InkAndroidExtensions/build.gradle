@@ -68,6 +68,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0' // Set this dependency to build and run Espresso tests
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
 
+    compileOnly "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
     compileOnly "com.jakewharton.timber:timber:$timber_version"
 
     compileOnly "io.reactivex.rxjava3:rxandroid:$rxandroid_version"									//RX

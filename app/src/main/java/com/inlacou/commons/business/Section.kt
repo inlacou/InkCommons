@@ -6,5 +6,6 @@ enum class Section(val mdl: SectionMdl) {
 	TEXTVIEW_BITMAP(SectionMdl(text = "TextView Bitmap", hideable = false)),
 	BETTER_SPINNER(SectionMdl(text = "Better Spinner", hideable = false)),
 	DIALOGS(SectionMdl(text = "Dialogs", hideable = false)),
-	COROUTINES(SectionMdl(text = "Coroutines", hideable = false)),
+	COROUTINES_PLAYGROUND(SectionMdl(text = "Coroutines playground", hideable = false)),
+	COROUTINES_COUNTER(SectionMdl(text = "Coroutines counter", hideable = false)),
 }
