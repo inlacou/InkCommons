@@ -4,7 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Color
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
 import android.net.ConnectivityManager
@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import java.util.*
 import java.util.stream.Stream
+
 
 fun Int.dpToPx() = (this * Resources.getSystem().displayMetrics.density).toInt()
 fun Float.dpToPx() = (this * Resources.getSystem().displayMetrics.density)
@@ -140,4 +141,17 @@ fun Context.getExternalStorageDirectoryCompat(): String? {
 		res = System.getenv("EXTERNAL_STORAGE")
 	}
 	return res
+}
+
+fun Bitmap.tintGradient(shader: Shader): Bitmap {
+	val width = this.width
+	val height = this.height
+	val updatedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+	val canvas = Canvas(updatedBitmap)
+	canvas.drawBitmap(this, 0f, 0f, null)
+	val paint = Paint()
+	paint.shader = shader
+	paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN /* https://i.stack.imgur.com/rLIEz.png */)
+	canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
+	return updatedBitmap
 }

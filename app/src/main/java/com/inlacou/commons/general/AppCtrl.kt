@@ -1,10 +1,7 @@
 package com.inlacou.commons.general
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import androidx.multidex.MultiDexApplication
-import com.inlacou.inkkotlinextensions.fromJson
+import com.inlacou.inker.Inker
 import com.inlacou.inkkotlinextensions.rx.EventBusChannel
 import com.inlacou.inkpersistor.GenericSharedPrefMngr
 import com.inlacou.inkspannable.InkSpannableConfig
@@ -17,6 +14,7 @@ class AppCtrl: MultiDexApplication() {
 		super.onCreate()
 		instance = this
 		Timber.plant(Timber.DebugTree())
+		Inker.mix(InkerDebugColor())
 		InkSpannableConfig.context = WeakReference(this)
 
 		EventBusChannel.removePermanent = { GenericSharedPrefMngr.erase(this, key = "EventBusChannel.${it.name}") }

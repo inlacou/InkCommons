@@ -8,4 +8,5 @@ enum class Section(val mdl: SectionMdl) {
 	DIALOGS(SectionMdl(text = "Dialogs", hideable = false)),
 	COROUTINES_PLAYGROUND(SectionMdl(text = "Coroutines playground", hideable = false)),
 	COROUTINES_COUNTER(SectionMdl(text = "Coroutines counter", hideable = false)),
+	GRADIENT_TINT(SectionMdl(text = "Gradient tint", hideable = false)),
 }

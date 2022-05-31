@@ -37,6 +37,10 @@ import com.inlacou.commons.ui.views.sidebar.SidebarViewMdl
 import com.inlacou.inkkotlinextensions.fromJson
 import com.inlacou.inkkotlinextensions.toJson
 import com.inlacou.commons.ui.fragments.general.GeneralFragMdl
+import com.inlacou.commons.ui.fragments.gradienttint.GradientTintFrag
+import com.inlacou.commons.ui.fragments.gradienttint.GradientTintFragMdl
+import com.inlacou.commons.ui.fragments.gradienttint.Gradienter
+import com.inlacou.inkandroidextensions.getColorCompat
 import timber.log.Timber
 
 /**
@@ -131,6 +135,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())
 			COROUTINES_PLAYGROUND -> CoroutinesPlaygroundFrag.create(CoroutinesPlaygroundFragMdl())
 			COROUTINES_COUNTER -> CoroutinesCounterFrag.create(0)
+			GRADIENT_TINT -> GradientTintFrag.create(GradientTintFragMdl(getColorCompat(R.color.basic_red), getColorCompat(R.color.basic_green), Gradienter.LinearTopDown))
 		}, section, extras)
 	}
 

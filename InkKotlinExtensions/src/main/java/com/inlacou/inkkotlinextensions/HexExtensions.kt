@@ -2,7 +2,7 @@ package com.inlacou.inkkotlinextensions
 
 fun String.hexToDecimal() = Integer.parseInt(this, 16)
 
-fun String.hexToGrayScale(algorithm: GrayScaleAlgorithm = GrayScaleAlgorithm.AVERAGE): String {
+fun String.hexColorToGrayScale(algorithm: GrayScaleAlgorithm = GrayScaleAlgorithm.AVERAGE): String {
     var aux = this.replace("#", "")
     var alpha: String? = null
     when(aux.length){
