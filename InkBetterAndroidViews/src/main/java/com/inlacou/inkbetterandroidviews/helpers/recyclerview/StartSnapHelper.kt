@@ -1,4 +1,4 @@
-package com.inlacou.inkbetterandroidviews.helpers
+package com.inlacou.inkbetterandroidviews.helpers.recyclerview
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
