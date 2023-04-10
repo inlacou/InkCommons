@@ -12,8 +12,15 @@ import java.lang.NumberFormatException
 fun main() {
     val either: Either<NullPointerException, Int> = Either.Right(2)
 
+    when(either) {
+        is Either.Left -> "left"
+        is Either.Right -> "right"
+        //No 'else' branch is required
+    }.let {
+    }
+
     either.map {
-        2
+        3
     }.let {
     }
 
