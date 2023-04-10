@@ -11,10 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.*
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.PopupMenu
-import android.widget.RelativeLayout
+import android.widget.*
 import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -181,6 +178,32 @@ fun View.getScreenshotBitmap(): Bitmap? {
 
 	Timber.d("returning")
 	return bitmap
+}
+
+fun View.showPopup(layoutResId: Int, populateCallback: (popupView: View) -> Unit) {
+	// inflate the layout of the popup window
+	val inflater = context.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+	val popupView: View = inflater.inflate(layoutResId, null)
+	
+	populateCallback.invoke(popupView)
+	
+	// create the popup window
+	val popupWindow = PopupWindow(
+		popupView,
+		LinearLayout.LayoutParams.WRAP_CONTENT, // width
+		LinearLayout.LayoutParams.WRAP_CONTENT, // height
+		true, // lets taps outside the popup also dismiss it
+	)
+	
+	// show the popup window
+	// which view you pass in doesn't matter, it is only used for the window token
+	popupWindow.showAtLocation(this, Gravity.CENTER, 0, 0)
+	
+	// dismiss the popup window when touched
+	popupView.setOnTouchListener { _, _ ->
+		popupWindow.dismiss()
+		true
+	}
 }
 
 fun View.showOverflow(menuResId: Int, onMenuItemClick: (menuItem: MenuItem) -> Boolean) {
