@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.disposables.Disposable
  * AlwaysTryAll             - Execute all always, and return retrieved data with nulls instead when an error happened
  *
  */
-class CombineSequentialObs <T> internal constructor(list: List<Observable<T>>, val errorBehaviour: ErrorBehaviour, val alwaysTryAllOnError: ((Throwable) -> Unit)? = null) : ObservableOnSubscribe<List<T?>> {
+class CombineSequentialObs <T: Any> internal constructor(list: List<Observable<T>>, val errorBehaviour: ErrorBehaviour, val alwaysTryAllOnError: ((Throwable) -> Unit)? = null) : ObservableOnSubscribe<List<T?>> {
 
     private var remaining: List<Observable<T>> = list
     private var results: MutableList<T?> = mutableListOf()
@@ -61,7 +61,7 @@ class CombineSequentialObs <T> internal constructor(list: List<Observable<T>>, v
     }
 
     companion object {
-        fun <T> create(list: List<Observable<T>>, errorBehaviour: ErrorBehaviour = AlwaysTryAll): Observable<List<T?>> {
+        fun <T: Any> create(list: List<Observable<T>>, errorBehaviour: ErrorBehaviour = AlwaysTryAll): Observable<List<T?>> {
             return Observable.create(CombineSequentialObs(list, errorBehaviour))
         }
     }
