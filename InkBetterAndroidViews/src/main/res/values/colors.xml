@@ -14,5 +14,6 @@
     <color name="basic_white">#ffffff</color>
     <color name="basic_orange">#FF7700</color>
     <color name="transparent">#0000</color>
-    <color name="none">#0000</color>
+    <color name="none">@color/transparent</color>
+    <color name="colorAccent">@color/basic_pink</color>
 </resources>
