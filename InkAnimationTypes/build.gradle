@@ -17,7 +17,7 @@ afterEvaluate {
 }
 
 android {
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         minSdkVersion 14
