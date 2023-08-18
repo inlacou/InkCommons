@@ -106,10 +106,10 @@ class DialogsFrag: BaseFrag() {
                 ComplexListDialog<LinearLayout, ImageText>(this.context, model = ComplexListDialogMdl(
                     title = InkSpannableBuilder().addTextBold("Complex List dialog").build(),
                     itemLayoutResId = R.layout.recyclerview_item_image_text, /* Set desired layout here */
-                    items = listOf(ImageText("Perro", iconTintColorResId = R.color.basic_red),
-                        ImageText("Gato", iconTintColorResId = R.color.basic_blue),
-                        ImageText("Pez", iconTintColorResId = R.color.basic_green),
-                        ImageText("Pájaro", iconTintColorResId = R.color.basic_pink)),
+                    items = listOf(ImageText("Perro", iconTintColorResId = com.inlacou.inkbetterandroidviews.R.color.basic_red),
+                        ImageText("Gato", iconTintColorResId = com.inlacou.inkbetterandroidviews.R.color.basic_blue),
+                        ImageText("Pez", iconTintColorResId = com.inlacou.inkbetterandroidviews.R.color.basic_green),
+                        ImageText("Pájaro", iconTintColorResId = com.inlacou.inkbetterandroidviews.R.color.basic_pink)),
                     onViewPopulate = { dialog, layout, model ->
                         /* Populate provided layout here */
                         layout.findViewById<TextView>(R.id.text).text = model.name

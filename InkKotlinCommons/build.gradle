@@ -5,32 +5,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier 'sources'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    from javadoc.destinationDir
-    classifier 'javadoc'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                group = 'com.github.inlacou.inkcommons'
-                artifactId = 'InkKotlinCommons'
-                artifact(sourceJar)
-                artifact(javadocJar)
-                from components.java
-            }
-        }
-    }
+    sourceCompatibility = JavaVersion.VERSION_18
+    targetCompatibility = JavaVersion.VERSION_18
 }
 
 dependencies {
@@ -39,15 +15,35 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.0-M1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0-M1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.0-M1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 
-    compileOnly "io.reactivex.rxjava3:rxjava:$rxjava_version"
-    compileOnly "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
-    testImplementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
-    testImplementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier.set("sources")
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    archiveClassifier.set("javadoc")
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.github.inlacou.inkcommons'
+                artifactId = 'InkKotlinCommons'
+                artifact(sourceJar)
+                artifact(javadocJar)
+                from components.java
+            }
+        }
+    }
 }

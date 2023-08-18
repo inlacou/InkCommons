@@ -8,6 +8,8 @@ data class Maybe<T>(val value: T?) {
 	fun <R> flatMap(func: (T) -> Maybe<R>): Maybe<R> = if(value==null) Maybe(null) else func(this.value)
 }
 
+fun <T, R> T?.maybeMap(func: (T) -> R?): R? = if(this==null) null else func(this)
+
 /**
  * Allows beautifully non-nested sintax when working with Observable<Maybe<T>>.
  * Like this:
@@ -52,5 +54,3 @@ fun <T, R> Single<Maybe<T>>.flatMapMaybeMonad(callback: (T) -> Single<Maybe<R>>)
  */
 fun <T, R> io.reactivex.rxjava3.core.Maybe<Maybe<T>>.flatMapMaybeMonad(callback: (T) -> io.reactivex.rxjava3.core.Maybe<Maybe<R>>): io.reactivex.rxjava3.core.Maybe<Maybe<R>>
   = flatMap { if(it.value==null) io.reactivex.rxjava3.core.Maybe.just(Maybe(null)) else callback(it.value) }
-
-fun <T, R> T?.maybeMap(callback: (T) -> R?): R? = if(this==null) null else callback(this)

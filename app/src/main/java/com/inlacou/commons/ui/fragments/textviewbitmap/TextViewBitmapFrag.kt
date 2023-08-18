@@ -71,7 +71,7 @@ class TextViewBitmapFrag: BaseFrag() {
                     .setMaxLines(2)
                     .setBold(5, 8)
                     .setMaxLines(1)
-                    .setBackgroundColor(requireContext().getColorCompat(R.color.basic_red))
+                    .setBackgroundColor(requireContext().getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red))
                     .setMaxWidth(maxWidth = 500)
                     .build()) })
             addView(View(context).apply {
@@ -86,7 +86,7 @@ class TextViewBitmapFrag: BaseFrag() {
                     .setFontSize(10f)
                     .setIsFontSizeInSp(true)
                     .setBold(6, 11)
-                    .setBackgroundColor(requireContext().getColorCompat(R.color.basic_red))
+                    .setBackgroundColor(requireContext().getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red))
                     .setMaxWidth(maxWidth = windowSize().x)
                     .build()) })
             addView(View(context).apply {
@@ -101,7 +101,7 @@ class TextViewBitmapFrag: BaseFrag() {
                     .setFontSize(10f)
                     .setIsFontSizeInSp(true)
                     .setBold(6, 11)
-                    .setBackgroundColor(requireContext().getColorCompat(R.color.basic_red))
+                    .setBackgroundColor(requireContext().getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red))
                     .setMaxWidth(maxWidth = windowSize().x+100)
                     .build()) })
             addView(View(context).apply {
@@ -116,7 +116,7 @@ class TextViewBitmapFrag: BaseFrag() {
                     .setFontSize(10f)
                     .setIsFontSizeInSp(true)
                     .setBold(6, 11)
-                    .setBackgroundColor(requireContext().getColorCompat(R.color.basic_red))
+                    .setBackgroundColor(requireContext().getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red))
                     .setMaxWidth(maxWidth = windowSize().x/2)
                     .build()) })
             addView(View(context).apply {
@@ -131,7 +131,7 @@ class TextViewBitmapFrag: BaseFrag() {
                     .setFontSize(15f)
                     .setIsFontSizeInSp(true)
                     .setBold(7, 7+5+2)
-                    .setBackgroundColor(requireContext().getColorCompat(R.color.basic_red))
+                    .setBackgroundColor(requireContext().getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red))
                     .setMaxWidth(114)
                     .build()) })
             addView(View(context).apply {
@@ -146,7 +146,7 @@ class TextViewBitmapFrag: BaseFrag() {
                     .setFontSize(15f)
                     .setIsFontSizeInSp(true)
                     .setBold(7, 7+5+2)
-                    .setBackgroundColor(requireContext().getColorCompat(R.color.basic_red))
+                    .setBackgroundColor(requireContext().getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red))
                     .setMaxWidth(554)
                     .build()) })
             addView(View(context).apply {

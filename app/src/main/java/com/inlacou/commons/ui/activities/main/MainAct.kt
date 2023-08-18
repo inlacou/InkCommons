@@ -135,7 +135,13 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())
 			COROUTINES_PLAYGROUND -> CoroutinesPlaygroundFrag.create(CoroutinesPlaygroundFragMdl())
 			COROUTINES_COUNTER -> CoroutinesCounterFrag.create(0)
-			GRADIENT_TINT -> GradientTintFrag.create(GradientTintFragMdl(getColorCompat(R.color.basic_red), getColorCompat(R.color.basic_green), Gradienter.LinearTopDown))
+			GRADIENT_TINT -> GradientTintFrag.create(
+				GradientTintFragMdl(
+					getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red),
+					getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_green),
+					Gradienter.LinearTopDown
+				)
+			)
 		}, section, extras)
 	}
 

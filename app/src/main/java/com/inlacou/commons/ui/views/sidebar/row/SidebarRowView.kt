@@ -48,7 +48,7 @@ open class SidebarRowView @JvmOverloads constructor(context: Context, attrs: Att
 	fun populate() {
 		model.item.mdl.apply {
 			surfaceLayout?.let { it.setPaddings(left = it.paddingLeft, top = paddingTop.dpToPx(), bottom = paddingBot.dpToPx(), right = it.paddingRight) }
-			ivIcon?.setDrawableRes(iconResId ?: R.color.transparent)
+			ivIcon?.setDrawableRes(iconResId ?: com.inlacou.inkbetterandroidviews.R.color.transparent)
 			tvTitle?.text = textResId.let { if(it!=null) resources.getString(it) else "" }
 			tvTitle?.setTextColor(resources.getColorCompat(if(model.selected) {
 				R.color.red_text
