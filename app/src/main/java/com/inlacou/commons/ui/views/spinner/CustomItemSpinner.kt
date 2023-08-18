@@ -47,7 +47,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 				this.onViewPopulate = { base: RippleLinearLayout, item: CustomItem, pos: Int ->
 					base.findViewById<TextView>(R.id.tv_title).text = item.name
 					resources.getIdentifier(item.iconResourceName, "drawable", context.packageName)
-						.let { base.findViewById<ImageView>(R.id.iv_icon)?.setDrawableRes(if (it != 0) it else R.color.transparent) }
+						.let { base.findViewById<ImageView>(R.id.iv_icon)?.setDrawableRes(if (it != 0) it else com.inlacou.inkbetterandroidviews.R.color.transparent) }
 					base.findViewById<ImageView>(R.id.iv_icon)?.tint(item.colorHexadecimal)
 					base.setOnClickListener {
 						onItemClickListener.onItemClick(base.parent as ListView, it, pos, this.getItemId(pos))
