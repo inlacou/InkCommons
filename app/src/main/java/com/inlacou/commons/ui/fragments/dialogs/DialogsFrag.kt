@@ -29,7 +29,8 @@ import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialog
 import com.inlacou.inkbetterandroidviews.dialogs.list.simple.SimpleListDialogMdl
 import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialog
 import com.inlacou.inkbetterandroidviews.dialogs.simple.SimpleDialogMdl
-import com.inlacou.inkkotlinextensions.calculateCompoundInterestAndLogIt
+import com.inlacou.inkbetterandroidviews.dialogs.timer.CountdownDialog
+import com.inlacou.inkbetterandroidviews.dialogs.timer.CountdownDialogMdl
 import com.inlacou.inkkotlinextensions.fromJson
 import com.inlacou.inkspannable.InkSpannableBuilder
 
@@ -172,6 +173,24 @@ class DialogsFrag: BaseFrag() {
                         doubleNumber = it
                         requireActivity().toast(it.toString())
                     }
+                )).show()
+            }
+        })
+        lv?.addView(Button(this.context).apply {
+            text = "Timer dialog (30s)"
+            setOnClickListener {
+                CountdownDialog(this.context, model = CountdownDialogMdl(
+                    title = InkSpannableBuilder().addTextBold("Timer dialog (30s)").build(),
+                    time = 30
+                )).show()
+            }
+        })
+        lv?.addView(Button(this.context).apply {
+            text = "Timer dialog (1m30s)"
+            setOnClickListener {
+                CountdownDialog(this.context, model = CountdownDialogMdl(
+                    title = InkSpannableBuilder().addTextBold("Timer dialog (1m30s)").build(),
+                    time = 90
                 )).show()
             }
         })

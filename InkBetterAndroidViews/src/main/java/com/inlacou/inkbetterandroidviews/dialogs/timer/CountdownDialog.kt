@@ -1,0 +1,58 @@
+package com.inlacou.inkbetterandroidviews.dialogs.timer
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
+import com.inlacou.inkbetterandroidviews.databinding.DialogTimerBinding
+import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
+
+class CountdownDialog @JvmOverloads constructor(
+	context: Context,
+	attrs: AttributeSet? = null,
+	defStyleAttr: Int = 0,
+	override val model: CountdownDialogMdl
+) : BasicDialog(context, attrs, defStyleAttr) {
+
+	private var binder: DialogTimerBinding? = null
+	override val shadow: View? get() = binder?.shadow
+	override val dialog: View? get() = binder?.dialog
+	override val tvTitle: TextView? get() = binder?.tvTitle
+	private val tvTime: TextView? get() = binder?.tvTime
+	override val btnCancel: View? get() = binder?.btnCancel
+	override val btnAccept: View? get() = binder?.btnStopResume
+
+	fun applyModel(newModel: CountdownDialogMdl) { //Copy contents
+		model.time = newModel.time
+		super.applyModel(newModel)
+	}
+
+	private val controller: CountdownDialogCtrl by lazy { baseController as CountdownDialogCtrl }
+
+	override fun initialize() {
+		super.initialize()
+		if(binder==null) binder = DialogTimerBinding.inflate(LayoutInflater.from(context), this, true)
+		baseController = CountdownDialogCtrl(view = this, model = model)
+	}
+
+	override fun onAttachedToWindow() {
+		super.onAttachedToWindow()
+		controller.start()
+	}
+
+	override fun populate() {
+		super.populate()
+		tvTitle?.text = model.title
+	}
+
+	override fun setListeners() {
+		super.setListeners()
+		btnAccept?.setOnClickListener { controller.onStopResume() }
+	}
+
+	fun setText(s: String) {
+		tvTime?.text = s
+	}
+
+}

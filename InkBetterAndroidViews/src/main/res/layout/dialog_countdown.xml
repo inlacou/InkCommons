@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/shadow"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingTop="@dimen/inkbetterandroidviews_general_all"
+	android:paddingBottom="@dimen/inkbetterandroidviews_general_all"
+	android:paddingHorizontal="@dimen/inkbetterandroidviews_general_all_double"
+	android:clickable="true"
+	android:background="#3000">
+
+	<com.inlacou.pripple.RippleLinearLayout
+		android:id="@+id/dialog"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:minHeight="50dp"
+		android:orientation="vertical"
+		android:padding="@dimen/inkbetterandroidviews_general_all"
+		app:backgroundNormal="@color/basic_white"
+		app:backgroundRipple="@color/basic_white"
+		app:corners="@dimen/inkbetterandroidviews_general_all">
+
+		<TextView
+			android:id="@+id/tv_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingStart="@dimen/inkbetterandroidviews_general_all_half"
+			android:paddingBottom="@dimen/inkbetterandroidviews_general_all_half"
+			android:textColor="@color/basic_black"
+			tools:text="Hello" />
+
+		<TextView
+			android:id="@+id/tv_time"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingStart="@dimen/inkbetterandroidviews_general_all_half"
+			android:paddingBottom="@dimen/inkbetterandroidviews_general_all_half"
+			android:layout_gravity="center"
+			android:layout_margin="@dimen/inkbetterandroidviews_general_all_double"
+			android:textSize="60sp"
+			android:textColor="@color/basic_black"
+			tools:text="1m 30s" />
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end">
+
+			<com.inlacou.pripple.RippleButton
+				android:id="@+id/btn_cancel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingHorizontal="@dimen/inkbetterandroidviews_general_all"
+				android:paddingVertical="@dimen/inkbetterandroidviews_general_all_half"
+				android:text="@string/Close"
+				android:textAllCaps="true"
+				android:textColor="@color/basic_black"
+				android:textStyle="bold"
+				app:backgroundNormal="@color/basic_white"
+				app:backgroundRipple="@color/colorAccent"
+				app:corners="@dimen/inkbetterandroidviews_general_all_half" />
+
+			<com.inlacou.pripple.RippleButton
+				android:id="@+id/btn_stop_resume"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingHorizontal="@dimen/inkbetterandroidviews_general_all"
+				android:paddingVertical="@dimen/inkbetterandroidviews_general_all_half"
+				android:layout_marginStart="@dimen/inkbetterandroidviews_general_all_half"
+				android:text="@string/Stop"
+				android:textAllCaps="true"
+				android:textColor="@color/basic_black"
+				android:textStyle="bold"
+				app:backgroundNormal="@color/basic_white"
+				app:backgroundRipple="@color/colorAccent"
+				app:corners="@dimen/inkbetterandroidviews_general_all_half" />
+		</LinearLayout>
+	</com.inlacou.pripple.RippleLinearLayout>
+</RelativeLayout>

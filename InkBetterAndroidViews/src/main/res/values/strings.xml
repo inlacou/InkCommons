@@ -1,4 +1,6 @@
 <resources>
     <string name="Accept">Accept</string>
     <string name="Cancel">Cancel</string>
+    <string name="Stop">Stop</string>
+    <string name="Close">Close</string>
 </resources>
