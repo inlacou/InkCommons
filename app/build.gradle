@@ -8,6 +8,7 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
+        namespace "com.inlacou.commons"
         applicationId "com.inlacou.commons"
         minSdkVersion 19
         targetSdkVersion 33
@@ -28,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '18'
     }
     buildFeatures {
         viewBinding true

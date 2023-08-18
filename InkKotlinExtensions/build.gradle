@@ -5,36 +5,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier 'sources'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    from javadoc.destinationDir
-    classifier 'javadoc'
-}
-
-test {
-    useJUnitPlatform()
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                group = 'com.github.inlacou.inkcommons'
-                artifactId = 'InkKotlinExtensions'
-                artifact(sourceJar)
-                artifact(javadocJar)
-                from components.java
-            }
-        }
-    }
+    sourceCompatibility = JavaVersion.VERSION_18
+    targetCompatibility = JavaVersion.VERSION_18
 }
 
 dependencies {
@@ -60,3 +32,32 @@ dependencies {
     testImplementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                      //RX
     testImplementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	//RX
 }
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier.set("sources")
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    archiveClassifier.set("javadoc")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.github.inlacou.inkcommons'
+                artifactId = 'InkKotlinExtensions'
+                artifact(sourceJar)
+                artifact(javadocJar)
+                from components.java
+            }
+        }
+    }
+}
+
