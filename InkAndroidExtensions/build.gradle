@@ -18,13 +18,11 @@ afterEvaluate {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
 
         namespace 'com.inlacou.inkandroidextensions'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

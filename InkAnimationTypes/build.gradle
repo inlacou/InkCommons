@@ -17,13 +17,11 @@ afterEvaluate {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
 
         namespace 'com.inlacou.inkanimationtypes'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
