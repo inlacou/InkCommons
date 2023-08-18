@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.inlacou.inkbetterandroidviews.databinding.DialogTimerBinding
+import com.inlacou.inkbetterandroidviews.databinding.DialogCountdownBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
 class CountdownDialog @JvmOverloads constructor(
@@ -15,7 +15,7 @@ class CountdownDialog @JvmOverloads constructor(
 	override val model: CountdownDialogMdl
 ) : BasicDialog(context, attrs, defStyleAttr) {
 
-	private var binder: DialogTimerBinding? = null
+	private var binder: DialogCountdownBinding? = null
 	override val shadow: View? get() = binder?.shadow
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
@@ -32,7 +32,7 @@ class CountdownDialog @JvmOverloads constructor(
 
 	override fun initialize() {
 		super.initialize()
-		if(binder==null) binder = DialogTimerBinding.inflate(LayoutInflater.from(context), this, true)
+		if(binder==null) binder = DialogCountdownBinding.inflate(LayoutInflater.from(context), this, true)
 		baseController = CountdownDialogCtrl(view = this, model = model)
 	}
 
