@@ -39,7 +39,7 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	 * Sets suggestion dropdown height.
 	 * Used to avoid it from occupying the whole screen.
 	 */
-	var desiredDropdownHeight = 400
+	var desiredDropdownHeight: Int? = null
 
 	/**
 	 * Variable to control time passed since first click.
@@ -89,7 +89,7 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 				val clear = clearOnClick && System.currentTimeMillis()-unfocusTimeMillis>200
 				if(clear) setText("")
 				performFiltering(if(clear) "" else this.text, 0)
-				dropDownHeight = desiredDropdownHeight
+				desiredDropdownHeight?.let { dropDownHeight = it }
 			} else {
 				performFiltering("", 0)
 				(this.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(this.windowToken, 0)
