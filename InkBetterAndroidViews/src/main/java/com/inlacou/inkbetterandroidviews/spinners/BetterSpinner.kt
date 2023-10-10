@@ -8,14 +8,14 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Adapter
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.inkbetterandroidviews.R
-import com.inlacou.inkbetterandroidviews.adapters.GenericListAdapter
 import timber.log.Timber
 import java.util.*
 
@@ -79,7 +79,20 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 		super.setText(text, type)
 		onItemClick()
 	}
-	
+
+	override fun setOnItemClickListener(listener: AdapterView.OnItemClickListener?) {
+		if(listener==null) super.setOnItemClickListener(null)
+		else super.setOnItemClickListener { adapterView: AdapterView<*>, view: View, position: Int, id: Long ->
+			val item = adapterView.getItemAtPosition(position)
+			val itemId = adapterView.getItemIdAtPosition(position)
+			if(filter != null) {
+				if(simpleItems?.contains(item)==true) listener.onItemClick(adapterView, view, simpleItems!!.indexOf(item), itemId)
+				else if(complexItems?.map { it.display }?.contains(item)==true) listener.onItemClick(adapterView, view, complexItems!!.map { it.display }!!.indexOf(item), itemId)
+				else listener.onItemClick(adapterView, view, position, id)
+			} else listener.onItemClick(adapterView, view, position, id)
+		}
+	}
+
 	override fun enoughToFilter(): Boolean = true
 
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
@@ -112,15 +125,14 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 			when (event.action) {
 				MotionEvent.ACTION_DOWN -> startClickTime = Calendar.getInstance().timeInMillis
 				MotionEvent.ACTION_UP -> {
-					val clickDuration = Calendar.getInstance().timeInMillis - startClickTime
-					if (clickDuration < MAX_CLICK_DURATION) {
+					if ((Calendar.getInstance().timeInMillis - startClickTime) < MAX_CLICK_DURATION) {
 						isPopup = if (isPopup) {
 							dismissDropDown()
 							false
 						} else {
 							Timber.d("requestFocus")
 							this.requestFocus()
-							//showDropDown()
+							// showDropDown()
 							true
 						}
 					}

@@ -98,7 +98,7 @@ class GradientTintFrag : BaseFrag() {
 	private fun setListeners() {
 		colorPicker1?.onColorChangedListener = ColorPicker.OnColorChangedListener { controller.onColor1Change(it) }
 		colorPicker2?.onColorChangedListener = ColorPicker.OnColorChangedListener { controller.onColor2Change(it) }
-		disposables.add(beOptions?.itemClicks()?.distinctUntilChanged()?.subscribe({ controller.onOptionSelected(it.first) }, { Inker.e { it }}))
+		disposables.add(beOptions?.itemClicks()?.distinctUntilChanged()?.subscribe({ controller.onOptionSelected(it) }, { Inker.e { it }}))
 	}
 
 	internal fun getBitmap1() = iv1?.drawable?.toBitmap()

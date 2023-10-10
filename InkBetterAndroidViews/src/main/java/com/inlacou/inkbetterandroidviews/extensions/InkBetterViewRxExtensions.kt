@@ -8,12 +8,14 @@ import android.widget.TextView
 import com.inlacou.inkbetterandroidviews.listenerstoflow.OnLongTouchIncrementFiringSpeedFlow
 import com.inlacou.inkbetterandroidviews.listenerstoobservable.*
 import com.inlacou.inkbetterandroidviews.listenerstoobservable.AutoCompleteTextViewObs
+import com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
 import io.reactivex.rxjava3.core.Observable
 
 /* UI */
 fun View.clicks(): Observable<View> = Observable.create(OnClickObs(this))
 fun View.longClicks(cosumeEvent: Boolean = true): Observable<View> = Observable.create(OnLongClickObs(this, consumeEvent = cosumeEvent))
 fun AutoCompleteTextView.itemClicks(): Observable<Pair<Int, Any>> = Observable.create(AutoCompleteTextViewObs(this))
+fun BetterSpinner.itemClicks(): Observable<Int> = Observable.create(BetterSpinnerObs(this))
 fun View.touchs(): Observable<Triple<MotionEvent, Float, Float>> = Observable.create(OnTouchObs(this))
 fun TextView.textChanges(): Observable<String> = Observable.create(TextChangeObs(this))
 fun CheckBox.checkedChanges(): Observable<Boolean> = Observable.create(CheckBoxObs(this))

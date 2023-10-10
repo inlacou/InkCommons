@@ -104,10 +104,10 @@ class BetterSpinnerFrag: BaseFrag() {
     }
 
     private fun setListeners() {
-        betterSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        betterSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        betterSpinnerFilterableComplex?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        customItemSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
-        customItemSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #${it.first}: ${it.second}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") })
+        disposables.add(betterSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(betterSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(betterSpinnerFilterableComplex?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${complexItems[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(customItemSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${tags[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(customItemSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${tags[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
     }
 }

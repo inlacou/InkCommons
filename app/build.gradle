@@ -5,13 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
-
+    compileSdk 34
     defaultConfig {
         namespace "com.inlacou.commons"
         applicationId "com.inlacou.commons"
         minSdkVersion 19
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_18
-        targetCompatibility JavaVersion.VERSION_18
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '18'
+        jvmTarget = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding true
