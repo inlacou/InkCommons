@@ -7,6 +7,7 @@ data class CountdownDialogMdl(
 	override var title: SpannableStringBuilder?,
 	override var backgroundColorResId: Int? = null,
 	var time: Int,
+	var onTimerFinished: (() -> Unit)? = null,
 	override var cancelOnOutsideClick: Boolean = true,
 	override var onCancelled: (() -> Unit)? = null,
 ): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled, backgroundColorResId)
