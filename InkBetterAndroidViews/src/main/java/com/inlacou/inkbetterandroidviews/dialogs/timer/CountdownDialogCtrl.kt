@@ -11,7 +11,12 @@ import java.util.concurrent.TimeUnit
 class CountdownDialogCtrl(override val view: CountdownDialog, override val model: CountdownDialogMdl): BasicDialogCtrl(view, model) {
 
 	private var disposable: Disposable? = null
-	var remainingTime = model.time
+	private var remainingTime = model.time
+		set(value) {
+			field = value
+			updateShownTime(value)
+			onRemainingTime(value)
+		}
 
 	fun start() {
 		disposable = Observable.interval(0, 1, TimeUnit.SECONDS)
@@ -19,13 +24,21 @@ class CountdownDialogCtrl(override val view: CountdownDialog, override val model
 			.toUi()
 			.subscribe({
 				remainingTime--
-				val s = remainingTime % 60
-				val m = remainingTime / 60
-				view.setText(if(model.time>60) "$m:$s" else "$s")
-				if(remainingTime==0) model.onTimerFinished?.invoke(view)
 			},{
 				throw it
 			})
+	}
+
+	open fun updateShownTime(remainingTime: Int) {
+		view.setText(if(model.time > 60) {
+			"${remainingTime / 60}:${remainingTime % 60}"
+		} else {
+			"$remainingTime"
+		})
+	}
+
+	open fun onRemainingTime(remainingTime: Int) {
+		if(remainingTime==0) model.onTimerFinished?.invoke(view)
 	}
 
 	fun onStopResume() {

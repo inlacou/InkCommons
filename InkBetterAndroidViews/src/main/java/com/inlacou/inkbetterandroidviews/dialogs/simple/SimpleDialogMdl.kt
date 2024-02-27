@@ -4,7 +4,7 @@ import android.text.SpannableStringBuilder
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogMdl
 
-data class SimpleDialogMdl(
+open class SimpleDialogMdl(
 	override var title: SpannableStringBuilder?,
 	override var backgroundColorResId: Int? = null,
 	var content: SpannableStringBuilder? = null,

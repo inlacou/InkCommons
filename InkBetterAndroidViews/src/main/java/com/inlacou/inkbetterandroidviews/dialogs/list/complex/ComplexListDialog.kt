@@ -11,7 +11,7 @@ import com.inlacou.inkbetterandroidviews.adapters.GenericRvAdapter
 import com.inlacou.inkbetterandroidviews.databinding.DialogListSimpleBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class ComplexListDialog<CustomView: View, CustomModel> @JvmOverloads constructor(
+open class ComplexListDialog<CustomView: View, CustomModel> @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -22,7 +22,7 @@ class ComplexListDialog<CustomView: View, CustomModel> @JvmOverloads constructor
 	override val shadow: View? get() = binder?.shadow
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
-	val rvContent: RecyclerView? get() = binder?.rvContent
+	open val rvContent: RecyclerView? get() = binder?.rvContent
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnAccept
 

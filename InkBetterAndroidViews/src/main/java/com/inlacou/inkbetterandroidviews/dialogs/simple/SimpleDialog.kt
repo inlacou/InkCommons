@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.inlacou.inkbetterandroidviews.databinding.DialogSimpleBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class SimpleDialog @JvmOverloads constructor(
+open class SimpleDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -19,7 +19,7 @@ class SimpleDialog @JvmOverloads constructor(
 	override val shadow: View? get() = binder?.shadow
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
-	val tvContent: TextView? get() = binder?.tvContent
+	open val tvContent: TextView? get() = binder?.tvContent
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnAccept
 

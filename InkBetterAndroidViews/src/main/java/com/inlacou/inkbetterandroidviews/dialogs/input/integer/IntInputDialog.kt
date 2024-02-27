@@ -12,7 +12,7 @@ import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputIntegerBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class IntInputDialog @JvmOverloads constructor(
+open class IntInputDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -23,9 +23,9 @@ class IntInputDialog @JvmOverloads constructor(
 	override val shadow: View? get() = binder?.shadow
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
-	val tvContent: TextView? get() = binder?.tvContent
-	val eiInt: IntInput? get() = binder?.eiInt
-	val eiLayout: TextInputLayout? get() = binder?.eiLayout
+	open val tvContent: TextView? get() = binder?.tvContent
+	open val eiInt: IntInput? get() = binder?.eiInt
+	open val eiLayout: TextInputLayout? get() = binder?.eiLayout
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnAccept
 

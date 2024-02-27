@@ -45,7 +45,7 @@ abstract class BasicDialog @JvmOverloads constructor(
 
 	protected open fun setListeners() {
 		shadow?.setOnClickListener { controller.onOutsideClick() }
-		dialog?.setOnClickListener { /*Do nothing*/ }
+		dialog?.setOnClickListener { /*Deliberately do nothing*/ }
 		btnCancel?.setOnClickListener { controller.onCancelClick() }
 	}
 

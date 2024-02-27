@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.inlacou.inkbetterandroidviews.databinding.DialogCountdownBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class CountdownDialog @JvmOverloads constructor(
+open class CountdownDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -19,12 +19,13 @@ class CountdownDialog @JvmOverloads constructor(
 	override val shadow: View? get() = binder?.shadow
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
-	private val tvTime: TextView? get() = binder?.tvTime
+	protected val tvTime: TextView? get() = binder?.tvTime
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnStopResume
 
 	fun applyModel(newModel: CountdownDialogMdl) { //Copy contents
 		model.time = newModel.time
+		model.onTimerFinished = newModel.onTimerFinished
 		super.applyModel(newModel)
 	}
 

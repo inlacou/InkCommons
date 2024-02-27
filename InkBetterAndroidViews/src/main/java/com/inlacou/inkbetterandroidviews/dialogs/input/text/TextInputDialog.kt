@@ -12,7 +12,7 @@ import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputTextBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class TextInputDialog @JvmOverloads constructor(
+open class TextInputDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,

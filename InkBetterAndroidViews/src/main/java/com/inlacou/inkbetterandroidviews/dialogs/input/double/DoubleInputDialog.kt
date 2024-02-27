@@ -14,7 +14,7 @@ import com.inlacou.inkbetterandroidviews.databinding.DialogInputDoubleBinding
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputIntegerBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 
-class DoubleInputDialog @JvmOverloads constructor(
+open class DoubleInputDialog @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -25,9 +25,9 @@ class DoubleInputDialog @JvmOverloads constructor(
 	override val shadow: View? get() = binder?.shadow
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
-	val tvContent: TextView? get() = binder?.tvContent
-	val eiDouble: DoubleInput? get() = binder?.eiDouble
-	val eiLayout: TextInputLayout? get() = binder?.eiLayout
+	open val tvContent: TextView? get() = binder?.tvContent
+	open val eiDouble: DoubleInput? get() = binder?.eiDouble
+	open val eiLayout: TextInputLayout? get() = binder?.eiLayout
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnAccept
 

@@ -5,7 +5,7 @@ import android.view.View
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogMdl
 
-data class ComplexListDialogMdl<CustomView: View, CustomModel>(
+open class ComplexListDialogMdl<CustomView: View, CustomModel>(
 	override var title: SpannableStringBuilder?,
 	override var backgroundColorResId: Int? = null,
 	var itemLayoutResId: Int,

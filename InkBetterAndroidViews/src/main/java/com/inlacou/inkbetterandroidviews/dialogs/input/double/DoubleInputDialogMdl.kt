@@ -4,7 +4,7 @@ import android.text.SpannableStringBuilder
 import com.inlacou.inkbetterandroidviews.R
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogMdl
 
-data class DoubleInputDialogMdl(
+open class DoubleInputDialogMdl(
 	override var title: SpannableStringBuilder?,
 	override var backgroundColorResId: Int? = null,
 	var content: SpannableStringBuilder? = null,
