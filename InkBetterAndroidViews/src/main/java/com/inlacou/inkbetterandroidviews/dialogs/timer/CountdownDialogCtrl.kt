@@ -22,7 +22,7 @@ class CountdownDialogCtrl(override val view: CountdownDialog, override val model
 				val s = remainingTime % 60
 				val m = remainingTime / 60
 				view.setText(if(model.time>60) "$m:$s" else "$s")
-				if(remainingTime==0) model.onTimerFinished?.invoke()
+				if(remainingTime==0) model.onTimerFinished?.invoke(view)
 			},{
 				throw it
 			})
