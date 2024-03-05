@@ -5,21 +5,23 @@ import com.inlacou.inkandroidextensions.toUi
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogCtrl
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class CountdownDialogCtrl(override val view: CountdownDialog, override val model: CountdownDialogMdl): BasicDialogCtrl(view, model) {
 
-	private var disposable: Disposable? = null
-	private var remainingTime = model.time
+	protected var timerDisposable: Disposable? = null
+	protected var remainingTime = model.time
 		set(value) {
 			field = value
 			updateShownTime(value)
 			onRemainingTime(value)
 		}
 
-	fun start() {
-		disposable = Observable.interval(0, 1, TimeUnit.SECONDS)
+	/**
+	 * Method to start the timer. The timer is controlled by [timerDisposable]. The time is in [remainingTime].
+	 */
+	open fun start() {
+		timerDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
 			.onComputation()
 			.toUi()
 			.subscribe({
@@ -29,26 +31,42 @@ class CountdownDialogCtrl(override val view: CountdownDialog, override val model
 			})
 	}
 
+	/**
+	 * Method to stop or resume the timer.
+	 */
+	open fun onStopResume() {
+		if(timerDisposable != null) timerDisposable?.dispose()
+		else start()
+	}
+
+	/**
+	 * Method changed with each change on the value [remainingTime] to update UI.
+	 * Other reactions are handled in [onRemainingTime].
+	 */
 	open fun updateShownTime(remainingTime: Int) {
-		view.setText(if(model.time > 60) {
+		view.setTimerText(if(model.time > 60) {
 			"${remainingTime / 60}:${remainingTime % 60}"
 		} else {
 			"$remainingTime"
 		})
 	}
 
+	/**
+	 * Method changed with each change on the value [remainingTime] to react to it.
+	 * Updating the UI is not here, it's on [updateShownTime].
+	 */
 	open fun onRemainingTime(remainingTime: Int) {
 		if(remainingTime==0) model.onTimerFinished?.invoke(view)
 	}
 
-	fun onStopResume() {
-		if(disposable != null) disposable?.dispose()
-		else start()
+	override fun onDestroy() {
+		timerDisposable?.dispose()
+		super.onDestroy()
 	}
 
-	override fun onDestroy() {
-		disposable?.dispose()
-		super.onDestroy()
+	override fun onCancelClick() {
+		timerDisposable?.dispose()
+		super.onCancelClick()
 	}
 
 }

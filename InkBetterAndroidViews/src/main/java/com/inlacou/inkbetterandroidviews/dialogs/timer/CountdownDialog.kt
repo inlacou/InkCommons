@@ -23,7 +23,7 @@ open class CountdownDialog @JvmOverloads constructor(
 	override val btnCancel: View? get() = binder?.btnCancel
 	override val btnAccept: View? get() = binder?.btnStopResume
 
-	fun applyModel(newModel: CountdownDialogMdl) { //Copy contents
+	open fun applyModel(newModel: CountdownDialogMdl) { //Copy contents
 		model.time = newModel.time
 		model.onTimerFinished = newModel.onTimerFinished
 		super.applyModel(newModel)
@@ -42,17 +42,12 @@ open class CountdownDialog @JvmOverloads constructor(
 		controller.start()
 	}
 
-	override fun populate() {
-		super.populate()
-		tvTitle?.text = model.title
-	}
-
 	override fun setListeners() {
 		super.setListeners()
 		btnAccept?.setOnClickListener { controller.onStopResume() }
 	}
 
-	fun setText(s: String) {
+	open fun setTimerText(s: String) {
 		tvTime?.text = s
 	}
 
