@@ -13,6 +13,7 @@ import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputDoubleBinding
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputIntegerBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
+import com.inlacou.pripple.RippleButton
 
 open class DoubleInputDialog @JvmOverloads constructor(
 	context: Context,
@@ -28,8 +29,8 @@ open class DoubleInputDialog @JvmOverloads constructor(
 	open val tvContent: TextView? get() = binder?.tvContent
 	open val eiDouble: DoubleInput? get() = binder?.eiDouble
 	open val eiLayout: TextInputLayout? get() = binder?.eiLayout
-	override val btnCancel: View? get() = binder?.btnCancel
-	override val btnAccept: View? get() = binder?.btnAccept
+	override val btnCancel: RippleButton? get() = binder?.btnCancel
+	override val btnAccept: RippleButton? get() = binder?.btnAccept
 
 	fun applyModel(newModel: DoubleInputDialogMdl) { //Copy contents
 		model.content = newModel.content

@@ -11,6 +11,7 @@ import com.inlacou.exinput.free.numeric.vint.IntInput
 import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputIntegerBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
+import com.inlacou.pripple.RippleButton
 
 open class IntInputDialog @JvmOverloads constructor(
 	context: Context,
@@ -26,8 +27,8 @@ open class IntInputDialog @JvmOverloads constructor(
 	open val tvContent: TextView? get() = binder?.tvContent
 	open val eiInt: IntInput? get() = binder?.eiInt
 	open val eiLayout: TextInputLayout? get() = binder?.eiLayout
-	override val btnCancel: View? get() = binder?.btnCancel
-	override val btnAccept: View? get() = binder?.btnAccept
+	override val btnCancel: RippleButton? get() = binder?.btnCancel
+	override val btnAccept: RippleButton? get() = binder?.btnAccept
 
 	fun applyModel(newModel: IntInputDialogMdl) { //Copy contents
 		model.content = newModel.content

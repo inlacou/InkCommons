@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
 import com.inlacou.inkbetterandroidviews.databinding.DialogListSimpleBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
+import com.inlacou.pripple.RippleButton
 
 open class SimpleListDialog @JvmOverloads constructor(
 	context: Context,
@@ -23,8 +24,8 @@ open class SimpleListDialog @JvmOverloads constructor(
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
 	open val rvContent: RecyclerView? get() = binder?.rvContent
-	override val btnCancel: View? get() = binder?.btnCancel
-	override val btnAccept: View? get() = binder?.btnAccept
+	override val btnCancel: RippleButton? get() = binder?.btnCancel
+	override val btnAccept: RippleButton? get() = binder?.btnAccept
 
 	fun applyModel(newModel: SimpleListDialogMdl) { //Copy contents
 		model.items = newModel.items

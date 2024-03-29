@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import com.inlacou.inkbetterandroidviews.databinding.DialogSimpleBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
+import com.inlacou.pripple.RippleButton
 
 open class SimpleDialog @JvmOverloads constructor(
 	context: Context,
@@ -20,8 +21,8 @@ open class SimpleDialog @JvmOverloads constructor(
 	override val dialog: View? get() = binder?.dialog
 	override val tvTitle: TextView? get() = binder?.tvTitle
 	open val tvContent: TextView? get() = binder?.tvContent
-	override val btnCancel: View? get() = binder?.btnCancel
-	override val btnAccept: View? get() = binder?.btnAccept
+	override val btnCancel: RippleButton? get() = binder?.btnCancel
+	override val btnAccept: RippleButton? get() = binder?.btnAccept
 
 	fun applyModel(newModel: SimpleDialogMdl) { //Copy contents
 		model.content = newModel.content

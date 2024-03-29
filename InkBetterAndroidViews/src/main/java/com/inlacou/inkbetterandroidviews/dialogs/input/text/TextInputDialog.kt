@@ -11,6 +11,7 @@ import com.inlacou.exinput.free.text.TextInput
 import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputTextBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
+import com.inlacou.pripple.RippleButton
 
 open class TextInputDialog @JvmOverloads constructor(
 	context: Context,
@@ -26,8 +27,8 @@ open class TextInputDialog @JvmOverloads constructor(
 	val tvContent: TextView? get() = binder?.tvContent
 	val eiText: TextInput? get() = binder?.eiText
 	val eiLayout: TextInputLayout? get() = binder?.eiLayout
-	override val btnCancel: View? get() = binder?.btnCancel
-	override val btnAccept: View? get() = binder?.btnAccept
+	override val btnCancel: RippleButton? get() = binder?.btnCancel
+	override val btnAccept: RippleButton? get() = binder?.btnAccept
 
 	fun applyModel(newModel: TextInputDialogMdl) { //Copy contents
 		model.content = newModel.content

@@ -5,7 +5,9 @@ import com.inlacou.inkbetterandroidviews.R
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialogMdl
 
 open class IntInputDialogMdl(
-	override var title: SpannableStringBuilder?,
+	override var title: SpannableStringBuilder? = null,
+	override var buttonCancelText: SpannableStringBuilder? = null,
+	override var buttonAcceptText: SpannableStringBuilder? = null,
 	override var backgroundColorResId: Int? = null,
 	var content: SpannableStringBuilder? = null,
 	var hint: String = "",
@@ -24,9 +26,11 @@ open class IntInputDialogMdl(
 	override var cancelOnOutsideClick: Boolean = true,
 	var onAccepted: ((Int) -> Unit),
 	override var onCancelled: (() -> Unit)? = null,
-): BasicDialogMdl(title, cancelOnOutsideClick, onCancelled, backgroundColorResId) {
+): BasicDialogMdl(title, buttonCancelText, buttonAcceptText, cancelOnOutsideClick, onCancelled, backgroundColorResId) {
 	constructor(
 		title: String?,
+		buttonCancelText: String? = null,
+		buttonAcceptText: String? = null,
 		backgroundColorResId: Int? = null,
 		content: String? = null,
 		hint: String = "",
@@ -45,7 +49,7 @@ open class IntInputDialogMdl(
 		cancelOnOutsideClick: Boolean = true,
 		onAccepted: ((Int) -> Unit),
 		onCancelled: (() -> Unit)? = null
-	): this(SpannableStringBuilder(title), backgroundColorResId, SpannableStringBuilder(content),
+	): this(SpannableStringBuilder(title), buttonCancelText?.let { SpannableStringBuilder(it) }, buttonAcceptText?.let { SpannableStringBuilder(it) }, backgroundColorResId, SpannableStringBuilder(content),
 		hint, input, suffix, prefix,
 		titleColorResId, contentColorResId, textColorResId, hintColorResId,
 		inputColorResId, suffixColorResId, prefixColorResId, maxDigits,

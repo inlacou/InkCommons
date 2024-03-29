@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
 import com.inlacou.inkbetterandroidviews.dialogs.BaseDialog
+import com.inlacou.pripple.RippleButton
 
 abstract class BasicDialog @JvmOverloads constructor(
 	context: Context,
@@ -15,8 +16,8 @@ abstract class BasicDialog @JvmOverloads constructor(
 	abstract val shadow: View?
 	abstract val dialog: View?
 	abstract val tvTitle: TextView?
-	abstract val btnCancel: View?
-	abstract val btnAccept: View?
+	abstract val btnCancel: RippleButton?
+	abstract val btnAccept: RippleButton?
 
 	abstract val model: BasicDialogMdl
 	fun applyModel(newModel: BasicDialogMdl) { //Copy contents
@@ -40,6 +41,8 @@ abstract class BasicDialog @JvmOverloads constructor(
 
 	open fun populate() {
 		tvTitle?.text = model.title
+		model.buttonCancelText?.let { btnCancel?.text = it }
+		model.buttonAcceptText?.let { btnAccept?.text = it }
 		model.backgroundColorResId?.let { shadow?.setBackgroundResource(it) }
 	}
 
