@@ -70,10 +70,11 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                         //RX
     implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"                                  	 //RX
     implementation "com.github.inlacou:PRipple:$pripple_version"
-    implementation "com.github.irontec:InkSpannable:$inkspannable_version"
     implementation "com.github.inlacou:ExInput:$exinput_version"
+    implementation 'com.github.inlacou:InkBasicModels:1.2.1'
+    implementation "com.github.irontec:InkSpannable:$inkspannable_version"
 
-    implementation 'com.github.inlacou:Inker:2.0.0'
+    implementation 'com.github.inlacou:Inker:2.0.1'
     implementation "org.greenrobot:eventbus:3.3.1"
     implementation 'com.github.inlacou:InkPersistor:1.1.3.2'
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.0")

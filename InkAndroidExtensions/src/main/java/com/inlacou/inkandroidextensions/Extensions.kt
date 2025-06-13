@@ -31,6 +31,10 @@ fun Context.getColorCompat(resId: Int): Int {
 	return resources.getColorCompat(resId)
 }
 
+fun Context.getColorCompat(resId: ResId): Int {
+	return resources.getColorCompat(resId.value)
+}
+
 fun MediaPlayer.setRawAudioDataSource(context: Context, resId: Int) {
 	setDataSource(context, getRawResourceUri(context, resId))
 }

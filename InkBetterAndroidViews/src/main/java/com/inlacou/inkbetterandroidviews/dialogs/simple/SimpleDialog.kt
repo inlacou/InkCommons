@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import com.inlacou.inkbasicmodels.extensions.applyModel
 import com.inlacou.inkbetterandroidviews.databinding.DialogSimpleBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 import com.inlacou.pripple.RippleButton
@@ -41,8 +42,8 @@ open class SimpleDialog @JvmOverloads constructor(
 
 	override fun populate() {
 		super.populate()
-		tvTitle?.text = model.title
-		tvContent?.text = model.content
+		tvTitle?.applyModel(model.title)
+		tvContent?.applyModel(model.content)
 	}
 
 	override fun setListeners() {

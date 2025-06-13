@@ -13,9 +13,14 @@ import com.inlacou.commons.R
 import com.inlacou.commons.databinding.FragmentDialogsBinding
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
+import com.inlacou.inkandroidextensions.ResId
 import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkandroidextensions.toast
 import com.inlacou.inkandroidextensions.view.tint
+import com.inlacou.inkbasicmodels.TextInputLayoutMdl
+import com.inlacou.inkbasicmodels.TextMdl
+import com.inlacou.inkbasicmodels.TextStyleMdl
+import com.inlacou.inkbasicmodels.TextViewMdl
 import com.inlacou.inkbetterandroidviews.adapters.SimpleRvAdapter
 import com.inlacou.inkbetterandroidviews.dialogs.input.double.DoubleInputDialog
 import com.inlacou.inkbetterandroidviews.dialogs.input.double.DoubleInputDialogMdl
@@ -79,15 +84,25 @@ class DialogsFrag: BaseFrag() {
         super.initialize(rootView)
         baseController = DialogsFragCtrl(view = this, model = model)
     }
-    
+
+    fun textViewMdl(
+        text: InkSpannableBuilder
+    ): TextViewMdl {
+        return TextViewMdl(
+            textMdl = TextMdl(
+                text = text
+            )
+        )
+    }
+
     fun populate(rootView: View? = null) {
         lv?.addView(Button(this.context).apply {
             text = "Simple dialog"
             setOnClickListener {
                 SimpleDialog(this.context, model = SimpleDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Simple Dialog").build(),
-                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build()
-                    , backgroundColorResId = R.color.custom_dialog_shadow
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Simple Dialog")),
+                    content = textViewMdl(InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet")),
+                    backgroundColorResId = ResId(R.color.custom_dialog_shadow)
                 )).show()
             }
         })
@@ -95,7 +110,7 @@ class DialogsFrag: BaseFrag() {
             text = "Simple List dialog"
             setOnClickListener {
                 SimpleListDialog(this.context, model = SimpleListDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Simple List dialog").build(),
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Simple List dialog")),
                     items = listOf(Row("Perro"), Row("Gato"), Row("Pez"), Row("Pájaro")),
                     onItemSelected = { requireActivity().toast(it.displayAsRow) }
                 )).show()
@@ -105,7 +120,7 @@ class DialogsFrag: BaseFrag() {
             text = "Complex List dialog"
             setOnClickListener {
                 ComplexListDialog<LinearLayout, ImageText>(this.context, model = ComplexListDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Complex List dialog").build(),
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Complex List dialog")),
                     itemLayoutResId = R.layout.recyclerview_item_image_text, /* Set desired layout here */
                     items = listOf(ImageText("Perro", iconTintColorResId = com.inlacou.inkbetterandroidviews.R.color.basic_red),
                         ImageText("Gato", iconTintColorResId = com.inlacou.inkbetterandroidviews.R.color.basic_blue),
@@ -130,11 +145,17 @@ class DialogsFrag: BaseFrag() {
             text = "Text input dialog"
             setOnClickListener {
                 TextInputDialog(this.context, model = TextInputDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Text input dialog").build(),
-                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextColor("ipsum", context.getColorCompat(R.color.red_text)).addBlank().addText("dolor sit amet").build(),
-                    prefix = "prefix",
-                    prefixColorResId = R.color.red_text,
-                    hint = "Name",
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Text input dialog")),
+                    content = textViewMdl(InkSpannableBuilder().addText("Lorem").addBlank().addTextColor("ipsum", context.getColorCompat(R.color.red_text)).addBlank().addText("dolor sit amet")),
+                    inputLayout = TextInputLayoutMdl(
+                        prefixMdl = TextMdl(
+                            text = InkSpannableBuilder("prefix"),
+                            textStyleMdl = TextStyleMdl(
+                                text = InkSpannableBuilder("Name"),
+                                textColorResId = R.color.red_text
+                            )
+                        )
+                    ),
                     input = name,
                     onAccepted = {
                         name = it
@@ -147,11 +168,17 @@ class DialogsFrag: BaseFrag() {
             text = "Integer input dialog"
             setOnClickListener {
                 IntInputDialog(this.context, model = IntInputDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Integer input dialog").build(),
-                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet").build(),
-                    suffix = "units",
-                    suffixColorResId = R.color.red_text,
-                    hint = "Some value",
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Integer input dialog")),
+                    content = textViewMdl(InkSpannableBuilder().addText("Lorem").addBlank().addTextBold("ipsum").addBlank().addText("dolor sit amet")),
+                    hintPrefixSuffix = TextInputLayoutMdl(
+                        prefixMdl = TextMdl(
+                            text = InkSpannableBuilder("units"),
+                            textStyleMdl = TextStyleMdl(
+                                text = InkSpannableBuilder("Some value"),
+                                textColorResId = R.color.red_text
+                            )
+                        )
+                    ),
                     input = intNumber,
                     onAccepted = {
                         intNumber = it
@@ -164,10 +191,17 @@ class DialogsFrag: BaseFrag() {
             text = "Double input dialog"
             setOnClickListener {
                 DoubleInputDialog(this.context, model = DoubleInputDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Double input dialog").build(),
-                    content = InkSpannableBuilder().addText("Lorem").addBlank().addTextColor("ipsum", context.getColorCompat(R.color.red_text)).addBlank().addText("dolor sit amet").build(),
-                    suffix = "gr",
-                    hint = "Some value",
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Double input dialog")),
+                    content = textViewMdl(InkSpannableBuilder().addText("Lorem").addBlank().addTextColor("ipsum", context.getColorCompat(R.color.red_text)).addBlank().addText("dolor sit amet")),
+                    hintPrefixSuffix = TextInputLayoutMdl(
+                        suffixMdl = TextMdl(
+                            text = InkSpannableBuilder("gr"),
+                            textStyleMdl = TextStyleMdl(
+                                text = InkSpannableBuilder("Some value"),
+                                textColorResId = R.color.red_text
+                            )
+                        )
+                    ),
                     input = doubleNumber,
                     onAccepted = {
                         doubleNumber = it
@@ -180,7 +214,7 @@ class DialogsFrag: BaseFrag() {
             text = "Timer dialog (30s)"
             setOnClickListener {
                 CountdownDialog(this.context, model = CountdownDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Timer dialog (30s)").build(),
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Timer dialog (30s)")),
                     time = 30
                 )).show()
             }
@@ -189,7 +223,7 @@ class DialogsFrag: BaseFrag() {
             text = "Timer dialog (1m30s)"
             setOnClickListener {
                 CountdownDialog(this.context, model = CountdownDialogMdl(
-                    title = InkSpannableBuilder().addTextBold("Timer dialog (1m30s)").build(),
+                    title = textViewMdl(InkSpannableBuilder().addTextBold("Timer dialog (1m30s)")),
                     time = 90
                 )).show()
             }

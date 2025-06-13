@@ -9,6 +9,8 @@ import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.exinput.free.numeric.vint.IntInput
 import com.inlacou.inkandroidextensions.getColorCompat
+import com.inlacou.inkbasicmodels.TextViewMdl
+import com.inlacou.inkbasicmodels.extensions.applyModel
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputIntegerBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
 import com.inlacou.pripple.RippleButton
@@ -30,17 +32,12 @@ open class IntInputDialog @JvmOverloads constructor(
 	override val btnCancel: RippleButton? get() = binder?.btnCancel
 	override val btnAccept: RippleButton? get() = binder?.btnAccept
 
-	fun applyModel(newModel: IntInputDialogMdl) { //Copy contents
+	fun applyModel(newModel: IntInputDialogMdl) { // Copy contents
 		model.content = newModel.content
 		model.input = newModel.input
-		model.hint = newModel.hint
+		model.hintPrefixSuffix = newModel.hintPrefixSuffix
 		model.maxDigits = newModel.maxDigits
 		model.required = newModel.required
-		model.prefix = newModel.prefix
-		model.suffix = newModel.suffix
-		model.prefixColorResId = newModel.prefixColorResId
-		model.suffixColorResId = newModel.suffixColorResId
-		model.hintColorResId = newModel.hintColorResId
 		super.applyModel(newModel)
 	}
 
@@ -52,21 +49,13 @@ open class IntInputDialog @JvmOverloads constructor(
 		baseController = IntInputDialogCtrl(view = this, model = model)
 	}
 
+
 	override fun populate() {
 		super.populate()
-		tvTitle?.text = model.title
-		tvContent?.text = model.content
+		tvTitle?.applyModel(model.title)
+		tvContent?.applyModel(model.content)
 		eiInt?.int = model.input
-		eiLayout?.hint = model.hint
-		eiLayout?.suffixText = model.suffix
-		eiLayout?.prefixText = model.prefix
-		tvTitle?.setTextColor(context.getColorCompat(model.titleColorResId))
-		tvContent?.setTextColor(context.getColorCompat(model.contentColorResId))
-		eiInt?.setTextColor(context.getColorCompat(model.textColorResId))
-		eiInt?.setHintTextColor(context.getColorCompat(model.hintColorResId))
-		eiLayout?.hintTextColor = ColorStateList.valueOf(context.getColorCompat(model.hintColorResId))
-		eiLayout?.setSuffixTextColor(ColorStateList.valueOf(context.getColorCompat(model.suffixColorResId)))
-		eiLayout?.setPrefixTextColor(ColorStateList.valueOf(context.getColorCompat(model.prefixColorResId)))
+		eiLayout?.applyModel(model.hintPrefixSuffix)
 		eiInt?.maxDigits = model.maxDigits
 		eiInt?.required = model.required
 		eiInt?.requestFocus()

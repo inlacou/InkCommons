@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
+import com.inlacou.inkbasicmodels.extensions.applyModel
 import com.inlacou.inkbetterandroidviews.dialogs.BaseDialog
 import com.inlacou.pripple.RippleButton
 
@@ -40,10 +41,10 @@ abstract class BasicDialog @JvmOverloads constructor(
 	}
 
 	open fun populate() {
-		tvTitle?.text = model.title
+		tvTitle?.applyModel(model.title)
 		model.buttonCancelText?.let { btnCancel?.text = it }
 		model.buttonAcceptText?.let { btnAccept?.text = it }
-		model.backgroundColorResId?.let { shadow?.setBackgroundResource(it) }
+		model.backgroundColorResId?.let { shadow?.setBackgroundResource(it.value) }
 	}
 
 	protected open fun setListeners() {

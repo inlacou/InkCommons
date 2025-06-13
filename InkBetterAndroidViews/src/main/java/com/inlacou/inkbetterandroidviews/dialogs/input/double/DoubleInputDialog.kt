@@ -10,6 +10,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
 import com.inlacou.inkandroidextensions.getColorCompat
+import com.inlacou.inkbasicmodels.extensions.applyModel
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputDoubleBinding
 import com.inlacou.inkbetterandroidviews.databinding.DialogInputIntegerBinding
 import com.inlacou.inkbetterandroidviews.dialogs.basic.BasicDialog
@@ -35,14 +36,9 @@ open class DoubleInputDialog @JvmOverloads constructor(
 	fun applyModel(newModel: DoubleInputDialogMdl) { //Copy contents
 		model.content = newModel.content
 		model.input = newModel.input
-		model.hint = newModel.hint
+		model.hintPrefixSuffix = newModel.hintPrefixSuffix
 		model.maxDigits = newModel.maxDigits
 		model.required = newModel.required
-		model.prefix = newModel.prefix
-		model.suffix = newModel.suffix
-		model.prefixColorResId = newModel.prefixColorResId
-		model.suffixColorResId = newModel.suffixColorResId
-		model.hintColorResId = newModel.hintColorResId
 		super.applyModel(newModel)
 	}
 
@@ -56,19 +52,11 @@ open class DoubleInputDialog @JvmOverloads constructor(
 
 	override fun populate() {
 		super.populate()
-		tvTitle?.text = model.title
-		tvContent?.text = model.content
+		tvTitle?.applyModel(model.title)
+		tvContent?.applyModel(model.content)
+		eiDouble?.applyModel(model.inputStyle)
 		eiDouble?.double = model.input
-		eiLayout?.hint = model.hint
-		eiLayout?.suffixText = model.suffix
-		eiLayout?.prefixText = model.prefix
-		tvTitle?.setTextColor(context.getColorCompat(model.titleColorResId))
-		tvContent?.setTextColor(context.getColorCompat(model.contentColorResId))
-		eiDouble?.setTextColor(context.getColorCompat(model.textColorResId))
-		eiDouble?.setHintTextColor(context.getColorCompat(model.hintColorResId))
-		eiLayout?.hintTextColor = ColorStateList.valueOf(context.getColorCompat(model.hintColorResId))
-		eiLayout?.setSuffixTextColor(ColorStateList.valueOf(context.getColorCompat(model.suffixColorResId)))
-		eiLayout?.setPrefixTextColor(ColorStateList.valueOf(context.getColorCompat(model.prefixColorResId)))
+		eiLayout?.applyModel(model.hintPrefixSuffix)
 		eiDouble?.maxDigits = model.maxDigits
 		eiDouble?.required = model.required
 		eiDouble?.requestFocus()
