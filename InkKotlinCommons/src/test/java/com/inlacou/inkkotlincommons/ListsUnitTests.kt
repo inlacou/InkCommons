@@ -1,9 +1,8 @@
 package com.inlacou.inkkotlincommons
 
 import com.inlacou.inkkotlincommons.lists.*
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class ListsUnitTests {
 	
@@ -15,24 +14,24 @@ class ListsUnitTests {
 		list.push("dos") //dos, uno
 		list.push("tres") //tres, dos, uno
 		list.push("cuatro") //cuatro, tres, dos, uno
-		assertTrue(list.toString(), list.contains("uno"))
-		assertTrue(list.toString(), list.contains("dos"))
-		assertTrue(list.toString(), list.contains("tres"))
-		assertTrue(list.toString(), list.contains("cuatro"))
+		assertTrue(list.contains("uno"), list.toString())
+		assertTrue(list.contains("dos"), list.toString())
+		assertTrue(list.contains("tres"), list.toString())
+		assertTrue(list.contains("cuatro"), list.toString())
 		assertEquals(list.toString(), "[cuatro, tres, dos, uno]", list.toString())
 		list.max = 4
 		assertEquals(4, list.size)
 		list.push("uno") //uno, cuatro, tres, dos //oldest value (first "uno") is discarded
-		assertEquals(list.toString(), "uno", list.get(0))
-		assertTrue(list.toString(), list.contains("uno"))
-		assertTrue(list.toString(), list.contains("dos"))
-		assertTrue(list.toString(), list.contains("tres"))
-		assertTrue(list.toString(), list.contains("cuatro"))
+		assertEquals("uno", list.get(0), list.toString())
+		assertTrue(list.contains("uno"), list.toString())
+		assertTrue(list.contains("dos"), list.toString())
+		assertTrue(list.contains("tres"), list.toString())
+		assertTrue(list.contains("cuatro"), list.toString())
 		assertEquals(list.toString(), "[uno, cuatro, tres, dos]", list.toString())
 		assertEquals(4, list.size)
-		assertTrue(list.toString(), list.isNotEmpty())
+		assertTrue(list.isNotEmpty(), list.toString())
 		list.clear()
-		assertTrue(list.toString(), list.isEmpty())
+		assertTrue(list.isEmpty(), list.toString())
 		
 		list.push("uno") //uno
 		list.push("dos") //dos, uno

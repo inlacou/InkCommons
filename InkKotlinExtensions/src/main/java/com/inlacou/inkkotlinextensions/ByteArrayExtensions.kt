@@ -1,7 +1,5 @@
 package com.inlacou.inkkotlinextensions
 
-import java.util.*
-
 /**
  * Transforms each byte to:
  * radix 10 -> it's decimal value
@@ -10,7 +8,7 @@ import java.util.*
  */
 fun ByteArray.toStringsRadix(radix: Int = 10): String {
 	return map { it.toString(radix) }
-		.toString().replace(", ", "").replace("[", "").replace("]", "").toUpperCase(Locale.ROOT)
+		.toString().replace(", ", "").replace("[", "").replace("]", "").uppercase()
 }
 
 /**

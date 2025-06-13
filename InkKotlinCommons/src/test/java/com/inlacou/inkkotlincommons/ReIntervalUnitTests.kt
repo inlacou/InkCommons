@@ -1,8 +1,8 @@
 package com.inlacou.inkkotlincommons
 
 import com.inlacou.inkkotlincommons.rx.observables.ReInterval
-import org.junit.Test
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 import java.util.concurrent.TimeUnit
 
 class ReIntervalUnitTests {
