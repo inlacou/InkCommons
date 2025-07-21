@@ -3,25 +3,27 @@ package com.inlacou.inkkotlinextensions
 fun String.hexToDecimal() = Integer.parseInt(this, 16)
 
 fun String.hexColorToGrayScale(algorithm: GrayScaleAlgorithm = GrayScaleAlgorithm.AVERAGE): String {
-    var aux = this.replace("#", "")
+    // Color String without the starting #
+    var code = this.replace("#", "")
     var alpha: String? = null
-    when(aux.length){
-        3 -> { aux = "${aux[0]}${aux[0]}${aux[1]}${aux[1]}${aux[2]}${aux[2]}" }
-        4 -> { alpha = "${aux[0]}"; aux = "${aux[1]}${aux[1]}${aux[2]}${aux[2]}${aux[3]}${aux[3]}" }
+    // Make it XX XX XX, like 0055AA
+    when(code.length){
+        3 -> { code = "${code[0]}${code[0]}${code[1]}${code[1]}${code[2]}${code[2]}" }
+        4 -> { alpha = "${code[0]}"; code = "${code[1]}${code[1]}${code[2]}${code[2]}${code[3]}${code[3]}" }
         6 -> { /*Do nothing*/ }
-        7 -> { alpha = "${aux[0]}"; aux = "${aux[1]}${aux[2]}${aux[3]}${aux[4]}${aux[5]}${aux[6]}"}
-        8 -> { alpha = "${aux[0]}${aux[1]}"; aux = "${aux[2]}${aux[3]}${aux[4]}${aux[5]}${aux[6]}${aux[7]}"}
-        else -> return aux
+        7 -> { alpha = "${code[0]}"; code = "${code[1]}${code[2]}${code[3]}${code[4]}${code[5]}${code[6]}"}
+        8 -> { alpha = "${code[0]}${code[1]}"; code = "${code[2]}${code[3]}${code[4]}${code[5]}${code[6]}${code[7]}"}
+        else -> return code
     }
-    val r = "${aux[0]}${aux[1]}".hexToDecimal()
-    val g = "${aux[2]}${aux[3]}".hexToDecimal()
-    val b = "${aux[4]}${aux[5]}".hexToDecimal()
+    val r = "${code[0]}${code[1]}".hexToDecimal()
+    val g = "${code[2]}${code[3]}".hexToDecimal()
+    val b = "${code[4]}${code[5]}".hexToDecimal()
 
-    aux = when(algorithm){
+    val grayedColor = when(algorithm){
         GrayScaleAlgorithm.LIGHTNESS -> ((maxOf(r, g, b)+minOf(r, g, b)) / 2).decimalToHex()
         GrayScaleAlgorithm.AVERAGE -> ((r + g + b)/3).decimalToHex()
         GrayScaleAlgorithm.LUMINOSITY -> ((0.21*r + 0.72*g + 0.07*b)/3).toInt().decimalToHex()
     }
 
-    return "" + (alpha ?: "") + aux + aux + aux
+    return (alpha ?: "") + grayedColor + grayedColor + grayedColor
 }

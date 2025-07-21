@@ -200,9 +200,12 @@ private fun JsonObject.getNullableJsonPrimitiveByPathOrThrow(path: JsonPath, typ
     try {
         return found?.jsonPrimitive
     } catch (e: IllegalArgumentException) {
+        println(e.message)
         throw if (
             e.message == "Element class kotlinx.serialization.json.JsonObject is not a JsonPrimitive" ||
-            e.message == "Element class kotlinx.serialization.json.JsonArray is not a JsonPrimitive"
+            e.message == "Element class kotlinx.serialization.json.JsonArray is not a JsonPrimitive" ||
+            e.message == "Element class kotlinx.serialization.json.JsonObject (Kotlin reflection is not available) is not a JsonPrimitive" ||
+            e.message == "Element class kotlinx.serialization.json.JsonArray (Kotlin reflection is not available) is not a JsonPrimitive"
         ) {
             JsonPathFoundWrongFormatException(type, path.s, found.toString(), this.toString())
         } else e

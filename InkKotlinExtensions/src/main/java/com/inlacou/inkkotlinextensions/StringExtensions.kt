@@ -248,9 +248,15 @@ val validLetters = listOf(
 /**
  * @param forceDecimals means if it should add 0s if not enough decimal digits
  */
-fun String.formatDecimal(maxDecimals: Int, forceDecimals: Boolean = false, markThousands: Boolean = true,
-						 decimalSeparator: String = ",", thousandsSeparator: String = ".",
-						 roundingMode: RoundingMode = RoundingMode.FLOOR, onDecimalsLimited: (() -> Unit)? = null): String {
+fun String.formatDecimal(
+	maxDecimals: Int,
+	forceDecimals: Boolean = false,
+	markThousands: Boolean = true,
+	decimalSeparator: String = ",",
+	thousandsSeparator: String = ".",
+	roundingMode: RoundingMode = RoundingMode.FLOOR,
+	onDecimalsLimited: (() -> Unit)? = null
+): String {
 	val secret = "%&%&lñjkndfkljWEkljkjsdgrkbnldflkjnjzdgKJFELBEUEW"
 	if (trim().isEmpty() or trim().equals("nan", ignoreCase = true) or trim().equals("null", ignoreCase = true)) {
 		return this
@@ -338,3 +344,41 @@ fun String.formatDecimal(maxDecimals: Int, forceDecimals: Boolean = false, markT
 		return ""
 	}
 }
+
+internal fun <T> Array<T>.toStringWithIndentation(tabLevel: Int = 0): String = toList().toStringWithIndentation(tabLevel)
+
+/**
+ * Used to convert a [List] to [String] giving more indentation to each item.
+ * If the item is a multiline [String], it will do even more indentation for each line of it.
+ *
+ * @receiver [List]<[T]> to convert to [String]
+ *
+ * @param [tabLevel] [Int] to start with
+ *
+ * @return [String]
+ */
+internal fun <T> Collection<T>.toStringWithIndentation(tabLevel: Int = 0): String {
+	if (this.isEmpty()) return "[]"
+	var result = if (this.first() !is String) "["
+	else ""
+	forEach {
+		result +=
+			if (it !is String && it.toString().lines().size > 1) it.toString().lines().toStringWithIndentation(tabLevel + 1)
+			else "\n${"\t" * (tabLevel + 1)}$it,"
+	}
+	result = result.dropLast(1) // Remove the trailing comma
+	return if (this.isNotEmpty() && this.first() !is String) "$result\n${"\t" * tabLevel}]"
+	else result
+}
+
+/**
+ * Used to multiply a [String] [n] times.
+ *
+ * @return [String]
+ */
+internal operator fun String.times(n: Int): String {
+	var result = this
+	repeat(n) { result += result }
+	return result
+}
+
