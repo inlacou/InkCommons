@@ -382,3 +382,10 @@ internal operator fun String.times(n: Int): String {
 	return result
 }
 
+fun String.fromTo(index1: Int, index2: Int): String {
+	return this.substring(index1, index2)
+}
+
+fun String.removeFromTo(index1: Int, index2: Int): String {
+	return this.substring(0, index1)+this.substring(index2)
+}

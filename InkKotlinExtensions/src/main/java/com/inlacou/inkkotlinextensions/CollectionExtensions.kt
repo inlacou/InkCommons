@@ -126,3 +126,10 @@ inline fun <T> Iterable<T>.forEachIndexedReversed(action: (index: Int, T) -> Uni
     var index = toList().size - 1
     this.reversed().forEach { action(index--, it) }
 }
+
+/**
+ * If [index] is 5 on a 3 element list, it will take the second element.
+ */
+fun <T> List<T>.getRepeating(index: Int): T =
+    if(index>=size) this[index%size]
+    else this[index]

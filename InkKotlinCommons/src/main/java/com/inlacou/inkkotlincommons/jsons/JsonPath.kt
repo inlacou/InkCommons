@@ -21,7 +21,7 @@ internal value class JsonPath(val s: String) : Comparable<JsonPath> {
      * must be at '$.actions[0].in.resources' or at '$.in.resources'.
      */
     fun mergePathsAtActionLevel(childPath: JsonPath): JsonPath {
-        return JsonPath(Regex("\\\$\\.actions\\[[0-9]*\\]").find(this.s)?.groupValues?.get(0) ?: "$").mergePaths(childPath)
+        return JsonPath(Regex("\\$\\.actions\\[[0-9]*]").find(this.s)?.groupValues?.get(0) ?: "$").mergePaths(childPath)
     }
 
     fun mergePaths(childPath: JsonPath): JsonPath {

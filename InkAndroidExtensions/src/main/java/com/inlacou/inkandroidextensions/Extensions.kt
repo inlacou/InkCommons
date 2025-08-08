@@ -3,6 +3,7 @@ package com.inlacou.inkandroidextensions
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -19,7 +20,6 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import java.util.*
 import java.util.stream.Stream
-
 
 fun Int.dpToPx() = (this * Resources.getSystem().displayMetrics.density).toInt()
 fun Float.dpToPx() = (this * Resources.getSystem().displayMetrics.density)
