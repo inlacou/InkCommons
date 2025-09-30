@@ -108,7 +108,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 		if(model.drawerOpenedOnStart) drawerLayout?.openDrawer(GravityCompat.START)
 
 		val drawerMenuItems = mutableListOf<SidebarViewMdl>()
-		values().forEach { drawerMenuItems.add(SidebarViewMdl(it, onClick = {
+		Section.entries.forEach { drawerMenuItems.add(SidebarViewMdl(it, onClick = {
 			Timber.d("adapterDrawer: $adapterDrawer")
 			adapterDrawer?.onItemSelected(it); loadSection(it.item) })) }
 		adapterDrawer = SidebarRvAdapter(rvDrawer, drawerMenuItems)
@@ -148,7 +148,11 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 	private fun loadFragment(fragment: Fragment, section: Section, extras: String? = null){
 		this.fragment = fragment
 		model.section = section
-		toolbar?.title = if(fragment is BaseFrag && fragment.title!=null) fragment.title else section.mdl.textResId.let { if(it!=null) getString(it) else "" }
+		toolbar?.title =
+			section.mdl.textResId?.let { getString(it) }
+				?: section.mdl.text
+				?: (if(fragment is BaseFrag && fragment.title != null) fragment.title else null)
+				?: fragment::class.simpleName
 		if (extras != null && extras.isNotEmpty()) {
 			val bundle = Bundle()
 			val type = object : TypeToken<Map<String, String>>(){}.type
