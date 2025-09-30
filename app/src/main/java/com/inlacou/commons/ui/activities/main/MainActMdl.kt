@@ -6,6 +6,6 @@ import com.inlacou.commons.business.Section
  * Created by inlacou on 02/02/18.
  */
 data class MainActMdl(
-		var section: Section = Section.GRADIENT_TINT,
+		var section: Section = Section.JETPACK_COMPOSE,
 		val drawerOpenedOnStart: Boolean = false
 )

@@ -23,6 +23,7 @@ import com.inlacou.commons.ui.activities.BaseFragAct
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFragMdl
+import com.inlacou.commons.ui.fragments.compose.ComposeFrag
 import com.inlacou.commons.ui.fragments.coroutines.playground.CoroutinesPlaygroundFrag
 import com.inlacou.commons.ui.fragments.coroutines.playground.CoroutinesPlaygroundFragMdl
 import com.inlacou.commons.ui.fragments.coroutines.counter.CoroutinesCounterFrag
@@ -135,6 +136,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())
 			COROUTINES_PLAYGROUND -> CoroutinesPlaygroundFrag.create(CoroutinesPlaygroundFragMdl())
 			COROUTINES_COUNTER -> CoroutinesCounterFrag.create(0)
+			JETPACK_COMPOSE -> ComposeFrag.create(0)
 			GRADIENT_TINT -> GradientTintFrag.create(
 				GradientTintFragMdl(
 					getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red),

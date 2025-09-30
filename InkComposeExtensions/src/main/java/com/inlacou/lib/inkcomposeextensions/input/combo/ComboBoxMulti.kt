@@ -21,20 +21,20 @@ import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBoxItem
 // TODO not tested as of 30-09-2025
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun <T: ComboBoxItem> MultiComboBox(
-    labelText: String,
-    options: List<T>,
-    onOptionsChosen: (List<T>) -> Unit,
+fun <T: ComboBoxItem> ComboBoxMulti(
+    label: String,
+    items: List<T>,
+    selectedItems: List<T> = emptyList(),
+    onItemsSelected: (List<T>) -> Unit,
     modifier: Modifier = Modifier,
-    initialSelectedItems: List<T> = emptyList(),
 ) {
     var expanded by remember { mutableStateOf(false) }
     // when no options available, I want ComboBox to be disabled
-    val isEnabled by rememberUpdatedState { options.isNotEmpty() }
+    val isEnabled by rememberUpdatedState { items.isNotEmpty() }
     var selectedOptionsList  = remember { mutableStateListOf<T>()}
 
     //Initial setup of selected ids
-    initialSelectedItems.forEach {
+    selectedItems.forEach {
         selectedOptionsList.add(it)
     }
 
@@ -44,7 +44,7 @@ fun <T: ComboBoxItem> MultiComboBox(
             if (isEnabled()) {
                 expanded = !expanded
                 if (!expanded) {
-                    onOptionsChosen(options.filter { it in selectedOptionsList }.toList())
+                    onItemsSelected(items.filter { it in selectedOptionsList }.toList())
                 }
             }
         },
@@ -61,7 +61,7 @@ fun <T: ComboBoxItem> MultiComboBox(
             readOnly = true,
             value = selectedSummary,
             onValueChange = {},
-            label = { Text(text = labelText) },
+            label = { Text(text = label) },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
             },
@@ -71,10 +71,10 @@ fun <T: ComboBoxItem> MultiComboBox(
             expanded = expanded,
             onDismissRequest = {
                 expanded = false
-                onOptionsChosen(options.filter { it in selectedOptionsList }.toList())
+                onItemsSelected(items.filter { it in selectedOptionsList }.toList())
             },
         ) {
-            for (option in options) {
+            for (option in items) {
                 
                 //use derivedStateOf to evaluate if it is checked
                 var checked = remember {

@@ -2,15 +2,16 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'de.mannodermaus.android-junit5'
+    id("org.jetbrains.kotlin.plugin.compose") version "2.0.0" // this version matches your Kotlin version
 }
 
 android {
-    compileSdk 34
+    compileSdk 36
     defaultConfig {
         namespace "com.inlacou.commons"
         applicationId "com.inlacou.commons"
-        minSdkVersion 19
-        targetSdkVersion 34
+        minSdkVersion 28
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -36,6 +37,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose = true
     }
     lintOptions {
         abortOnError false
@@ -48,6 +50,7 @@ dependencies {
     implementation project(':InkBetterAndroidViews')
     implementation project(':InkKotlinCommons')
     implementation project(':InkKotlinExtensions')
+    implementation project(':InkComposeExtensions')
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
@@ -58,6 +61,22 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    implementation(platform("androidx.compose:compose-bom:2025.09.01"))
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-core")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation ("androidx.activity:activity-compose")
+
+    implementation 'androidx.compose.ui:ui:1.9.2'
+    implementation 'androidx.compose.ui:ui-graphics:1.9.2'
+    implementation 'androidx.compose.ui:ui-tooling:1.9.2'
+    implementation 'androidx.compose.ui:ui-tooling-preview:1.9.2'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest:1.9.2'
+    debugImplementation 'androidx.compose.ui:ui-test-junit4:1.9.2'
+
+    implementation("androidx.activity:activity-compose")
+    implementation("androidx.fragment:fragment-ktx")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

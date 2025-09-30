@@ -13,6 +13,7 @@ fun IntegerTextField(
 ) {
     TextField(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
+        maxLines = 1,
         value = value.toString(),
         onValueChange = { it.toIntOrNull()?.let { onValueChange.invoke(it) } },
     )

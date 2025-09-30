@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 
 @Composable
-fun <T: ComboBoxItem> DropdownBox(
+fun <T: ComboBoxItem> ComboBox(
     label: String,
     selectedItem: T,
     items: List<T>,
