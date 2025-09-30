@@ -35,7 +35,7 @@ fun <T: ComboBoxItem> ComboBoxMulti(
 
     //Initial setup of selected ids
     selectedItems.forEach {
-        selectedOptionsList.add(it)
+        if(selectedOptionsList.contains(it).not()) selectedOptionsList.add(it)
     }
 
     ExposedDropdownMenuBox(
@@ -53,7 +53,7 @@ fun <T: ComboBoxItem> ComboBoxMulti(
         val selectedSummary = when (selectedOptionsList.size) {
             0 -> ""
             1 -> selectedOptionsList.first().display
-            else -> "Selected nº: ${selectedOptionsList.size}"
+            else -> selectedOptionsList.map { it.display }.toString()
         }
         TextField(
             enabled = isEnabled(),
@@ -75,10 +75,9 @@ fun <T: ComboBoxItem> ComboBoxMulti(
             },
         ) {
             for (option in items) {
-                
                 //use derivedStateOf to evaluate if it is checked
                 var checked = remember {
-                    derivedStateOf { option in selectedOptionsList}
+                    derivedStateOf { selectedOptionsList.any { it == option } }
                 }.value
 
                 DropdownMenuItem(

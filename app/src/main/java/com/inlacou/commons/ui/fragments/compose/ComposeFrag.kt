@@ -77,6 +77,7 @@ class ComposeFrag : Fragment() {
                         ).map {
                             object : ComboBoxItem {
                                 override val display: String get() = it
+                                override fun toString(): String = it
                             }
                         }
 
