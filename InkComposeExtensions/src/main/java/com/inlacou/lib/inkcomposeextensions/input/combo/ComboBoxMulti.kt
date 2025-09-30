@@ -16,7 +16,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.inlacou.lib.inkcomposeextensions.combo.ComboBoxItem
+import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBoxItem
 
 // TODO not tested as of 30-09-2025
 @OptIn(ExperimentalMaterial3Api::class)

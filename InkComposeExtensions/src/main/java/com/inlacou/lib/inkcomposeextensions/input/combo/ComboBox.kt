@@ -1,4 +1,4 @@
-package com.inlacou.lib.inkcomposeextensions.combo
+package com.inlacou.lib.inkcomposeextensions.input.combo
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
