@@ -9,7 +9,7 @@ buildscript {
     ext.rxandroid_version = "3.0.2"
     ext.rxjava_version = "3.1.12"
     ext.rxkotlin_version = "3.0.1"
-    ext.gson_version = "2.9.0"
+    ext.gson_version = "2.13.2"
     ext.timber_version = "5.0.1"
     ext.junit_version = "6.0.0"
 
