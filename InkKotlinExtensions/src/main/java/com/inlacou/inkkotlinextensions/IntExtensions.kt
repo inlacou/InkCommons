@@ -1,7 +1,6 @@
 package com.inlacou.inkkotlinextensions
 
 import kotlin.math.floor
-import kotlin.math.pow
 import kotlin.math.roundToInt
 
 val Int.digitsNum: Int get() = toString().length
@@ -72,9 +71,9 @@ fun Float.calculateCompoundInterestAndLogIt(interes: Float, timeUnits: Int, time
 	return result
 }
 
-fun Float.calculateCompoundInterest(interes: Float, timeUnits: Int): Float {
-	val increment = 1f+interes
+fun Float.calculateCompoundInterest(interestPerInterval: Float, numberOfIntervals: Int): Float {
+	val increment = 1f + interestPerInterval
 	var result = this
-	repeat(timeUnits) { result*=increment }
+	repeat(numberOfIntervals) { result *= increment }
 	return result
 }
