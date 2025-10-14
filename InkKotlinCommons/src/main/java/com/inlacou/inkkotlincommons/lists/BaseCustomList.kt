@@ -36,13 +36,13 @@ abstract class BaseCustomList<T>(
 	
 }
 
-inline fun <T> fifoOf(): Fifo<T> = Fifo()
-inline fun <T> fifoOf(vararg elements: T): Fifo<T> = Fifo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
-inline fun <T> lifoOf(): Lifo<T> = Lifo()
-inline fun <T> lifoOf(vararg elements: T): Lifo<T> = Lifo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
-inline fun <T> liloOf(): Lilo<T> = Lilo()
-inline fun <T> liloOf(vararg elements: T): Lilo<T> = Lilo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
-inline fun <T> filoOf(): Filo<T> = Filo()
-inline fun <T> filoOf(vararg elements: T): Filo<T> = Filo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
-inline fun <T> noDupeMutableListOf(): NoDupeMutableList<T> = NoDupeMutableList()
-inline fun <T> noDupeMutableListOf(vararg elements: T): NoDupeMutableList<T> = NoDupeMutableList((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
+fun <T> fifoOf(): Fifo<T> = Fifo()
+fun <T> fifoOf(vararg elements: T): Fifo<T> = Fifo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
+fun <T> lifoOf(): Lifo<T> = Lifo()
+fun <T> lifoOf(vararg elements: T): Lifo<T> = Lifo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
+fun <T> liloOf(): Lilo<T> = Lilo()
+fun <T> liloOf(vararg elements: T): Lilo<T> = Lilo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
+fun <T> filoOf(): Filo<T> = Filo()
+fun <T> filoOf(vararg elements: T): Filo<T> = Filo((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
+fun <T> noDupeMutableListOf(): NoDupeMutableList<T> = NoDupeMutableList()
+fun <T> noDupeMutableListOf(vararg elements: T): NoDupeMutableList<T> = NoDupeMutableList((if (elements.isNotEmpty()) elements.asList() else emptyList()).toMutableList())
