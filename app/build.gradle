@@ -43,11 +43,12 @@ android {
 }
 
 dependencies {
-    implementation project(':InkAndroidExtensions')
-    implementation project(':InkAnimationTypes')
-    implementation project(':InkBetterAndroidViews')
-    implementation project(':InkKotlinCommons')
     implementation project(':InkKotlinExtensions')
+    implementation project(':InkKotlinCommons')
+    implementation project(':InkAnimationTypes')
+    implementation project(':InkAndroidExtensions')
+    implementation project(':InkAndroidCommons')
+    implementation project(':InkBetterAndroidViews')
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
