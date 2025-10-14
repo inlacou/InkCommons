@@ -21,7 +21,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
 
         namespace 'com.inlacou.inkbetterandroidviews'
