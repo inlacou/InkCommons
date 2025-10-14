@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenuItem
@@ -16,9 +17,9 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.inlacou.inker.Inker
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBoxItem
 
-// TODO not tested as of 30-09-2025
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T: ComboBoxItem> ComboBoxMulti(
@@ -28,15 +29,14 @@ fun <T: ComboBoxItem> ComboBoxMulti(
     onItemsSelected: (List<T>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    Inker.d { "selectedItems: $selectedItems | items: $items" }
+
     var expanded by remember { mutableStateOf(false) }
     // when no options available, I want ComboBox to be disabled
     val isEnabled by rememberUpdatedState { items.isNotEmpty() }
-    var selectedOptionsList  = remember { mutableStateListOf<T>()}
-
-    //Initial setup of selected ids
-    selectedItems.forEach {
-        if(selectedOptionsList.contains(it).not()) selectedOptionsList.add(it)
-    }
+    val selectedOptionsList  = remember { mutableStateListOf<T>().apply {
+        addAll(selectedItems)
+    } }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -88,8 +88,10 @@ fun <T: ComboBoxItem> ComboBoxMulti(
                                 onCheckedChange = { newCheckedState ->
                                     if (newCheckedState) {
                                         selectedOptionsList.add(option)
+                                            .also { Inker.d { "add $option ($it) | $selectedOptionsList" } }
                                     } else {
                                         selectedOptionsList.remove(option)
+                                            .also { Inker.d { "remove $option ($it) | $selectedOptionsList" } }
                                     }
                                 },
                             )
@@ -99,8 +101,10 @@ fun <T: ComboBoxItem> ComboBoxMulti(
                     onClick = {
                         if (!checked) {
                             selectedOptionsList.add(option)
+                                .also { Inker.d { "add $option ($it) | $selectedOptionsList" } }
                         } else {
                             selectedOptionsList.remove(option)
+                                .also { Inker.d { "remove $option ($it) | $selectedOptionsList" } }
                         }
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,

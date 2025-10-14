@@ -14,20 +14,17 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 
 @Composable
-fun DoubleTextField(
-    value: Double,
+fun StringTextField(
+    value: String,
     label: String = "",
-    onValueChange: (value: Double) -> Unit,
+    onValueChange: (value: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var internalValue by remember { mutableStateOf(value.toString()) }
+    var internalValue by remember { mutableStateOf(value) }
 
     val onValueChange: (String) -> Unit = {
-        if(it.isEmpty()) internalValue = it
-        it.toDoubleOrNull()?.let { doubleValue ->
-            internalValue = it
-            onValueChange.invoke(doubleValue)
-        }
+        internalValue = it
+        onValueChange.invoke(it)
     }
 
     if(label.isNotEmpty()) {

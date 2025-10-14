@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.inlacou.commons.ui.fragments.coroutines.counter.CoroutinesCounterFrag
+import com.inlacou.inker.Inker
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBox
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBoxItem
 import com.inlacou.lib.inkcomposeextensions.input.text.DoubleTextField
@@ -61,11 +62,11 @@ class ComposeFrag : Fragment() {
 
                         var doubleValue by remember { mutableDoubleStateOf(0.0) }
                         Text("Double value: $doubleValue", color = Color.White)
-                        DoubleTextField(doubleValue, { doubleValue = it })
+                        DoubleTextField(doubleValue, label = "label", onValueChange = { doubleValue = it })
 
                         var intValue by remember { mutableIntStateOf(0) }
                         Text("Int value: $intValue", color = Color.White)
-                        IntegerTextField(intValue, { intValue = it })
+                        IntegerTextField(intValue, onValueChange = { intValue = it })
 
                         val cities = listOf(
                             "Bilbao",
@@ -78,6 +79,10 @@ class ComposeFrag : Fragment() {
                             object : ComboBoxItem {
                                 override val display: String get() = it
                                 override fun toString(): String = it
+                                override fun equals(other: Any?): Boolean {
+                                    return if(other is ComboBoxItem) this.display == other.display
+                                    else false
+                                }
                             }
                         }
 
@@ -96,7 +101,10 @@ class ComposeFrag : Fragment() {
                             label = "Cities (multi)",
                             items = cities,
                             selectedItems = selectedItems,
-                            onItemsSelected = { selectedItems = it }
+                            onItemsSelected = {
+                                Inker.d { "selectedItems: $it" }
+                                selectedItems = it
+                            }
                         )
                     }
                 }
