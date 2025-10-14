@@ -26,6 +26,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version")
 }
 
 task sourceJar(type: Jar) {
