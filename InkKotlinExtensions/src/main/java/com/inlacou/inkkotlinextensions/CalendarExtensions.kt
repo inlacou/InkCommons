@@ -129,11 +129,11 @@ fun Calendar.setMilliseconds(value: Int) : Calendar {
 	return this
 }
 
-fun Calendar.setMilliseconds(millis: Long): Calendar {
+fun Calendar.setTime(millis: Long): Calendar {
 	this.timeInMillis = millis
 	return this }
 
-fun Long.toCalendar(): Calendar = Calendar.getInstance().setMilliseconds(this)
+fun Long.toCalendar(): Calendar = Calendar.getInstance().setTime(this)
 
 fun Calendar.isLeapYear() = ((year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0)))
 
