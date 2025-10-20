@@ -55,20 +55,19 @@ dependencies {
     compileOnly 'androidx.core:core-ktx:1.17.0'
     compileOnly 'com.google.android.material:material:1.13.0'
 
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation "org.junit.jupiter:junit-jupiter:$junit_version"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_version"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testImplementation "junit:junit:$junit"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junit_jupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_jupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_jupiter"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_jupiter"
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.5'
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$androidx_junit"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Set this dependency to build and run Espresso tests
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
 
     compileOnly "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
     compileOnly "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
-    compileOnly "com.jakewharton.timber:timber:$timber_version"
 
     compileOnly "io.reactivex.rxjava3:rxandroid:$rxandroid_version"									//RX
     // Because RxAndroid releases are few and far between, it is recommended you also

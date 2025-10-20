@@ -15,11 +15,11 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation "org.junit.jupiter:junit-jupiter:$junit_version"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_version"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testImplementation "junit:junit:$junit"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junit_jupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_jupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_jupiter"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_jupiter"
 
     compileOnly "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
     compileOnly "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"

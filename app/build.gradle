@@ -82,12 +82,11 @@ dependencies {
     // such as input and measurement/layout
     implementation 'androidx.compose.ui:ui'
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 
     implementation ('androidx.multidex:multidex:2.0.1')
-    implementation "com.jakewharton.timber:timber:$timber_version"
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "io.reactivex.rxjava3:rxandroid:$rxandroid_version"                                   //RX
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"                                         //RX

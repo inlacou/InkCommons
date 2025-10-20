@@ -10,8 +10,9 @@ buildscript {
     ext.rxjava_version = "3.1.12"
     ext.rxkotlin_version = "3.0.1"
     ext.gson_version = "2.13.2"
-    ext.timber_version = "5.0.1"
-    ext.junit_version = "6.0.0"
+    ext.junit = "4.13.2"
+    ext.junit_jupiter = "6.0.0"
+    ext.androidx_junit = "1.3.0"
 
     repositories {
         google()

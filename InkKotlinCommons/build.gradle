@@ -18,10 +18,10 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    testImplementation "org.junit.jupiter:junit-jupiter:$junit_version"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_version"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junit_jupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_jupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_jupiter"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_jupiter"
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
