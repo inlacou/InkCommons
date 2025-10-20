@@ -27,7 +27,7 @@ fun <T: ComboBoxItem> ComboBox(
     label: String,
     selectedItem: T,
     items: List<T>,
-    padding: Dp = 20.dp,
+    modifier: Modifier = Modifier,
     onItemSelected: (T) -> Unit
 ) {
     var mExpanded by remember { mutableStateOf(false) }
@@ -39,7 +39,7 @@ fun <T: ComboBoxItem> ComboBox(
         if (mExpanded) Icons.Filled.KeyboardArrowUp
         else Icons.Filled.KeyboardArrowDown
 
-    Column(Modifier.padding(padding)) {
+    Column(modifier) {
         OutlinedTextField(
             value = selectedItem.display,
             onValueChange = {

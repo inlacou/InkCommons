@@ -28,6 +28,7 @@ import com.inlacou.inker.Inker
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBox
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBoxItem
 import com.inlacou.lib.inkcomposeextensions.input.text.DoubleTextField
+import com.inlacou.lib.inkcomposeextensions.input.text.InkTextField
 import com.inlacou.lib.inkcomposeextensions.input.text.IntegerTextField
 
 class ComposeFrag : Fragment() {
@@ -62,11 +63,11 @@ class ComposeFrag : Fragment() {
 
                         var doubleValue by remember { mutableDoubleStateOf(0.0) }
                         Text("Double value: $doubleValue", color = Color.White)
-                        DoubleTextField(doubleValue, label = "label", onValueChange = { doubleValue = it })
+                        InkTextField(doubleValue, label = "label", onValueChange = { doubleValue = it })
 
                         var intValue by remember { mutableIntStateOf(0) }
                         Text("Int value: $intValue", color = Color.White)
-                        IntegerTextField(intValue, onValueChange = { intValue = it })
+                        InkTextField(intValue, onValueChange = { intValue = it })
 
                         val cities = listOf(
                             "Bilbao",
