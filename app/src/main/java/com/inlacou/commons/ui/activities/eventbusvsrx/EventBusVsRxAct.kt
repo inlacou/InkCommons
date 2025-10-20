@@ -21,7 +21,6 @@ import com.inlacou.inkkotlinextensions.toJson
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import timber.log.Timber
 
 @SuppressLint("SetTextI18n")
 class EventBusVsRxAct : BaseAct() {
@@ -168,7 +167,6 @@ class EventBusVsRxAct : BaseAct() {
 			EventBus.getDefault().postSticky(Event3("forced by button click"))
 			EventBusChannel.postSticky(Event4("forced by button click"))
 			EventBus.getDefault().postSticky(Event4("forced by button click"))
-			Timber.d("forced by button click")
 			toast("forced by button click")
 		}, { toast(it.message ?: "Unknown error happened") })
 	}

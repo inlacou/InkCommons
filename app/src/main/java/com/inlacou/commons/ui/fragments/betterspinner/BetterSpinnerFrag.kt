@@ -14,7 +14,6 @@ import com.inlacou.inkandroidextensions.toast
 import com.inlacou.inkbetterandroidviews.extensions.itemClicks
 import com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
 import com.inlacou.inkkotlinextensions.fromJson
-import timber.log.Timber
 
 class BetterSpinnerFrag: BaseFrag() {
 
@@ -104,10 +103,10 @@ class BetterSpinnerFrag: BaseFrag() {
     }
 
     private fun setListeners() {
-        disposables.add(betterSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
-        disposables.add(betterSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
-        disposables.add(betterSpinnerFilterableComplex?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${complexItems[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
-        disposables.add(customItemSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${tags[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
-        disposables.add(customItemSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${tags[it]}") }, { Timber.e(it); activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(betterSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(betterSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${items[it]}") }, { activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(betterSpinnerFilterableComplex?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${complexItems[it]}") }, { activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(customItemSpinner?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${tags[it]}") }, { activity?.toast(it.message ?: "Unknown error happened") }))
+        disposables.add(customItemSpinnerFilterable?.itemClicks()?.subscribe({ activity?.toast("Selected #$it: ${tags[it]}") }, { activity?.toast(it.message ?: "Unknown error happened") }))
     }
 }

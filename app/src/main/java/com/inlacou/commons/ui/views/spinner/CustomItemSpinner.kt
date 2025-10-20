@@ -16,7 +16,6 @@ import com.inlacou.inkandroidextensions.view.tint
 import com.inlacou.inkbetterandroidviews.adapters.GenericListAdapter
 import com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
 import com.inlacou.pripple.RippleLinearLayout
-import timber.log.Timber
 
 /**
  * Created by inlacou on 26/08/21.
@@ -33,11 +32,9 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
 		super.onFocusChanged(focused, direction, previouslyFocusedRect)
-		Timber.d("onFocusChanged")
 	}
 
 	fun setTagAdapter(items: List<CustomItem>) {
-		Timber.d("setTagAdapter | items: $items")
 		setComplexAdapter(items) {
 			GenericListAdapter(
 				context, itemList = it.filterIsInstance<CustomItem>(),

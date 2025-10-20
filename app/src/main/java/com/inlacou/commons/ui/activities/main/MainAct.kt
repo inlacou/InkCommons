@@ -42,7 +42,6 @@ import com.inlacou.commons.ui.fragments.gradienttint.GradientTintFrag
 import com.inlacou.commons.ui.fragments.gradienttint.GradientTintFragMdl
 import com.inlacou.commons.ui.fragments.gradienttint.Gradienter
 import com.inlacou.inkandroidextensions.getColorCompat
-import timber.log.Timber
 
 /**
  * Created by inlacou on 02/02/18.
@@ -77,7 +76,6 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
-		Timber.d("onCreate")
 		super.onCreate(savedInstanceState)
 		binder = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
 
@@ -110,7 +108,6 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 
 		val drawerMenuItems = mutableListOf<SidebarViewMdl>()
 		Section.entries.forEach { drawerMenuItems.add(SidebarViewMdl(it, onClick = {
-			Timber.d("adapterDrawer: $adapterDrawer")
 			adapterDrawer?.onItemSelected(it); loadSection(it.item) })) }
 		adapterDrawer = SidebarRvAdapter(rvDrawer, drawerMenuItems)
 		rvDrawer?.adapter = adapterDrawer
@@ -162,7 +159,6 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			val it = mp.entries.iterator()
 			while (it.hasNext()) {
 				val pair = it.next()
-				Timber.d("${pair.key}: ${pair.value}")
 				bundle.putString(pair.key, pair.value)
 				//it.remove() // avoids a ConcurrentModificationException
 			}

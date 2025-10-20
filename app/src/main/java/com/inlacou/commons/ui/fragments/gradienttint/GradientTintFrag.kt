@@ -15,7 +15,6 @@ import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.inkbetterandroidviews.extensions.itemClicks
 import com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
 import com.inlacou.inker.Inker
-import timber.log.Timber
 import kotlin.reflect.KClass
 import kotlin.reflect.jvm.jvmName
 
@@ -61,7 +60,6 @@ class GradientTintFrag : BaseFrag() {
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		super.onCreateView(inflater, container, savedInstanceState)
-		Timber.d("onCreateView")
 		val rootView = inflater.inflate(R.layout.fragment_gradient_tint, container, false)
 		binder = FragmentGradientTintBinding.bind(rootView)
 

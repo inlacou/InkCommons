@@ -5,7 +5,6 @@ import com.inlacou.inker.Inker
 import com.inlacou.inkkotlinextensions.rx.EventBusChannel
 import com.inlacou.inkpersistor.GenericSharedPrefMngr
 import com.inlacou.inkspannable.InkSpannableConfig
-import timber.log.Timber
 import java.lang.ref.WeakReference
 
 class AppCtrl: MultiDexApplication() {
@@ -13,7 +12,6 @@ class AppCtrl: MultiDexApplication() {
 	override fun onCreate() {
 		super.onCreate()
 		instance = this
-		Timber.plant(Timber.DebugTree())
 		Inker.mix(InkerDebugColor())
 		InkSpannableConfig.context = WeakReference(this)
 

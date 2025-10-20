@@ -11,7 +11,6 @@ import com.inlacou.commons.databinding.FragmentDialogsBinding
 import com.inlacou.commons.general.AppCtrl
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.inkkotlinextensions.fromJson
-import timber.log.Timber
 
 class CoroutinesPlaygroundFrag: BaseFrag() {
 
@@ -68,6 +67,5 @@ class CoroutinesPlaygroundFrag: BaseFrag() {
 
     fun showError(throwable: Throwable) {
         //TODO
-        Timber.w("TODO show error on UI ${throwable.message}")
     }
 }

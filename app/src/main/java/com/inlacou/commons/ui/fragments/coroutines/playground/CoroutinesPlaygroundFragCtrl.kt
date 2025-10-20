@@ -4,7 +4,6 @@ import com.inlacou.commons.ui.fragments.BaseFragCtrl
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.*
-import timber.log.Timber
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
@@ -15,7 +14,9 @@ class CoroutinesPlaygroundFragCtrl(val view: CoroutinesPlaygroundFrag, val model
     private val coroutineExceptionHandler: CoroutineExceptionHandler =
         CoroutineExceptionHandler { _, throwable ->
             coroutineScopeMain.launch(Dispatchers.Main) { view.showError(throwable) }
-            GlobalScope.launch { Timber.e("Caught $throwable") }
+            GlobalScope.launch {
+                //Timber.e("Caught $throwable")
+            }
         }
 
     /**
@@ -59,49 +60,61 @@ class CoroutinesPlaygroundFragCtrl(val view: CoroutinesPlaygroundFrag, val model
     /* MAIN */
 
     private fun timers0() {
-        Timber.d("launch timers")
+        //Timber.d("launch timers")
         rxTimer(5)
         coroutineTimer(5)
-        Timber.d("launched timers")
+        //Timber.d("launched timers")
     }
 
     private fun timers1() {
-        Timber.d("launch timers")
+        //Timber.d("launch timers")
         rxTimer(5)
         coroutineScopeMain.launch { coroutineTimer(5) }
-        Timber.d("launched timers")
+        //Timber.d("launched timers")
     }
 
     private fun timers2() {
-        Timber.d("launch timers")
+        //Timber.d("launch timers")
         coroutineScopeMain.launch { coroutineTimer(5) }
         rxTimer(5)
-        Timber.d("launched timers")
+        //Timber.d("launched timers")
     }
 
     private fun callbacksToCoroutines() {
-        Timber.d("about to launch coroutine")
-        coroutineScopeMain.launch { Timber.d("result: ${rxCallbackToCoroutine()}") }
+        //Timber.d("about to launch coroutine")
+        coroutineScopeMain.launch {
+            //Timber.d("result: ${rxCallbackToCoroutine()}")
+        }
     }
 
     private fun fetchFromServerOrDb() {
-        Timber.d("about to get username with Rx")
-        fetchUsernameRx { Timber.d("got username with rx (on via callback) '$it'") }
-        Timber.d("about to get username with Coroutine")
-        cdisposables.add(coroutineScopeMain.launch { Timber.d("about to get username with Coroutine '${fetchUsernameCoroutine()}'") })
+        //Timber.d("about to get username with Rx")
+        fetchUsernameRx {
+            //Timber.d("got username with rx (on via callback) '$it'")
+        }
+        //Timber.d("about to get username with Coroutine")
+        cdisposables.add(coroutineScopeMain.launch {
+            //Timber.d("about to get username with Coroutine '${fetchUsernameCoroutine()}'")
+        })
     }
 
     private fun errorHandling() {
-        Timber.d("error handling | about to get from server (in 5s)")
-        coroutineScopeMain.async { Timber.d("error handling | main | got from server '${fetchUsernameCoroutine()}'") }
+        //Timber.d("error handling | about to get from server (in 5s)")
+        coroutineScopeMain.async {
+            //Timber.d("error handling | main | got from server '${fetchUsernameCoroutine()}'")
+        }
         coroutineScopeMain.launch { coroutineError("error0 main") }
         coroutineScopeMain.launch { coroutineError("error1 main") }
         coroutineScopeDefault.launch { coroutineError("error0 default") }
-        coroutineScopeMain.async { Timber.d("error handling | default | got from server '${fetchUsernameCoroutine()}'") }
+        coroutineScopeMain.async {
+            //Timber.d("error handling | default | got from server '${fetchUsernameCoroutine()}'")
+        }
         coroutineScopeDefault.launch { coroutineError("error1 default") }
         coroutineScopeIO.launch { coroutineError("error0 IO") }
         coroutineScopeIO.launch { coroutineError("error1 IO") }
-        coroutineScopeMain.async { Timber.d("error handling | IO | got from server '${fetchUsernameCoroutine()}'") }
+        coroutineScopeMain.async {
+            //Timber.d("error handling | IO | got from server '${fetchUsernameCoroutine()}'")
+        }
         coroutineScopeUnconfined.launch { coroutineError("error0 unconfined") }
         coroutineScopeUnconfined.launch { coroutineError("error1 unconfined") }
     }
@@ -123,18 +136,17 @@ class CoroutinesPlaygroundFragCtrl(val view: CoroutinesPlaygroundFrag, val model
     private fun rxTimer(seconds: Int) {
         rxTimerDisposable = Observable.interval(0, 1, TimeUnit.SECONDS).subscribe({
             if(it==seconds.toLong()) {
-                Timber.d("rx timer up!")
                 rxTimerDisposable?.dispose()
-            }else{
-                Timber.d("rx timer ${seconds-it}")
             }
-        },{ Timber.e("rx timer error $it") })
+        },{
+            //Timber.e("rx timer error $it")
+        })
     }
 
     private fun coroutineTimer(seconds: Int) {
         try {
             repeat(seconds+1) {
-                Timber.d(if(it==seconds) {
+                (if(it==seconds) {
                     rxTimerDisposable?.dispose()
                     "coroutine timer up!"
                 }else{
@@ -142,11 +154,16 @@ class CoroutinesPlaygroundFragCtrl(val view: CoroutinesPlaygroundFrag, val model
                 })
                 Thread.sleep(1000)
             }
-        }catch (e: Exception) { Timber.e("coroutine timer error $e") }
+        }catch (e: Exception) {
+            //Timber.e("coroutine timer error $e")
+        }
     }
 
     private fun fetchUsernameRx(cb: (String) -> Unit) {
-        Observable.timer(5, TimeUnit.SECONDS).subscribe({ cb.invoke("JoeRx") }, { Timber.e(it) })
+        Observable.timer(5, TimeUnit.SECONDS).subscribe({ cb.invoke("JoeRx") }, {
+            //Timber.e(it)
+            }
+        )
     }
 
     private suspend fun fetchUsernameCoroutine(): String {
