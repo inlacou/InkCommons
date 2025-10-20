@@ -1,8 +1,11 @@
 package com.inlacou.commons.business
 
 data class SectionMdl(
-    var textResId: Int? = null, var text: String? = null, var hideable: Boolean,
-    var iconResId: Int? = null, var isTitle: Boolean = false,
+    var hideable: Boolean,
+    var textResId: Int? = null,
+    var text: String? = null,
+    var iconResId: Int? = null,
+    var isTitle: Boolean = false,
     /**
      * how many dps
      */

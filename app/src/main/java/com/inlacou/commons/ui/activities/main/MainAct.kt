@@ -23,6 +23,7 @@ import com.inlacou.commons.ui.activities.BaseFragAct
 import com.inlacou.commons.ui.fragments.BaseFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFrag
 import com.inlacou.commons.ui.fragments.betterspinner.BetterSpinnerFragMdl
+import com.inlacou.commons.ui.fragments.compose.ComposeFrag
 import com.inlacou.commons.ui.fragments.coroutines.playground.CoroutinesPlaygroundFrag
 import com.inlacou.commons.ui.fragments.coroutines.playground.CoroutinesPlaygroundFragMdl
 import com.inlacou.commons.ui.fragments.coroutines.counter.CoroutinesCounterFrag
@@ -108,7 +109,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 		if(model.drawerOpenedOnStart) drawerLayout?.openDrawer(GravityCompat.START)
 
 		val drawerMenuItems = mutableListOf<SidebarViewMdl>()
-		values().forEach { drawerMenuItems.add(SidebarViewMdl(it, onClick = {
+		Section.entries.forEach { drawerMenuItems.add(SidebarViewMdl(it, onClick = {
 			Timber.d("adapterDrawer: $adapterDrawer")
 			adapterDrawer?.onItemSelected(it); loadSection(it.item) })) }
 		adapterDrawer = SidebarRvAdapter(rvDrawer, drawerMenuItems)
@@ -135,6 +136,7 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 			DIALOGS -> DialogsFrag.create(DialogsFragMdl())
 			COROUTINES_PLAYGROUND -> CoroutinesPlaygroundFrag.create(CoroutinesPlaygroundFragMdl())
 			COROUTINES_COUNTER -> CoroutinesCounterFrag.create(0)
+			JETPACK_COMPOSE -> ComposeFrag.create(0)
 			GRADIENT_TINT -> GradientTintFrag.create(
 				GradientTintFragMdl(
 					getColorCompat(com.inlacou.inkbetterandroidviews.R.color.basic_red),
@@ -148,7 +150,11 @@ class MainAct : BaseFragAct(), NavigationView.OnNavigationItemSelectedListener {
 	private fun loadFragment(fragment: Fragment, section: Section, extras: String? = null){
 		this.fragment = fragment
 		model.section = section
-		toolbar?.title = if(fragment is BaseFrag && fragment.title!=null) fragment.title else section.mdl.textResId.let { if(it!=null) getString(it) else "" }
+		toolbar?.title =
+			section.mdl.textResId?.let { getString(it) }
+				?: section.mdl.text
+				?: (if(fragment is BaseFrag && fragment.title != null) fragment.title else null)
+				?: fragment::class.simpleName
 		if (extras != null && extras.isNotEmpty()) {
 			val bundle = Bundle()
 			val type = object : TypeToken<Map<String, String>>(){}.type

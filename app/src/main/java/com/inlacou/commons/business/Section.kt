@@ -9,4 +9,5 @@ enum class Section(val mdl: SectionMdl) {
 	COROUTINES_PLAYGROUND(SectionMdl(text = "Coroutines playground", hideable = false)),
 	COROUTINES_COUNTER(SectionMdl(text = "Coroutines counter", hideable = false)),
 	GRADIENT_TINT(SectionMdl(text = "Gradient tint", hideable = false)),
+	JETPACK_COMPOSE(SectionMdl(text = "Compose", hideable = false)),
 }
