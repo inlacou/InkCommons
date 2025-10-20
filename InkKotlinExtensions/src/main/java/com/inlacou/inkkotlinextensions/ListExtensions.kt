@@ -439,6 +439,47 @@ private fun <T> List<T>.bubbleSort(compare: (first: T, second: T) -> Int, startI
 	} else /*recursive end*/ this
 }
 
+/**
+ * Split a list into [Pair]s. The second element would only be null on the last [Pair].
+ *
+ * @see [splitInChunks]
+ */
+fun <T> List<T>.toPairList(): List<Pair<T, T?>> {
+	val result = mutableListOf<Pair<T, T?>>()
+	var index = 0
+	while (index < size) {
+		if(index < size-1) {
+			result += Pair(get(index), get(index+1))
+			index++
+			index++
+		} else {
+			result += Pair(get(index), null)
+			index++
+		}
+	}
+	return result
+}
+
+/**
+ * Split a list on chunks of the given size. The last chunk may be smaller.
+ *
+ * @see [toPairList]
+ */
+fun <T> List<T>.splitInChunks(chunkSize: Int): List<List<T>> {
+	val result = mutableListOf<List<T>>()
+	var index = 0
+	while (index < size) {
+		if(index < size-chunkSize) {
+			result += subList(index, index+chunkSize)
+			index += chunkSize
+		} else {
+			result += subList(index, size)
+			index = size
+		}
+	}
+	return result
+}
+
 private fun myAssertEquals(item1: List<String>, i: Int, i1: Int, item2: List<String>) {
 	println("assert: $item1 swapping ${item1[i]} and ${item1[i1]} is $item2")
 	val swapped = item1.swap(i, i1)
