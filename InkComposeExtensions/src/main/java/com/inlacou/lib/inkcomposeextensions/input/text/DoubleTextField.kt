@@ -16,17 +16,17 @@ import androidx.compose.ui.text.input.KeyboardType
 @Composable
 fun DoubleTextField(
     value: Double,
-    label: String = "",
-    onValueChange: (value: Double) -> Unit,
     modifier: Modifier = Modifier,
+    label: String = "",
+    onValueChange: ((value: Double) -> Unit)?,
 ) {
-    var internalValue by remember { mutableStateOf(value.toString()) }
+    var internalValue by remember(value) { mutableStateOf(value.toString()) }
 
-    val onValueChange: (String) -> Unit = {
+    val myOnValueChange: (String) -> Unit = {
         if(it.isEmpty()) internalValue = it
         it.toDoubleOrNull()?.let { doubleValue ->
             internalValue = it
-            onValueChange.invoke(doubleValue)
+            onValueChange?.invoke(doubleValue)
         }
     }
 
@@ -37,13 +37,15 @@ fun DoubleTextField(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
             maxLines = 1,
             value = internalValue,
-            onValueChange = onValueChange,
+            onValueChange = myOnValueChange,
+            readOnly = onValueChange == null,
         )
     } else TextField(
         modifier = modifier,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
         maxLines = 1,
         value = internalValue,
-        onValueChange = onValueChange,
+        onValueChange = myOnValueChange,
+        readOnly = onValueChange == null,
     )
 }

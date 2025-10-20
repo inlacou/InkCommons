@@ -16,31 +16,33 @@ import androidx.compose.ui.text.input.KeyboardType
 @Composable
 fun StringTextField(
     value: String,
-    label: String = "",
-    onValueChange: (value: String) -> Unit,
     modifier: Modifier = Modifier,
+    label: String = "",
+    onValueChange: ((value: String) -> Unit?)?,
 ) {
-    var internalValue by remember { mutableStateOf(value) }
+    var internalValue by remember(value) { mutableStateOf(value) }
 
-    val onValueChange: (String) -> Unit = {
+    val myOnValueChange: (String) -> Unit = {
         internalValue = it
-        onValueChange.invoke(it)
+        onValueChange?.invoke(it)
     }
 
     if(label.isNotEmpty()) {
         OutlinedTextField(
             modifier = modifier,
             label = { Text(label) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
             maxLines = 1,
             value = internalValue,
-            onValueChange = onValueChange,
+            onValueChange = myOnValueChange,
+            readOnly = onValueChange == null,
         )
     } else TextField(
         modifier = modifier,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
         maxLines = 1,
         value = internalValue,
-        onValueChange = onValueChange,
+        onValueChange = myOnValueChange,
+        readOnly = onValueChange == null,
     )
 }
