@@ -48,8 +48,8 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compileOnly 'androidx.core:core-ktx:1.17.0'
-    compileOnly 'com.google.android.material:material:1.13.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'com.google.android.material:material:1.8.0'
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

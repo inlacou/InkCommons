@@ -26,7 +26,6 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -69,21 +68,17 @@ fun Activity.hideKeyboard(){
  * callback boolean determines if it should continue this path or not
  */
 fun Activity.iterateOverAllViews(doSomething: ((View) -> Boolean)? = null, debug: Boolean = false){
-	if(debug) Timber.d("family | start: ${getView()}")
 	var view = getView()
 	try {
 		while (view!=null){
 			view = view.parent as View?
-			if(debug) Timber.d("family | parent: $view")
 		}
 	}catch (e: java.lang.Exception){
-		if(debug) Timber.d("family | final parent: $view")
 		view?.let { handleView(it, debug = debug, callback = doSomething) }
 	}
 }
 
 private fun handleView(view: View, tag: String = " |", debug: Boolean = false, callback: ((View) -> Boolean)? = null){
-	if(debug) Timber.d("family$tag $view")
 	if(callback?.invoke(view)!=false) {
 		when (view) {
 			is AppBarLayout -> {
@@ -134,7 +129,6 @@ fun Activity.handleThrowable(throwable: Throwable){
 	//if(throwable is VolleyError){
 	//	handleGenericError(throwable, null)
 	//}else{
-		Timber.e(throwable.message)
 	//}
 }
 
@@ -190,7 +184,7 @@ fun Activity.saveImage(image: Bitmap, onComplete: (Uri?) -> Unit): Disposable {
 			stream.close()
 			uri = FileProvider.getUriForFile(this, "$packageName.fileprovider", file)
 		} catch (e: IOException) {
-			Timber.d("IOException while trying to write file for sharing: " + e.message)
+			//Timber.d("IOException while trying to write file for sharing: " + e.message)
 		}
 		onComplete.invoke(uri)
 	},{})
@@ -198,13 +192,12 @@ fun Activity.saveImage(image: Bitmap, onComplete: (Uri?) -> Unit): Disposable {
 
 fun Activity.toast(messageResId: Int, duration: Int = Toast.LENGTH_SHORT) = toast(getString(messageResId), duration)
 fun Activity.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-	Timber.d("toasted: $message")
+	//Timber.d("toasted: $message")
 	Toast.makeText(this, message, duration).show()
 }
 
 fun Activity.dialog(messageResId: Int, titleResId: Int? = null) = dialog(getString(messageResId), if(titleResId!=null) getString(titleResId) else null)
 fun Activity.dialog(message: CharSequence, title: CharSequence? = null) {
-	Timber.d("alerted: $message")
 	val builder = AlertDialog.Builder(this)
 	title?.let { builder.setTitle(it) }
 	message.let { builder.setMessage(message) }
@@ -212,7 +205,6 @@ fun Activity.dialog(message: CharSequence, title: CharSequence? = null) {
 }
 
 fun Activity?.snackbar(message: String, length: Int = Snackbar.LENGTH_LONG) = this?.getView()?.let {
-	Timber.d("Snackbaring $message")
 	Snackbar.make(it, message, length).apply {
 		view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {
 			setTextColor(getColorCompat(R.color.snackbar_text_color_over_dark))

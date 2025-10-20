@@ -16,7 +16,6 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.inkbetterandroidviews.R
-import timber.log.Timber
 import java.util.*
 
 open class BetterSpinner: AppCompatAutoCompleteTextView {
@@ -96,7 +95,6 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	override fun enoughToFilter(): Boolean = true
 
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
-		Timber.d("onFocusChanged $focused | allowFilter: $allowFilter | direction: $direction | previous $previouslyFocusedRect")
 		if (focused) {
 			if(allowFilter) {
 				val clear = clearOnClick && System.currentTimeMillis()-unfocusTimeMillis>200
@@ -121,7 +119,6 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 		return if (!this.isEnabled) {
 			false
 		} else {
-			Timber.d("onTouchEvent ${event.action} | allowFilter: $allowFilter")
 			when (event.action) {
 				MotionEvent.ACTION_DOWN -> startClickTime = Calendar.getInstance().timeInMillis
 				MotionEvent.ACTION_UP -> {
@@ -130,7 +127,6 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 							dismissDropDown()
 							false
 						} else {
-							Timber.d("requestFocus")
 							this.requestFocus()
 							// showDropDown()
 							true
@@ -181,12 +177,10 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	}
 
 	private fun setTitles(titles: List<String>) {
-		Timber.d("setTitles: $titles")
 		setAdapter(ArrayAdapter(context, R.layout.common_simple_list_item, titles))
 	}
 
 	private fun setComplexTitles(titles: List<ComplexItem>) {
-		Timber.d("setComplexTitles: $titles")
 		setAdapter(complexAdapterBuilder?.invoke(titles) ?: ArrayAdapter(context, R.layout.common_simple_list_item, titles.map { it.display }))
 	}
 
@@ -208,7 +202,6 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 					complexItems != null -> setComplexTitles(complexItems.filter { it.filter(text.toString()) })
 					simpleItems != null -> setTitles(simpleItems.filter { it.contains(text.toString(), ignoreCase = true) })
 					else -> {
-						Timber.d("super.performFiltering($text, $keyCode)")
 						super.performFiltering(text, keyCode)
 						//(adapter as ArrayAdapter<*>).filter.filter(text)
 					}

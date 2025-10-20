@@ -5,7 +5,6 @@ import android.view.View
 
 import io.reactivex.rxjava3.core.ObservableEmitter
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
-import timber.log.Timber
 
 class OnLongTouchIncrementFiringSpeedObs constructor(private val view: View, breakpoints: List<Pair<Int, Int>>? = null) : ObservableOnSubscribe<Long> {
 	
@@ -39,7 +38,6 @@ class OnLongTouchIncrementFiringSpeedObs constructor(private val view: View, bre
 		view.setOnTouchListener { v, event ->
 			when (event.actionMasked) {
 				MotionEvent.ACTION_DOWN -> {
-					Timber.d("$view ACTION DOWN | isPressed: ${view.isPressed}")
 					downTimeStamp = System.currentTimeMillis()
 					thread.stop()
 					currentIndex = 0
@@ -49,14 +47,12 @@ class OnLongTouchIncrementFiringSpeedObs constructor(private val view: View, bre
 					true //hold the event
 				}
 				MotionEvent.ACTION_UP -> {
-					Timber.d("$view ACTION UP")
 					thread.stop()
 					currentIndex = 0
 					view.isPressed = false
 					false //release the event
 				}
 				MotionEvent.ACTION_CANCEL -> {
-					Timber.w("$view ACTION CANCEL")
 					false
 				}
 				else -> {
@@ -77,25 +73,20 @@ class IntervalThread(startingPeriodicity: Long, val callback: (thread: IntervalT
 	
 	private var running = false
 	private var thread: Thread = Thread {
-		Timber.d("begin")
 		while(running) {
-			Timber.d("iteration $counter")
 			accumulator += periodicity
 			if(callback.invoke(this, counter, accumulator)) counter++
 			else running = false
 			Thread.sleep(periodicity)
 		}
-		Timber.d("end")
 	}
 
 	fun start() {
-		Timber.d("start")
 		running = true
 		thread.start()
 	}
 	
 	fun stop() {
-		Timber.d("stop")
 		running = false
 	}
 	

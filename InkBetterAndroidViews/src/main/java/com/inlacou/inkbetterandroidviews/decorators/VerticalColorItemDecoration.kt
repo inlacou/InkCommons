@@ -8,7 +8,6 @@ import android.view.View
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.inlacou.inkandroidextensions.getColorCompat
-import timber.log.Timber
 
 @Deprecated("each time it is updated, the size is bigger because it accumulates. So... this is not a good idea.")
 class VerticalColorItemDecoration(
@@ -37,11 +36,6 @@ class VerticalColorItemDecoration(
             val childRight = child.right
             val childTop = child.top
             val childBottom = child.bottom
-
-            Timber.d("$this | decoration | height: ${parent.height}")
-            Timber.d("$this | decoration | width: ${parent.width}")
-            Timber.d("$this | decoration | top decoration | from ${childTop-top-parent.paddingTop} ($childTop-$top-${parent.paddingTop}-${parent.marginTop}) to ${childTop+params.topMargin-parent.paddingTop} ($childTop+${params.topMargin}-${parent.paddingTop})")
-            Timber.d("$this | decoration | bottom decoration | from ${childBottom+params.bottomMargin} ($childBottom+${params.bottomMargin}) to ${childBottom+bottom} ($childBottom+$childBottom)")
 
             paint.color = context.getColorCompat(backgroundResId)
             //Top

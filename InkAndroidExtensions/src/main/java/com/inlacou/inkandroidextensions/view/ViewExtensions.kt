@@ -24,7 +24,6 @@ import com.inlacou.inkandroidextensions.saveImage
 import com.inlacou.inkandroidextensions.toUi
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
@@ -147,7 +146,6 @@ fun View.eraseBehaviours() {
 }
 
 fun View.getScreenshotBitmap(): Bitmap? {
-	Timber.d("getScreenshotBitmap")
 	this.clearFocus()
 	this.isPressed = false
 
@@ -165,7 +163,6 @@ fun View.getScreenshotBitmap(): Bitmap? {
 	this.buildDrawingCache()
 	val cacheBitmap = this.drawingCache
 	if (cacheBitmap == null) {
-		Timber.e("failed getViewBitmap($this)")
 		return null
 	}
 
@@ -176,7 +173,6 @@ fun View.getScreenshotBitmap(): Bitmap? {
 	this.setWillNotCacheDrawing(willNotCache)
 	this.drawingCacheBackgroundColor = color
 
-	Timber.d("returning")
 	return bitmap
 }
 
@@ -389,7 +385,6 @@ fun View.hideResizeObs(durationMillis: Long): Observable<Float> {
  * @return (lambda) int representing VISIBLE, INVISIBLE, or GONE
  */
 fun View.addOnVisibilityChangeListener(callback: (Int) -> Unit): ViewTreeObserver.OnGlobalLayoutListener {
-	Timber.d("addOnVisibilityChange")
 	val listener = object : ViewTreeObserver.OnGlobalLayoutListener {
 		var lastVisibility: Int? = null
 		override fun onGlobalLayout() {
@@ -422,7 +417,6 @@ fun View.resizeHeightObs(from: Int, to: Int, durationMillis: Long, log: Boolean 
 		.map { it.toFloat()/100 } //internal progress
 		.map { from+((abs(to-from)*it)*(if(from<to) 1 else -1)) }
 		.toUi().doOnNext{ factor ->
-			if(log) Timber.d("resize | factor: $factor")
 			View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED).let { measure(it, it) }
 			resizeView(width, factor.toInt())
 			setVisible(true, holdSpaceOnDisappear = false)
@@ -465,9 +459,8 @@ fun View.setWidthHeight(width: Int?, height: Int?) {
 			is CoordinatorLayout -> layoutParams = CoordinatorLayout.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
 			is LinearLayoutCompat -> layoutParams = LinearLayoutCompat.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
 			null -> layoutParams = LinearLayoutCompat.LayoutParams(width ?: ViewGroup.LayoutParams.WRAP_CONTENT, height ?: ViewGroup.LayoutParams.WRAP_CONTENT)
-			else -> Timber.d("parent is ${parent.javaClass}")
+			else -> {} //Timber.d("parent is ${parent.javaClass}")
 		} }
 	}
-	Timber.d("new layoutParams: $layoutParams")
 	this.layoutParams = layoutParams
 }

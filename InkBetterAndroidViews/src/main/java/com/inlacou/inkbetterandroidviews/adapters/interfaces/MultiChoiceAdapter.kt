@@ -1,7 +1,5 @@
 package com.inlacou.inkbetterandroidviews.adapters.interfaces
 
-import timber.log.Timber
-
 interface MultiChoiceAdapter<T: Selectable>: BaseAdapter {
 
 	/**
@@ -16,19 +14,16 @@ interface MultiChoiceAdapter<T: Selectable>: BaseAdapter {
 	
 	fun onItemSelected(item: T, allowDeselect: Boolean = true) {
 		if(!item.selectable) { //If not selectable, reassign as unselected and move on
-			Timber.d("item not selectable | $item")
 			item.selected = false
 			return
 		}
 		if(currentlySelected.contains(item)) { //If already selected
-			Timber.d("item already selected | $item")
 			if(allowDeselect) { //And deselect is allowed
 				//Deselect
 				item.selected = false
 				currentlySelected.remove(item)
 			}
 		}else if(currentlySelected.size<maxNumberOfSelectedItemsAllowed() || maxNumberOfSelectedItemsAllowed()<0) { //If not selected and we are not at the max number of allowed items
-			Timber.d("item not selected | $item")
 			//Select
 			item.selected = true
 			currentlySelected.add(item)

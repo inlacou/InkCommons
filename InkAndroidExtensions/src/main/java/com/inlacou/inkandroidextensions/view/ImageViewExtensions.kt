@@ -11,7 +11,6 @@ import android.widget.ImageView
 import androidx.core.widget.ImageViewCompat
 import com.inlacou.inkandroidextensions.getColorCompat
 import com.inlacou.inkandroidextensions.getDrawableCompat
-import timber.log.Timber
 
 fun ImageView.tint(colorResId: Int) {
 	ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(this.context.getColorCompat(colorResId)))
@@ -28,7 +27,6 @@ fun ImageView.clearTint() {
 fun ImageView.recycleBitmap() {
 	(drawable as BitmapDrawable?)?.bitmap?.let {
 		it.recycle()
-		Timber.d("SongView | bitmap $it from $this recycled")
 	}
 }
 

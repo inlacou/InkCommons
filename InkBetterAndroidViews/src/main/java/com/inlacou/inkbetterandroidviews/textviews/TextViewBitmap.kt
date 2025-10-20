@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.inlacou.inkandroidextensions.dpToPx
-import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
 
@@ -157,18 +156,13 @@ class TextViewBitmap private constructor(val context: Context) {
 				&& currentOffset+currentIndex<=this.length) {
 				currentText = this.substring(currentOffset, currentOffset+currentIndex)
 				currentIndex += 1
-				Timber.d("currentIndex: $currentIndex | currentText: $currentText | currentOffset: $currentOffset")
-				Timber.d("continue? ${paint.measureText(currentText)<maxWidth && currentOffset+currentIndex<=this.length} | ${paint.measureText(currentText)}<${maxWidth} && ${currentOffset}+${currentIndex}<=${this.length}")
 			}
-
-			Timber.d("End of line ${chunks.size} | currentIndex: $currentIndex | currentText: $currentText | currentOffset: $currentOffset")
 
 			if(currentOffset+currentIndex>=this.length) {
 				chunks.add(this.substring(currentOffset, this.length))
 				return Pair(chunks.take(maxLines), currentLine)
 			}else if(currentLine<maxLines) {
 				//Vamos quitando hasta que el último elemento no sea un espacio vacío o un salto de línea
-				Timber.d("currentIndex: $currentIndex | currentText: $currentText | currentOffset: $currentOffset")
 				while ((currentText.lastOrNull()!=' ' && currentText.lastOrNull()!='\n')) {
 					currentText = this.substring(currentOffset, currentOffset+currentIndex)
 					currentIndex -= 1

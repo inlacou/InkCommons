@@ -4,7 +4,6 @@ import android.graphics.PointF
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.atan2
@@ -83,7 +82,6 @@ class GestureListener(
 				lastPosition1 = null
 				rotating = false
 				startingAngle = 1337f
-				Timber.d("myGestureListener | movements: ${movements.map { it.name }}")
 				movements = mutableListOf()
 			}
 		}
@@ -126,7 +124,6 @@ class GestureListener(
 				val oldAngle = angleBetweenPoints(x0, y0, x1, y1)
 				val newAngle = angleBetweenPoints(x0Old, y0Old, x1Old, y1Old)
 				val diffAngle = newAngle-oldAngle
-				Timber.d("myGestureListener | angle threshold: ${(startingAngle-newAngle).absoluteValue} | starting: $startingAngle")
 				if(rotating || (startingAngle-newAngle).absoluteValue>rotateThreshold) {
 					trigger(motionEvent, touchPoints, doubleClick, null, null, diffAngle, if(newAngle>oldAngle) Move.ROTATE_COUNTER_CLOCKWISE else Move.ROTATE_CLOCKWISE)
 					rotating = true
@@ -179,7 +176,6 @@ class GestureListener(
 	}
 	
 	private fun trigger(motionEvent: MotionEvent, fingers: Int, doubleClick: Boolean, horizontalMovement: Float?, verticalMovement: Float?, value: Float?, movement: Move) {
-		Timber.d("myGestureListener | movement: ${movement.name}")
 		movements.add(movement)
 		onEvent.invoke(motionEvent, fingers, doubleClick, horizontalMovement, verticalMovement, value, movement)
 	}

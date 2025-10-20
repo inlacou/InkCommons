@@ -3,14 +3,9 @@ package com.inlacou.inkbetterandroidviews.listenerstoflow
 import android.view.MotionEvent
 import android.view.View
 
-import io.reactivex.rxjava3.core.ObservableEmitter
-import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import kotlinx.coroutines.channels.ProducerScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
-import timber.log.Timber
-import java.util.concurrent.Flow
 
 class OnLongTouchIncrementFiringSpeedFlow constructor(private val view: View, breakpoints: List<Pair<Int, Int>>? = null) {
 	
@@ -43,7 +38,6 @@ class OnLongTouchIncrementFiringSpeedFlow constructor(private val view: View, br
 		view.setOnTouchListener { v, event ->
 			when (event.actionMasked) {
 				MotionEvent.ACTION_DOWN -> {
-					Timber.d("$view ACTION DOWN | isPressed: ${view.isPressed}")
 					downTimeStamp = System.currentTimeMillis()
 					thread.stop()
 					currentIndex = 0
@@ -53,14 +47,12 @@ class OnLongTouchIncrementFiringSpeedFlow constructor(private val view: View, br
 					true //hold the event
 				}
 				MotionEvent.ACTION_UP -> {
-					Timber.d("$view ACTION UP")
 					thread.stop()
 					currentIndex = 0
 					view.isPressed = false
 					false //release the event
 				}
 				MotionEvent.ACTION_CANCEL -> {
-					Timber.w("$view ACTION CANCEL")
 					false
 				}
 				else -> {
@@ -80,25 +72,20 @@ class IntervalThread(startingPeriodicity: Long, val callback: (thread: IntervalT
 	
 	private var running = false
 	private var thread: Thread = Thread {
-		Timber.d("begin")
 		while(running) {
-			Timber.d("iteration $counter")
 			accumulator += periodicity
 			if(callback.invoke(this, counter, accumulator)) counter++
 			else running = false
 			Thread.sleep(periodicity)
 		}
-		Timber.d("end")
 	}
 
 	fun start() {
-		Timber.d("start")
 		running = true
 		thread.start()
 	}
 	
 	fun stop() {
-		Timber.d("stop")
 		running = false
 	}
 	

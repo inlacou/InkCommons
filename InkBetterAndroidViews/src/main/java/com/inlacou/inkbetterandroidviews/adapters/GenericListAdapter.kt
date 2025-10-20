@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Filter
-import com.inlacou.inkbetterandroidviews.spinners.BetterSpinner
-import timber.log.Timber
 
 class GenericListAdapter<CustomView: View, CustomModel>(
 	context: Context,
@@ -21,7 +18,6 @@ class GenericListAdapter<CustomView: View, CustomModel>(
 	
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
 		= (convertView ?: inflater.inflate(layoutResourceId, parent, false)).also {
-			Timber.d("getView $position | $itemList")
 			onViewPopulate.invoke(it as CustomView, itemList[position], position)
 	}
 }

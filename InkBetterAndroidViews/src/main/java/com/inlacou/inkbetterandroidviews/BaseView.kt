@@ -12,7 +12,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import io.reactivex.rxjava3.disposables.Disposable
-import timber.log.Timber
 
 abstract class BaseView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
 	: FrameLayout(context, attrs, defStyleAttr) {
@@ -40,28 +39,23 @@ abstract class BaseView @JvmOverloads constructor(context: Context, attrs: Attri
 			is AppCompatActivity -> it.lifecycle.addObserver(lifecycleObserver)
 			is Fragment -> it.lifecycle.addObserver(lifecycleObserver)
 			is ContextWrapper -> tryToRegister(it.baseContext, lifecycleObserver)
-			else -> Timber.w("not appCompatActivity, not fragment, not ContextWrapper: $it")
+			else -> {} //Timber.w("not appCompatActivity, not fragment, not ContextWrapper: $it")
 		}
 	}
 	
 	open fun onStart() {
-		Timber.d("onStart")
 		try{ baseController.onStart() }catch (upe: UninitializedPropertyAccessException) {}
 	}
 	open fun onResume() {
-		Timber.d("onResume")
 		try{ baseController.onResume() }catch (upe: UninitializedPropertyAccessException) {}
 	}
 	open fun onPause() {
-		Timber.d("onPause")
 		baseController.onPause()
 	}
 	open fun onStop() {
-		Timber.d("onStop")
 		baseController.onStop()
 	}
 	open fun onDestroy() {
-		Timber.d("onDestroy")
 		disposeAll()
 	}
 

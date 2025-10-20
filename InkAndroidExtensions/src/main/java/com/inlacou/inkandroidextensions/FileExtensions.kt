@@ -5,7 +5,6 @@ import android.media.MediaMetadataRetriever
 import android.net.Uri
 import androidx.annotation.RequiresPermission
 import com.inlacou.inkkotlinextensions.removeLast
-import timber.log.Timber
 import java.io.*
 import java.net.URLConnection
 
@@ -47,13 +46,10 @@ fun File.size(): Long {
 
 @RequiresPermission("android.permission.READ_EXTERNAL_STORAGE")
 fun File.readFolder(): List<File> {
-	Timber.d("readFolder | Path: $path")
 	if(isFile){
-		Timber.d("readFolder | path not a ic_folder, but a file")
 		return emptyList()
 	}
 	val files = listFiles()
-	Timber.d("readFolder | files on ic_folder: ${files?.size}")
 	return files?.toList() ?: listOf()
 }
 
@@ -122,7 +118,7 @@ fun File.hasVideo(): Boolean {
 		mmr.setDataSource(inputStream.fd)
 		mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_VIDEO)!=null
 	}catch (e: Exception) {
-		Timber.e(e)
+		//Timber.e(e)
 		false
 	}
 }
@@ -142,30 +138,28 @@ fun File.toMetadata(context: Context): MediaMetadataRetriever {
 	//val path = absolutePath.replace("[", "").replace("]", "") //FileNotFoundException
 	//val path = absolutePath.replace("[", "`[").replace("]", "`]") //FileNotFoundException
 	val path = absolutePath //setDataSource failed: status = 0x80000000
-	Timber.d("toMetadata | path:        $path")
 	//Timber.d("readFolder | toURI().rawPath: ${toURI().rawPath}")
 	val inputStream = FileInputStream(path)
-	Timber.d("toMetadata | file exists: ${exists()}")
 	val mmr = MediaMetadataRetriever()
 	try{
 		mmr.setDataSource(inputStream.fd)
 	}catch (rte: RuntimeException) {
 		try{
-			Timber.w(rte)
+			//Timber.w(rte)
 			val afd = context.assets.openFd(path)
 			mmr.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
 		}catch (rte: RuntimeException) {
-			Timber.w(rte)
+			//Timber.w(rte)
 			try{
-				Timber.w(rte)
+				//Timber.w(rte)
 				mmr.setDataSource(absolutePath)
 			}catch (rte: RuntimeException) {
-				Timber.w(rte)
+				//Timber.w(rte)
 				try{
-					Timber.w(rte)
+					//Timber.w(rte)
 					mmr.setDataSource(context, Uri.fromFile(this))
 				}catch (rte: RuntimeException) {
-					Timber.w(rte)
+					//Timber.w(rte)
 				}
 			}
 		}

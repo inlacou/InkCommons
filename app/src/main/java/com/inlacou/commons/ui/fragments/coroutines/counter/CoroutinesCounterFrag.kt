@@ -1,7 +1,6 @@
 package com.inlacou.commons.ui.fragments.coroutines.counter
 
 import android.os.Bundle
-import timber.log.Timber
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,6 @@ class CoroutinesCounterFrag: Fragment() {
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        Timber.d("onCreateView")
         val rootView = inflater.inflate(R.layout.fragment_counter, container, false)
         binder = FragmentCounterBinding.bind(rootView)
         
