@@ -3,6 +3,7 @@ buildscript {
     ext.kotlin_version = '2.0.0'
     ext.coroutines_core_version = "1.6.1"
     ext.coroutines_android_version = "1.6.1"
+    ext.inker = "2.0.1"
     ext.exinput_version = "2.2.4"
     ext.pripple_version = "1.6.3"
     ext.inkspannable_version = "1.2.0"
