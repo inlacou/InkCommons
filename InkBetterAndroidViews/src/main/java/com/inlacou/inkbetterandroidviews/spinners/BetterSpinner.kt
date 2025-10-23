@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.text.InputType
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -25,6 +26,7 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 	constructor(arg0: Context?, arg1: AttributeSet?, arg2: Int) : super(arg0!!, arg1, arg2)
 
 	private var unfocusTimeMillis = 0L
+	private var keyboardVisible = false
 
 	/**
 	 * Whether to allow filtering by inputting text.
@@ -68,7 +70,23 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 		isFocusableInTouchMode = true
 		inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
 	}
-	
+
+	override fun dispatchKeyEventPreIme(event: KeyEvent): Boolean {
+		return if (event.keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+			val keyboard = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+			if (keyboardVisible) {
+				keyboardVisible = false
+				keyboard.hideSoftInputFromWindow(windowToken, 0)
+				true
+			} else if (isPopup) {
+				dismissDropDown()
+				isPopup = false
+				clearFocus()
+				true
+			} else super.dispatchKeyEventPreIme(event)
+		} else super.dispatchKeyEventPreIme(event)
+	}
+
 	override fun setText(text: CharSequence?, filter: Boolean) {
 		super.setText(text, filter)
 		onItemClick()
@@ -96,6 +114,7 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
 		if (focused) {
+			keyboardVisible = true
 			if(allowFilter) {
 				val clear = clearOnClick && System.currentTimeMillis()-unfocusTimeMillis>200
 				if(clear) setText("")
@@ -217,13 +236,11 @@ open class BetterSpinner: AppCompatAutoCompleteTextView {
 
 	override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
 		super.onTextChanged(text, start, lengthBefore, lengthAfter)
-		try {
-			(parent.parent as TextInputLayout).error = null
-		}catch (e: Exception) {}
+		(parent?.parent as? TextInputLayout)?.error = null
 	}
 	
 	override fun setError(error: CharSequence?) {
-		(parent.parent as TextInputLayout).error = error
+		(parent?.parent as? TextInputLayout)?.error = error
 	}
 	
 	companion object {
