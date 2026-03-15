@@ -5,6 +5,9 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -55,17 +58,14 @@ fun <T: ComboBoxItem> ComboBoxMulti(
             1 -> selectedOptionsList.first().display
             else -> selectedOptionsList.map { it.display }.toString()
         }
-        TextField(
+        OutlinedTextField(
             enabled = isEnabled(),
             modifier = Modifier.menuAnchor(),
             readOnly = true,
             value = selectedSummary,
             onValueChange = {},
             label = { Text(text = label) },
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            },
-            colors = ExposedDropdownMenuDefaults.textFieldColors(),
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
         )
         ExposedDropdownMenu(
             expanded = expanded,
@@ -76,7 +76,7 @@ fun <T: ComboBoxItem> ComboBoxMulti(
         ) {
             for (option in items) {
                 //use derivedStateOf to evaluate if it is checked
-                var checked = remember {
+                val checked = remember {
                     derivedStateOf { selectedOptionsList.any { it == option } }
                 }.value
 
