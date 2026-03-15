@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
@@ -25,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.inlacou.commons.ui.fragments.coroutines.counter.CoroutinesCounterFrag
 import com.inlacou.inker.Inker
+import com.inlacou.lib.inkcomposeextensions.dialogs.TextInputDialog
+import com.inlacou.lib.inkcomposeextensions.dialogs.WarningDialog
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBox
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBoxItem
 import com.inlacou.lib.inkcomposeextensions.input.text.DoubleTextField
@@ -60,6 +63,8 @@ class ComposeFrag : Fragment() {
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Text("Testing Jetpack Compose UI inside Fragment")
+
+                        var dialog by remember { mutableStateOf("") }
 
                         var doubleValue by remember { mutableDoubleStateOf(0.0) }
                         Text("Double value: $doubleValue", color = Color.White)
@@ -107,6 +112,37 @@ class ComposeFrag : Fragment() {
                                 selectedItems = it
                             }
                         )
+
+                        Button(
+                            onClick = {
+                                dialog = "input"
+                            }
+                        ) {
+                            Text("Show TextInputDialog")
+                        }
+
+                        Button(
+                            onClick = {
+                                dialog = "warning"
+                            }
+                        ) {
+                            Text("Show WarningDialog")
+                        }
+
+                        when(dialog) {
+                            "input" -> TextInputDialog(
+                                onAccept = { Inker.d { "onAccept: $it" }; dialog = "" },
+                                onCancel = { Inker.d { "onCancel" }; dialog = "" },
+                                title = "Title",
+                                positiveButtonText = "Accept"
+                            )
+                            "warning" -> WarningDialog(
+                                onAccept = { Inker.d { "onAccept" }; dialog = "" },
+                                onCancel = { Inker.d { "onCancel" }; dialog = "" },
+                                text = "Are you sure?",
+                                positiveButtonText = "Accept"
+                            )
+                        }
                     }
                 }
             }
