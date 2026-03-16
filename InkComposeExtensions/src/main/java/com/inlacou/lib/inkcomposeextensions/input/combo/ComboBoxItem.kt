@@ -1,4 +1,8 @@
 package com.inlacou.lib.inkcomposeextensions.input.combo
+
+import androidx.compose.runtime.Composable
+
 interface ComboBoxItem {
-    val display: String
+    @Composable
+    fun getDisplay(): String
 }

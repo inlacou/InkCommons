@@ -37,7 +37,7 @@ fun <T: ComboBoxItem> ComboBox(
             enabled = isEnabled(),
             modifier = Modifier.menuAnchor(),
             readOnly = true,
-            value = selectedItem.display,
+            value = selectedItem.getDisplay(),
             onValueChange = {},
             label = { Text(label) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
@@ -47,11 +47,11 @@ fun <T: ComboBoxItem> ComboBox(
             expanded = expanded,
             onDismissRequest = { expanded = false },
         ) {
-            items.forEach { label ->
+            items.forEach { item ->
                 DropdownMenuItem(
-                    text = { Text(text = label.display) },
+                    text = { Text(text = item.getDisplay()) },
                     onClick = {
-                        onItemSelected(items.first { it.display == label.display })
+                        onItemSelected(items.first { it == item })
                         expanded = false
                     }
                 )

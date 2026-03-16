@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -83,12 +84,8 @@ class ComposeFrag : Fragment() {
                             "Donostia",
                         ).map {
                             object : ComboBoxItem {
-                                override val display: String get() = it
-                                override fun toString(): String = it
-                                override fun equals(other: Any?): Boolean {
-                                    return if(other is ComboBoxItem) this.display == other.display
-                                    else false
-                                }
+                                @Composable
+                                override fun getDisplay(): String = it
                             }
                         }
 

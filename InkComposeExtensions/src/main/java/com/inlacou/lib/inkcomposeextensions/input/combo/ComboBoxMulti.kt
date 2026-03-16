@@ -55,8 +55,8 @@ fun <T: ComboBoxItem> ComboBoxMulti(
     ) {
         val selectedSummary = when (selectedOptionsList.size) {
             0 -> ""
-            1 -> selectedOptionsList.first().display
-            else -> selectedOptionsList.map { it.display }.toString()
+            1 -> selectedOptionsList.first().getDisplay()
+            else -> selectedOptionsList.map { it.getDisplay() }.toString()
         }
         OutlinedTextField(
             enabled = isEnabled(),
@@ -95,7 +95,7 @@ fun <T: ComboBoxItem> ComboBoxMulti(
                                     }
                                 },
                             )
-                            Text(text = option.display)
+                            Text(text = option.getDisplay())
                         }
                     },
                     onClick = {

@@ -44,10 +44,8 @@ fun <T: ComboBoxItem> CustomComboBox(
 
     Column(modifier) {
         OutlinedTextField(
-            value = selectedItem.display,
-            onValueChange = {
-                onItemSelected(items.first { item -> item.display == it })
-            },
+            value = selectedItem.getDisplay(),
+            onValueChange = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .onGloballyPositioned { mTextFieldSize = it.size.toSize() }
@@ -69,11 +67,11 @@ fun <T: ComboBoxItem> CustomComboBox(
             modifier = Modifier
                 .width(with(LocalDensity.current) { mTextFieldSize.width.toDp() })
         ) {
-            items.forEach { label ->
+            items.forEach { item ->
                 DropdownMenuItem(
-                    text = { Text(text = label.display) },
+                    text = { Text(text = item.getDisplay()) },
                     onClick = {
-                        onItemSelected(items.first { it.display == label.display })
+                        onItemSelected(items.first { it == item })
                         mExpanded = false
                     }
                 )
