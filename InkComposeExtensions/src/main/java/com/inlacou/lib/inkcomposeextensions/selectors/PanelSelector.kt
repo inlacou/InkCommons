@@ -1,4 +1,4 @@
-package com.inlacou.lib.inkcomposeextensions.background
+package com.inlacou.lib.inkcomposeextensions.selectors
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

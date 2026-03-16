@@ -1,4 +1,4 @@
-package com.inlacou.lib.inkcomposeextensions.background
+package com.inlacou.lib.inkcomposeextensions.scroll
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,6 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inlacou.lib.inkcomposeextensions.background.BoxItem
+import com.inlacou.lib.inkcomposeextensions.background.GradientColorBoxItem
+import com.inlacou.lib.inkcomposeextensions.ITEM_PADDING
+import com.inlacou.lib.inkcomposeextensions.background.BoxItemView
 
 @Composable
 fun OneRowHorizontalScroll(
@@ -24,7 +28,7 @@ fun OneRowHorizontalScroll(
         // number of colors and items per row
         items(items) { item ->
             val actualIndex = items.indexOf(item)
-            renderBoxItem(item = item, actualIndex == selectedItemIndex, onSelect = onItemSelected)
+            BoxItemView(item = item, actualIndex == selectedItemIndex, onSelect = onItemSelected)
         }
     }
 }

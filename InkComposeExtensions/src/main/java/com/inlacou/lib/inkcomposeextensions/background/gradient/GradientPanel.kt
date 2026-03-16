@@ -13,11 +13,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import com.inlacou.lib.inkcomposeextensions.background.ColorBoxItem
-import com.inlacou.lib.inkcomposeextensions.background.GRADIENT_ANGLE_RANGE_END
-import com.inlacou.lib.inkcomposeextensions.background.GRADIENT_ANGLE_RANGE_START
+import com.inlacou.lib.inkcomposeextensions.GRADIENT_ANGLE_RANGE_END
+import com.inlacou.lib.inkcomposeextensions.GRADIENT_ANGLE_RANGE_START
 import com.inlacou.lib.inkcomposeextensions.background.GradientColorBoxItem
-import com.inlacou.lib.inkcomposeextensions.background.ITEM_PADDING
-import com.inlacou.lib.inkcomposeextensions.background.OneRowHorizontalScroll
+import com.inlacou.lib.inkcomposeextensions.ITEM_PADDING
+import com.inlacou.lib.inkcomposeextensions.scroll.OneRowHorizontalScroll
 import com.inlacou.lib.inkcomposeextensions.background.color.ColorBox
 import com.inlacou.lib.inkcomposeextensions.sliders.CustomTwoDirectionalSlider
 

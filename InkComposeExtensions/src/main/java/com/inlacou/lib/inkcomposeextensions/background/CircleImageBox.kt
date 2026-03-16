@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inlacou.lib.inkcomposeextensions.BOX_SIZE
 import com.inlacou.lib.inkcomposeextensions.Colors
 import com.inlacou.lib.inkcomposeextensions.Utils
 

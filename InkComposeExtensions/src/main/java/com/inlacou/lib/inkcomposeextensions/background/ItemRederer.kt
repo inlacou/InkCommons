@@ -6,7 +6,7 @@ import com.inlacou.lib.inkcomposeextensions.background.color.TransparentColorBox
 import com.inlacou.lib.inkcomposeextensions.background.gradient.GradientColorBox
 
 @Composable
-fun renderBoxItem(item: BoxItem, isSelected: Boolean, onSelect: (BoxItem) -> Unit) {
+fun BoxItemView(item: BoxItem, isSelected: Boolean, onSelect: (BoxItem) -> Unit) {
     when (item) {
         is ColorBoxItem -> ColorBox(item = item.copy(isSelected = isSelected), onSelect = onSelect)
         is GradientColorBoxItem ->

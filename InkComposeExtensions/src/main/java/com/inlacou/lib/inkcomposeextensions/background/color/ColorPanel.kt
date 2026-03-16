@@ -10,8 +10,8 @@ import com.inlacou.lib.inkcomposeextensions.background.BoxItem
 import com.inlacou.lib.inkcomposeextensions.background.CircleIconBoxItem
 import com.inlacou.lib.inkcomposeextensions.background.CircleImageBoxItem
 import com.inlacou.lib.inkcomposeextensions.background.ColorBoxItem
-import com.inlacou.lib.inkcomposeextensions.background.ITEM_PADDING
-import com.inlacou.lib.inkcomposeextensions.background.MultiRowHorizontalScroll
+import com.inlacou.lib.inkcomposeextensions.ITEM_PADDING
+import com.inlacou.lib.inkcomposeextensions.scroll.MultiRowHorizontalScroll
 import com.inlacou.lib.inkcomposeextensions.background.TransparentBoxItem
 
 @Composable

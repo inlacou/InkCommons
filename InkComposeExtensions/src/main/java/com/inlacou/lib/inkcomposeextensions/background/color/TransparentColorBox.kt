@@ -21,13 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.core.graphics.scale
 import com.inlacou.lib.inkcomposeextensions.Config
 import com.inlacou.lib.inkcomposeextensions.R
-import com.inlacou.lib.inkcomposeextensions.background.BORDER_WIDTH
-import com.inlacou.lib.inkcomposeextensions.background.BOX_PADDING
-import com.inlacou.lib.inkcomposeextensions.background.BOX_SIZE
+import com.inlacou.lib.inkcomposeextensions.BORDER_WIDTH
+import com.inlacou.lib.inkcomposeextensions.BOX_PADDING
+import com.inlacou.lib.inkcomposeextensions.BOX_SIZE
 import com.inlacou.lib.inkcomposeextensions.background.BoxItem
-import com.inlacou.lib.inkcomposeextensions.background.INNER_RADIUS
-import com.inlacou.lib.inkcomposeextensions.background.OUTER_RADIUS
-import com.inlacou.lib.inkcomposeextensions.background.SIZE_DIFF
+import com.inlacou.lib.inkcomposeextensions.INNER_RADIUS
+import com.inlacou.lib.inkcomposeextensions.OUTER_RADIUS
+import com.inlacou.lib.inkcomposeextensions.SIZE_DIFF
 import com.inlacou.lib.inkcomposeextensions.background.TransparentBoxItem
 import toPixel
 

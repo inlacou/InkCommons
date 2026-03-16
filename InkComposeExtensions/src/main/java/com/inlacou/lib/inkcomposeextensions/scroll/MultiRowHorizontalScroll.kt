@@ -1,4 +1,4 @@
-package com.inlacou.lib.inkcomposeextensions.background
+package com.inlacou.lib.inkcomposeextensions.scroll
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +13,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inlacou.lib.inkcomposeextensions.Colors
 import com.inlacou.lib.inkcomposeextensions.Utils
+import com.inlacou.lib.inkcomposeextensions.background.BoxItem
+import com.inlacou.lib.inkcomposeextensions.background.CircleIconBoxItem
+import com.inlacou.lib.inkcomposeextensions.background.ColorBoxItem
+import com.inlacou.lib.inkcomposeextensions.ITEMS_PER_ROW
+import com.inlacou.lib.inkcomposeextensions.ITEM_PADDING
+import com.inlacou.lib.inkcomposeextensions.background.RoundedIconBoxItem
+import com.inlacou.lib.inkcomposeextensions.background.TransparentBoxItem
+import com.inlacou.lib.inkcomposeextensions.background.BoxItemView
 
 /**
  * A horizontally scrollable grid component that displays items in multiple rows.
@@ -57,7 +65,7 @@ fun MultiRowHorizontalScroll(
             ) {
                 rowItems.forEachIndexed { index, item ->
                     val actualIndex = items.indexOf(item)
-                    renderBoxItem(
+                    BoxItemView(
                         item = item,
                         actualIndex == selectedItemIndex,
                         onSelect = onItemSelected,

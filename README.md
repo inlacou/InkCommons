@@ -2,6 +2,14 @@
 # InkCommons [![](https://jitpack.io/v/inlacou/InkCommons.svg)](https://jitpack.io/#inlacou/InkCommons)
 Library project with various common libraries for my projects.
 
+- [InkKotlinCommons](#InkKotlinCommons)
+- [InkKotlinExtensions](#InkKotlinExtensions)
+- [InkAnimationTypes](#InkAnimationTypes)
+- [InkAndroidCommons](#InkAndroidCommons)
+- [InkAndroidExtensions](#InkAndroidExtensions)
+- [InkBetterAndroidViews](#InkBetterAndroidViews)
+- [InkComposeExtensions](#InkComposeExtensions)
+
 ## InkKotlinCommons
 Includes some new common classes.
 
@@ -88,6 +96,8 @@ Provided ease types are:
 * EaseInQuint
 </details>
 
+## InkAndroidCommons
+Import with `implementation 'com.github.inlacou.InkCommons:InkAndroidCommons:'` [![](https://jitpack.io/v/inlacou/InkCommons.svg)](https://jitpack.io/#inlacou/InkCommons)
 
 ## InkAndroidExtensions
 Import with `implementation 'com.github.inlacou.InkCommons:InkAndroidExtensions:'` [![](https://jitpack.io/v/inlacou/InkCommons.svg)](https://jitpack.io/#inlacou/InkCommons)
@@ -148,3 +158,8 @@ Also includes some extensions, allowing better view listener interaction through
 * `CheckBox.checkedChanges(): Observable<Boolean>`
 * `View.layoutChanges(): Observable<Triple<View, LayoutChangeObs.Dimensions, LayoutChangeObs.Dimensions>>`
 * `View.longClickSpeedingFiringIntervals(breakpointsAndSpeeds: List<Pair<Int, Int>>? = null): Observable<Long>`
+
+## InkComposeExtensions
+Import with `implementation 'com.github.inlacou.InkCommons:InkComposeExtensions:'` [![](https://jitpack.io/v/inlacou/InkCommons.svg)](https://jitpack.io/#inlacou/InkCommons)
+
+Some fairly simple Compose views and extensions. Easy to use or just copy code from it.

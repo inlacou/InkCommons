@@ -1,4 +1,4 @@
-package com.inlacou.lib.inkcomposeextensions.background
+package com.inlacou.lib.inkcomposeextensions
 
 const val BOX_SIZE = 36
 const val OUTER_RADIUS = 8

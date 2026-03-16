@@ -14,14 +14,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inlacou.lib.inkcomposeextensions.Config
-import com.inlacou.lib.inkcomposeextensions.background.BORDER_WIDTH
-import com.inlacou.lib.inkcomposeextensions.background.BOX_PADDING
-import com.inlacou.lib.inkcomposeextensions.background.BOX_SIZE
+import com.inlacou.lib.inkcomposeextensions.BORDER_WIDTH
+import com.inlacou.lib.inkcomposeextensions.BOX_PADDING
+import com.inlacou.lib.inkcomposeextensions.BOX_SIZE
 import com.inlacou.lib.inkcomposeextensions.background.BoxItem
 import com.inlacou.lib.inkcomposeextensions.background.ColorBoxItem
-import com.inlacou.lib.inkcomposeextensions.background.INNER_RADIUS
-import com.inlacou.lib.inkcomposeextensions.background.OUTER_RADIUS
-import com.inlacou.lib.inkcomposeextensions.background.SIZE_DIFF
+import com.inlacou.lib.inkcomposeextensions.INNER_RADIUS
+import com.inlacou.lib.inkcomposeextensions.OUTER_RADIUS
+import com.inlacou.lib.inkcomposeextensions.SIZE_DIFF
 
 @Composable
 fun ColorBox(
