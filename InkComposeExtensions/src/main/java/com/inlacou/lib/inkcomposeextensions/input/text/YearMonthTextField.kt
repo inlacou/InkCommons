@@ -29,7 +29,6 @@ fun YearMonthTextField(
     label: String = "",
     onValueChange: ((year: Int, month: Int) -> Unit)?,
 ) {
-    Inker.d { "value: ${calendarToString(value)}" }
     var showDialog by remember { mutableStateOf(false) }
     var internalValue by remember(value) { mutableStateOf(value) }
 
@@ -78,7 +77,6 @@ fun YearMonthTextField(
                     set(Calendar.YEAR, year)
                     set(Calendar.MONTH, month)
                 }
-                Inker.d { "onConfirm year=$year month=${month}" }
                 onValueChange?.invoke(year, month)
                 showDialog = false
             },

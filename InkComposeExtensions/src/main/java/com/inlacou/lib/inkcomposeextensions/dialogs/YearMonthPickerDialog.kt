@@ -76,6 +76,52 @@ fun YearMonthPickerDialog(
         MutableInteractionSource()
     }
 
+    @Composable
+    fun monthsRow(months: List<String>) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            months.forEach {
+                Box(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .clickable(
+                            indication = null,
+                            interactionSource = interactionSource,
+                            onClick = {
+                                month = it
+                            }
+                        )
+                        .background(
+                            color = Color.Transparent
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    val animatedSize by animateDpAsState(
+                        targetValue = if (month == it) 60.dp else 0.dp,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = LinearOutSlowInEasing
+                        )
+                    )
+                    Box(
+                        modifier = Modifier
+                            .size(animatedSize)
+                            .background(
+                                color = if (month == it) Color.Blue else Color.Transparent,
+                                shape = CircleShape
+                            )
+                    )
+                    Text(
+                        text = it,
+                        color = if (month == it) Color.White else Color.Black,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+        }
+    }
+
     AlertDialog(
         containerColor = Color.White,
         shape = RoundedCornerShape(10),
@@ -128,50 +174,10 @@ fun YearMonthPickerDialog(
                     modifier = Modifier
                         .padding(top = 30.dp)
                         .fillMaxWidth(),
-                    // elevation = 0.dp
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        months.forEach {
-                            Box(
-                                modifier = Modifier
-                                    .size(60.dp)
-                                    .clickable(
-                                        indication = null,
-                                        interactionSource = interactionSource,
-                                        onClick = {
-                                            month = it
-                                        }
-                                    )
-                                    .background(
-                                        color = Color.Transparent
-                                    ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                val animatedSize by animateDpAsState(
-                                    targetValue = if (month == it) 60.dp else 0.dp,
-                                    animationSpec = tween(
-                                        durationMillis = 500,
-                                        easing = LinearOutSlowInEasing
-                                    )
-                                )
-                                Box(
-                                    modifier = Modifier
-                                        .size(animatedSize)
-                                        .background(
-                                            color = if (month == it) Color.Blue else Color.Transparent,
-                                            shape = CircleShape
-                                        )
-                                )
-                                Text(
-                                    text = it,
-                                    color = if (month == it) Color.White else Color.Black,
-                                    fontWeight = FontWeight.Medium
-                                )
-                            }
-                        }
-                    }
+                    monthsRow(months.take(4))
+                    monthsRow(months.drop(4).take(4))
+                    monthsRow(months.drop(8).take(4))
                 }
             }
         },
