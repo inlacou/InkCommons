@@ -34,6 +34,8 @@ import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBoxItem
 import com.inlacou.lib.inkcomposeextensions.input.text.DoubleTextField
 import com.inlacou.lib.inkcomposeextensions.input.text.InkTextField
 import com.inlacou.lib.inkcomposeextensions.input.text.IntegerTextField
+import com.inlacou.lib.inkcomposeextensions.input.text.YearMonthTextField
+import java.util.Calendar
 
 class ComposeFrag : Fragment() {
 
@@ -75,6 +77,17 @@ class ComposeFrag : Fragment() {
                         Text("Int value: $intValue", color = Color.White)
                         InkTextField(intValue, onValueChange = { intValue = it })
 
+                        var monthValue by remember { mutableIntStateOf(Calendar.getInstance().get(Calendar.MONTH)) }
+                        var yearValue by remember { mutableIntStateOf(Calendar.getInstance().get(Calendar.YEAR)) }
+                        Text("Year/Month value: $yearValue/${(monthValue+1).toString().padStart(2, '0')}", color = Color.White)
+                        InkTextField(
+                            yearValue, monthValue,
+                            onValueChange = { year, month ->
+                                Inker.d { "selected year=$year month=$month" }
+                                yearValue = year; monthValue = month
+                            }
+                        )
+
                         val cities = listOf(
                             "Bilbao",
                             "Berango",
@@ -90,7 +103,7 @@ class ComposeFrag : Fragment() {
                         }
 
                         var selectedItem by remember { mutableStateOf(cities.first()) }
-                        Text("Selected item: $selectedItem", color = Color.White)
+                        Text("Selected item: ${selectedItem.getDisplay()}", color = Color.White)
                         ComboBox(
                             label = "Cities",
                             items = cities,
