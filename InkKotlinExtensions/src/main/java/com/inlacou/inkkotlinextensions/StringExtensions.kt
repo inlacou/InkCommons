@@ -345,13 +345,23 @@ fun String.formatDecimal(
 	}
 }
 
+/**
+ * Used to convert a [Array] to [String] giving more indentation to each item.
+ * If the item is a multiline [String], it will do even more indentation for each line of it.
+ *
+ * @receiver [Array]<[T]> to convert to [String]
+ *
+ * @param [tabLevel] [Int] to start with
+ *
+ * @return [String]
+ */
 internal fun <T> Array<T>.toStringWithIndentation(tabLevel: Int = 0): String = toList().toStringWithIndentation(tabLevel)
 
 /**
- * Used to convert a [List] to [String] giving more indentation to each item.
+ * Used to convert a [Collection] to [String] giving more indentation to each item.
  * If the item is a multiline [String], it will do even more indentation for each line of it.
  *
- * @receiver [List]<[T]> to convert to [String]
+ * @receiver [Collection]<[T]> to convert to [String]
  *
  * @param [tabLevel] [Int] to start with
  *
@@ -369,6 +379,13 @@ internal fun <T> Collection<T>.toStringWithIndentation(tabLevel: Int = 0): Strin
 	result = result.dropLast(1) // Remove the trailing comma
 	return if (this.isNotEmpty() && this.first() !is String) "$result\n${"\t" * tabLevel}]"
 	else result
+}
+
+fun String.indexOf(regex: Regex, startIndex: Int = 0): Int {
+    val text = this.substring(startIndex = startIndex)
+    return regex.find(text)?.let {
+        text.indexOf(it.groupValues.first())
+    } ?: -1
 }
 
 /**
