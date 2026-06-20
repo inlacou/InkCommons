@@ -52,7 +52,7 @@ dependencies {
     compileOnly project(':InkAnimationTypes')
     compileOnly project(':InkKotlinCommons')
     implementation 'com.github.inlacou:InkBasicModels:1.2.1'
-    implementation "com.github.irontec:InkSpannable:$inkspannable_version"
+    implementation "com.github.inlacou:InkSpannable:$inkspannable_version"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.17.0'

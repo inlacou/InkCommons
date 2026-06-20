@@ -15,7 +15,7 @@ fun ByteArray.toStringsRadix(radix: Int = 10): String {
  * Trasforms every byte to it's corresponding Char value
  */
 fun ByteArray.toChars(): String {
-	return map { it.toChar() }
+	return map { it.toInt().toChar() }
 		.toString().replace(", ", "").replace("[", "").replace("]", "")
 }
 
@@ -23,7 +23,7 @@ fun ByteArray.toChars(): String {
  * Trasforms every byte to it's corresponding Char value
  */
 fun Array<Byte>.toChars(): String {
-	return map { it.toChar() }
+	return map { it.toInt().toChar() }
 		.toString().replace(", ", "").replace("[", "").replace("]", "")
 }
 

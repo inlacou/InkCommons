@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'de.mannodermaus.android-junit5'
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.0" // this version matches your Kotlin version
+    id("org.jetbrains.kotlin.plugin.compose") version "$kotlin_version" // this version matches your Kotlin version
 }
 
 android {
@@ -104,7 +104,7 @@ dependencies {
     implementation "com.github.inlacou:PRipple:$pripple_version"
     implementation "com.github.inlacou:ExInput:$exinput_version"
     implementation 'com.github.inlacou:InkBasicModels:1.2.1'
-    implementation "com.github.irontec:InkSpannable:$inkspannable_version"
+    implementation "com.github.inlacou:InkSpannable:$inkspannable_version"
 
     implementation "com.github.inlacou:Inker:$inker"
     implementation "org.greenrobot:eventbus:3.3.1"
