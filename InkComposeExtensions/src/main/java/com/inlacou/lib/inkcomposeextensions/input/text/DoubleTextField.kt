@@ -15,16 +15,15 @@ import androidx.compose.ui.text.input.KeyboardType
 
 @Composable
 fun DoubleTextField(
-    value: Double,
+    value: Double?,
     modifier: Modifier = Modifier,
     label: String = "",
-    onValueChange: ((value: Double) -> Unit)?,
+    onValueChange: ((value: Double?) -> Unit)?,
 ) {
-    var internalValue by remember(value) { mutableStateOf(value.toString()) }
+    var internalValue by remember { mutableStateOf(value.toString()) }
 
     val myOnValueChange: (String) -> Unit = {
-        if(it.isEmpty()) internalValue = it
-        it.toDoubleOrNull()?.let { doubleValue ->
+        it.toDoubleOrNull().let { doubleValue ->
             internalValue = it
             onValueChange?.invoke(doubleValue)
         }

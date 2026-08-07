@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.inlacou.commons.ui.fragments.coroutines.counter.CoroutinesCounterFrag
 import com.inlacou.inker.Inker
+import com.inlacou.inkkotlincommons.YearMonth
 import com.inlacou.lib.inkcomposeextensions.dialogs.TextInputDialog
 import com.inlacou.lib.inkcomposeextensions.dialogs.WarningDialog
 import com.inlacou.lib.inkcomposeextensions.input.combo.ComboBox
@@ -71,21 +72,21 @@ class ComposeFrag : Fragment() {
 
                         var doubleValue by remember { mutableDoubleStateOf(0.0) }
                         Text("Double value: $doubleValue", color = Color.White)
-                        InkTextField(doubleValue, label = "label", onValueChange = { doubleValue = it })
+                        InkTextField(doubleValue, label = "label", onValueChange = { doubleValue = it ?: 0.0 })
 
                         var intValue by remember { mutableIntStateOf(0) }
                         Text("Int value: $intValue", color = Color.White)
-                        InkTextField(intValue, onValueChange = { intValue = it })
+                        InkTextField(intValue, onValueChange = { intValue = it ?: 0 })
 
                         var monthValue by remember { mutableIntStateOf(Calendar.getInstance().get(Calendar.MONTH)) }
                         var yearValue by remember { mutableIntStateOf(Calendar.getInstance().get(Calendar.YEAR)) }
                         Text("Year/Month value: $yearValue/${(monthValue+1).toString().padStart(2, '0')}", color = Color.White)
                         InkTextField(
-                            yearValue, monthValue,
-                            onValueChange = { year, month ->
-                                Inker.d { "selected year=$year month=$month" }
-                                yearValue = year; monthValue = month
-                            }
+                            YearMonth(year = yearValue, month = monthValue),
+                            onValueChange = { yearMonth: YearMonth ->
+                                Inker.d { "selected year=${yearMonth.year} month=${yearMonth.month}" }
+                                yearValue = yearMonth.year; monthValue = yearMonth.month
+                            },
                         )
 
                         val cities = listOf(

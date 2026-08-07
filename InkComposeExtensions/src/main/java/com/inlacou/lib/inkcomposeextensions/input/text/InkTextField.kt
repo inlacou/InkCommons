@@ -2,20 +2,20 @@ package com.inlacou.lib.inkcomposeextensions.input.text
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import java.util.Calendar
+import com.inlacou.inkkotlincommons.YearMonth
 
 @Composable fun InkTextField(
-    value: Double,
+    value: Double?,
     modifier: Modifier = Modifier,
     label: String = "",
-    onValueChange: ((value: Double) -> Unit)?,
+    onValueChange: ((value: Double?) -> Unit)?,
 ) = DoubleTextField(value, modifier, label, onValueChange)
 
 @Composable fun InkTextField(
-    value: Int,
+    value: Int?,
     modifier: Modifier = Modifier,
     label: String = "",
-    onValueChange: ((value: Int) -> Unit)?,
+    onValueChange: ((value: Int?) -> Unit)?,
 ) = IntegerTextField(value, modifier, label, onValueChange)
 
 @Composable fun InkTextField(
@@ -26,13 +26,12 @@ import java.util.Calendar
 ) = StringTextField(value, modifier, label, onValueChange)
 
 @Composable fun InkTextField(
-    year: Int,
-    month: Int,
+    yearMonth: YearMonth?,
     modifier: Modifier = Modifier,
     label: String = "",
-    onValueChange: ((year: Int, month: Int) -> Unit)?,
+    onValueChange: ((yearMonth: YearMonth) -> Unit)?,
 ) = YearMonthTextField(
-    value = Calendar.getInstance().apply { set(Calendar.YEAR, year); set(Calendar.MONTH, month) },
+    value = yearMonth,
     modifier = modifier,
     label = label,
     onValueChange = onValueChange)

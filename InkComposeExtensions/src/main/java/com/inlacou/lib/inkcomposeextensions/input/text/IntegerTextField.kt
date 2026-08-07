@@ -15,18 +15,17 @@ import androidx.compose.ui.text.input.KeyboardType
 
 @Composable
 fun IntegerTextField(
-    value: Int,
+    value: Int?,
     modifier: Modifier = Modifier,
     label: String = "",
-    onValueChange: ((value: Int) -> Unit)?,
+    onValueChange: ((value: Int?) -> Unit)?,
 ) {
-    var internalValue by remember(value) { mutableStateOf(value.toString()) }
+    var internalValue by remember { mutableStateOf(value.toString()) }
 
     val myOnValueChange: (String) -> Unit = {
-        if(it.isEmpty()) internalValue = it
-        it.toIntOrNull()?.let { doubleValue ->
+        it.toIntOrNull().let { intValue ->
             internalValue = it
-            onValueChange?.invoke(doubleValue)
+            onValueChange?.invoke(intValue)
         }
     }
 

@@ -3,7 +3,6 @@ package com.inlacou.lib.inkcomposeextensions.input.text
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -14,20 +13,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import com.inlacou.inker.Inker
+import com.inlacou.inkkotlincommons.YearMonth
 import com.inlacou.lib.inkcomposeextensions.dialogs.YearMonthPickerDialog
-import java.util.Calendar
 
 @Composable
 fun YearMonthTextField(
-    value: Calendar,
+    value: YearMonth?,
     modifier: Modifier = Modifier,
-    calendarToString: (Calendar) -> String = { "${it.get(Calendar.YEAR)}/${it.get(Calendar.MONTH).toString().padStart(2, '0')}" },
+    calendarToString: (YearMonth?) -> String = {
+        if(it == null) ""
+        else "${it.year}/${it.month.toString().padStart(2, '0')}"
+    },
     label: String = "",
-    onValueChange: ((year: Int, month: Int) -> Unit)?,
+    onValueChange: ((yearMonth: YearMonth) -> Unit)?,
 ) {
     var showDialog by remember { mutableStateOf(false) }
     var internalValue by remember(value) { mutableStateOf(value) }
@@ -71,13 +72,9 @@ fun YearMonthTextField(
 
     if(showDialog) {
         YearMonthPickerDialog(
-            current = internalValue,
-            onConfirm = { year, month ->
-                internalValue = Calendar.getInstance().apply {
-                    set(Calendar.YEAR, year)
-                    set(Calendar.MONTH, month)
-                }
-                onValueChange?.invoke(year, month)
+            current = internalValue ?: YearMonth.getInstance(),
+            onConfirm = { yearMonth ->
+                onValueChange?.invoke(yearMonth)
                 showDialog = false
             },
             onCancel = {

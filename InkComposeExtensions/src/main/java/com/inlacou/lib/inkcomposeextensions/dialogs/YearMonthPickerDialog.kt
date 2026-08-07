@@ -27,16 +27,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.inlacou.inker.Inker
-import java.util.Calendar
+import com.inlacou.inkkotlincommons.YearMonth
 
 @Composable
 fun YearMonthPickerDialog(
-    current: Calendar = Calendar.getInstance(),
-    onConfirm: (year: Int, month: Int) -> Unit,
+    current: YearMonth? = null,
+    onConfirm: (yearMonth: YearMonth) -> Unit,
     onCancel: () -> Unit
 ) = YearMonthPickerDialog(
-    currentYear = current.get(Calendar.YEAR),
-    currentMonth = current.get(Calendar.MONTH),
+    currentYear = (current ?: YearMonth.getInstance()).year,
+    currentMonth = (current ?: YearMonth.getInstance()).month,
     onConfirm = onConfirm,
     onCancel = onCancel,
 )
@@ -45,7 +45,7 @@ fun YearMonthPickerDialog(
 fun YearMonthPickerDialog(
     currentYear: Int,
     currentMonth: Int,
-    onConfirm: (year: Int, month: Int) -> Unit,
+    onConfirm: (yearMonth: YearMonth) -> Unit,
     onCancel: () -> Unit
 ) {
     Inker.d { "value: $currentYear/${currentMonth.toString().padStart(2, '0')}" }
@@ -186,8 +186,10 @@ fun YearMonthPickerDialog(
                 modifier = Modifier.padding(end = 20.dp),
                 onClick = {
                     onConfirm(
-                        year,
-                        months.indexOf(month),
+                        YearMonth(
+                            year = year,
+                            month = months.indexOf(month)
+                        ),
                     )
                 },
                 shape = CircleShape,
