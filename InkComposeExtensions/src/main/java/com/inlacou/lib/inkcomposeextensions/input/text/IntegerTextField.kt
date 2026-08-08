@@ -20,7 +20,7 @@ fun IntegerTextField(
     label: String = "",
     onValueChange: ((value: Int?) -> Unit)?,
 ) {
-    var internalValue by remember { mutableStateOf(value.toString()) }
+    var internalValue by remember { mutableStateOf(value?.toString() ?: "") }
 
     val myOnValueChange: (String) -> Unit = {
         it.toIntOrNull().let { intValue ->

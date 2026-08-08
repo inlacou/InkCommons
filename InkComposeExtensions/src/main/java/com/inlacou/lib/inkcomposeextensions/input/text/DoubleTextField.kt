@@ -20,7 +20,7 @@ fun DoubleTextField(
     label: String = "",
     onValueChange: ((value: Double?) -> Unit)?,
 ) {
-    var internalValue by remember { mutableStateOf(value.toString()) }
+    var internalValue by remember { mutableStateOf(value?.toString() ?: "") }
 
     val myOnValueChange: (String) -> Unit = {
         it.toDoubleOrNull().let { doubleValue ->
