@@ -17,7 +17,10 @@ data class YearMonth(
     val totalMonths by lazy { year * 12 + month }
     val calendar: Calendar by lazy { Calendar.Builder().setDate(year, month, 0).build() }
 
-    fun addMonths(months: Int): YearMonth = YearMonth(year = year+months/12, month = month+months%12)
+    fun addMonths(months: Int): YearMonth {
+        val newMonths = (month+months)%12
+        return YearMonth(year = year+((month+months)/12)+(if(newMonths < 0) -1 else 0), month = if(newMonths < 0) 12+newMonths else newMonths)
+    }
     fun diffInMonths(other: YearMonth): Int = totalMonths-other.totalMonths
 
     operator fun inc(): YearMonth = if(month == 11) YearMonth(month = 0, year = this.year+1) else YearMonth(month = this.month+1, year = this.year)
